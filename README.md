@@ -7,7 +7,7 @@ An application triallingthe use of MELD patterns in composition of musical piece
 - [User stories](notes/user-stories.md)
 - [User opeating scenarios](notes/operating-scenarios.md)
 - [Minimal viable product for initial development focus](notes/minimal-viable-product-scenario.md)
-- Rough architecture diagrams [Overall](notes/Overall-Architecture.jpg), [Remixer](notes/NiN-remixer-Arch.jpg)
+- Rough architecture diagrams [Overall/"fixed points"](notes/Overall-Architecture.jpg), [Remixer](notes/NiN-remixer-Arch.jpg)
 
 - Meeting notes/actions
     - [2018-02-08](notes/meetings/2018-02-08-meeting-agenda-goals-actions.md)
