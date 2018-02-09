@@ -43,16 +43,15 @@
     
     - listen to any of the offered fragments 
     - select one of the offered fragments to be inserted into the timeline
-    - select a different poisition in the timeline; the set of offered fragments is updated
+    - select a different position in the timeline; the set of offered fragments is updated
     - switch to NiN interface to create a new fragment, and subsequently add to working set
     - remove a fragment from the composition
-    - play some or all of the entire compiosition so far
-    - change compability moidel for offered fragments
+    - play some or all of the entire composition so far
+    - change compability model for offered fragments
 
 - Repeat and rinse
 
 - export resulting composition as "DMO" (maybe as link, or maybe as data)
-
 
 
 # Other features
