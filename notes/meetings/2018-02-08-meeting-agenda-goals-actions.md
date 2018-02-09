@@ -21,12 +21,12 @@ The overall aim of thid meeting will be to capture enough information about the 
 
 # Actions
 
-    - [ ] GK - agenda and notes to github repo
-    - [ ] GK - README for repo with links to other docs
-    - [ ] JP/GK - copy of whiteboard photos to GitHub repo (as placeholders)
-    - [ ] JP - "architecture" diagrams from whiteboard sketches (e.g., for presentation)
-    - [ ] JP/All - propose possible match "architecture" elements to MELD and related web/LD ideas
-    - [ ] JP - presentation for FAST meeting (10-15 minutes?)
+- [ ] GK - agenda and notes to github repo
+- [ ] GK - README for repo with links to other docs
+- [ ] JP/GK - copy of whiteboard photos to GitHub repo (as placeholders)
+- [ ] JP - "architecture" diagrams from whiteboard sketches (e.g., for presentation)
+- [ ] JP/All - propose possible match "architecture" elements to MELD and related web/LD ideas
+- [ ] JP - presentation for FAST meeting (10-15 minutes?)
 
 
 
