@@ -2,7 +2,7 @@
 
 ## Personas/stakeholders:
 
-- Experimental music composer: e.g. a person using NiN fragments to make some musical pieve
+- Experimental music composer: e.g. a person using NiN fragments to make some musical piece
 - Experimental music listener: someone who listens to a composed piece
 - Experimental musicologist: interested in the musicological ideas exposed by NiN
 - Musicology technologist: interested in  the technology used to realize NiN ideas
