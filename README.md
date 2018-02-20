@@ -21,7 +21,7 @@ An application triallingthe use of MELD patterns in composition of musical piece
 ## Links
 
 - [MELD paper ("Take it to the bridge")](https://ismir2017.smcnus.org/wp-content/uploads/2017/10/190_Paper.pdf)
-- [LDP specification(http://www.w3.org/TR/ldp/)
+- [LDP specification](http://www.w3.org/TR/ldp/)
 - [Web annotations specificatons](https://www.w3.org/blog/news/archives/6156)
 - [LDP implementations](https://www.w3.org/wiki/LDP_Implementations)
 - [Solid](https://solid.mit.edu)
