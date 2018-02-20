@@ -437,8 +437,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="576.64017"
-     inkscape:cy="366.43355"
+     inkscape:cx="504.49731"
+     inkscape:cy="377.86212"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -446,7 +446,8 @@
      inkscape:window-height="892"
      inkscape:window-x="70"
      inkscape:window-y="24"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     inkscape:snap-page="true" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -464,6 +465,14 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-308.26772)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4412"
+       width="1052.3622"
+       height="744.09448"
+       x="0"
+       y="308.26773"
+       ry="13.5338" />
     <rect
        rx="0"
        ry="7.5355124"
