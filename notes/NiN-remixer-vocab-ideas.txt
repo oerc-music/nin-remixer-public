@@ -1,0 +1,28 @@
+# Notes on vocabulary choices
+
+Going through the various parts of the architecture diagram:
+
+Fragments from NiN:
+  What is called a "DMO"
+  Music Ontology to reference the score as MEI
+  PROV for the "provenance metadata"
+
+Matched Fragments:
+  Represent matches as annotations
+  Some kinds of match can be recorded by relating two fragments to a shared concept
+    the "compatible key" match is probably included
+
+Working sets:
+  A set of fragments used in a Remixer session
+    may include one or more previously defined sets
+  LDP container(?) with references to include the Fragment DMOs
+    can we include by reference the previously defined containers
+    (do these change over time?)
+
+Assembled score
+  Can use the Segment ontology to map the use of fragments in the composition?
+
+Output DMO
+  Similar Provenance information to the input DMOs
+
+
