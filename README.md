@@ -1,6 +1,6 @@
 # Numbers into Notes remixer
 
-An application triallingthe use of MELD patterns in composition of musical pieces using the [Numbers into Notes](http://demeter.oerc.ox.ac.uk/NumbersIntoNotes/) application.
+An application trialling use of MELD patterns in composition of musical pieces using the [Numbers into Notes](http://demeter.oerc.ox.ac.uk/NumbersIntoNotes/) application.
 
 ## Design notes
 
@@ -16,6 +16,7 @@ An application triallingthe use of MELD patterns in composition of musical piece
 - Meeting notes/actions
     - [2018-02-08](notes/meetings/2018-02-08-meeting-agenda-goals-actions.md)
     - [2018-02-20](notes/meetings/2018-02-20-meeting.md)
+    - [2018-02-28](notes/meetings/2018-02-28-meeting.md)
 
 
 ## Links
