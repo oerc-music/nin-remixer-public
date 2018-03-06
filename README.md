@@ -12,11 +12,14 @@ An application trialling use of MELD patterns in composition of musical pieces u
 - Architecture mapping proposals:
     - [JP's working notes](notes/mapping.md)
     - [GK's early thoughts](notes/NiN-MELD-tentative-mappings-by-GK.md)
+- [Nin-Remixer vocabulary notes](notes/NiN-remixer-vocab-ideas.md)
+- [Compatibility service notes](notes/Match-Architecture.md)
 
 - Meeting notes/actions
     - [2018-02-08](notes/meetings/2018-02-08-meeting-agenda-goals-actions.md)
     - [2018-02-20](notes/meetings/2018-02-20-meeting.md)
     - [2018-02-28](notes/meetings/2018-02-28-meeting.md)
+    - [2018-03-06](notes/meetings/2018-03-06-meeting.md)
 
 
 ## Links
@@ -27,4 +30,5 @@ An application trialling use of MELD patterns in composition of musical pieces u
 - [LDP implementations](https://www.w3.org/wiki/LDP_Implementations)
 - [Solid](https://solid.mit.edu)
 - [Linked Data Notifications](http://www.w3.org/TR/ldn/)
+- ["Idealized" MELD model for Climb!](http://fast-project.annalist.net/annalist/c/MELD_Climb_performance/) in Annalist
 
