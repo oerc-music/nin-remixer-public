@@ -1,0 +1,20 @@
+
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix dc: <http://purl.org/dc/elements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix nin: <http://numbersintonotes.net/terms#> .
+@prefix ninre: <http://remix.numbersintonotes.net/vocab#> .
+
+<> a mo:Score, ldp:Resource ;
+  mo:published_as <http://numbersintonotes.net/mei/d2cca69a-85f5-46c3-aded-cdb97f30199f.mei> ;
+  dc:creator "John" ;
+  dc:title "Fibonacci 1" ;
+  nin:firstNote "F" ;
+  nin:key nin:Aflat ;
+  nin:mode nin:Major ;
+  nin:lastNote "F" ;
+  nin:tempo "60" .
+
