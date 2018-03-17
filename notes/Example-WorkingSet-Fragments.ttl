@@ -1,0 +1,53 @@
+
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix dc: <http://purl.org/dc/elements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix nin: <http://numbersintonotes.net/terms#> .
+@prefix ninre: <http://remix.numbersintonotes.net/vocab#> .
+
+# Working SetLDP Container
+
+<> a ldp:BasicContainer, ldp:Container , ninre:WorkSet ;
+   dc:author "John Pybus" ;    # or specify author by linking a URI...
+   dct:created "2018-03-14T11:44:00" ;
+   ldp:contains <frag1> , <frag2> , <frag3>.
+
+# Imported Fragment <frag1>
+
+<frag1> a mo:Score, ldp:Resource ;
+  mo:published_as <http://numbersintonotes.net/mei/d2cca69a-85f5-46c3-aded-cdb97f30199f.mei> ;
+  dc:creator "John" ;
+  dc:title "Fibonacci 1" ;
+  nin:firstNote "F" ;
+  nin:key nin:Aflat ;
+  nin:mode nin:Major ;
+  nin:lastNote "F" ;
+  nin:tempo "60" . # probably with a numeric literal datatype
+
+# Imported Fragment <frag2>
+
+<frag2> a mo:Score, ldp:Resource ;
+  mo:published_as <http://numbersintonotes.net/mei/a0007b2b-673c-4bf5-9ce1-aa98a1ea6365.mei> ;
+  dc:creator "John" ;
+  dc:title "Fibonacci 2" ;
+  nin:firstNote "G" ;
+  nin:key nin:C ;
+  nin:mode nin:Major ;
+  nin:lastNote "C" ;
+  nin:tempo "60" .
+
+# Imported Fragment <frag3>
+
+<frag3> a mo:Score, ldp:Resource ;
+  mo:published_as <http://numbersintonotes.net/mei/55a580ac-febb-49ee-b6c8-6a0507e891bb.mei> ;
+  dc:creator "John" ;
+  dc:title "Fibonacci - Again" ;
+  nin:firstNote "F" ;
+  nin:key nin:D ;
+  nin:mode nin:Minor ;
+  nin:lastNote "D" ;
+  nin:tempo "60" .
+
