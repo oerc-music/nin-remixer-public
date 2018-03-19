@@ -25,11 +25,18 @@ An application trialling use of MELD patterns in composition of musical pieces u
 
 ## Links
 
+- [Numbers into Notes GitHub repository](https://github.com/davidderoure/NumbersIntoNotes)
 - [MELD paper ("Take it to the bridge")](https://ismir2017.smcnus.org/wp-content/uploads/2017/10/190_Paper.pdf)
-- [LDP specification](http://www.w3.org/TR/ldp/)
 - [Web annotations specificatons](https://www.w3.org/blog/news/archives/6156)
-- [LDP implementations](https://www.w3.org/wiki/LDP_Implementations)
 - [Solid](https://solid.mit.edu)
 - [Linked Data Notifications](http://www.w3.org/TR/ldn/)
 - ["Idealized" MELD model for Climb!](http://fast-project.annalist.net/annalist/c/MELD_Climb_performance/) in Annalist
 
+### LDP links
+
+- [LDP specification](http://www.w3.org/TR/ldp/)
+- [LDP implementations](https://www.w3.org/wiki/LDP_Implementations)
+- [LDP in Virtuoso - Simple Curl Examples](http://vos.openlinksw.com/owiki/wiki/VOS/VirtuosoLDPSimpleCurlExamples)
+- http://marmotta.apache.org
+    - https://git-wip-us.apache.org/repos/asf?p=marmotta.git
+    - [Mirror of Marmotta git repo on github](https://github.com/apache/marmotta)
