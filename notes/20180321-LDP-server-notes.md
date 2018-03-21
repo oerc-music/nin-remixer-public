@@ -4,7 +4,7 @@
 
 (Summary: this looks promising.  The fact that Fedora/Duraspace are established and well-known in the HE/libraries domain seems advantageous to me.)
 
-- awoods@duraspace.org
+- awoods(at)duraspace.org
 
 The Fedora Repository application is an LDP server, that supports all three
 container types, installs as a drop-in war file or (for testing) as an
@@ -17,14 +17,14 @@ executable jar file, and is actively maintained.
 Feel free to experiment with our demo server:
 - http://demo.fcrepo.org:8080/fcrepo/ (fedoraAdmin:secret3)
 
-Please reach out if you have any questions: fedora-tech@googlegroups.com
+Please reach out if you have any questions: fedora-tech(at)googlegroups.com
 
 
 ## ldnode/node-solid-server
 
 (Summary: could be worth revisiting?  The implied solid connection might be useful in the future.)
 
-- melvincarvalho@gmail.com
+- melvincarvalho(at)gmail.com
 
 ldnode is now called node-solid-server -- it implements LDP and a few other
 things :
@@ -43,7 +43,7 @@ It's also now possible to install via docker.
 
 (Summary: look for an alternative when time permits?)
 
-- melvincarvalho@gmail.com
+- melvincarvalho(at)gmail.com
 
 Gold isnt actively maintained but if someone with Go experience had time to
 help out, that would be welcome!
@@ -53,7 +53,7 @@ help out, that would be welcome!
 
 (Summary: interesting option for experimentation, especially given some support for annotations, and Sarven's association with Solid.  But probably not an off-the-shelf choice for a production service.)
 
-- info@csarven.ca
+- info(at)csarven.ca
 
 I've built mayktso (pronounced "make it so"):
 
@@ -106,7 +106,7 @@ for other LDN Receiver implementations which also do LDP.
 
 (Summary: work-in-progress, not an obvious choice for us)
 
-- jeanmarc.vanel@gmail.com
+- jeanmarc.vanel(at)gmail.com
 
 If you're willing to use a work in progress, there is semantic_forms :
 https://github.com/jmvanel/semantic_forms/blob/master/scala/forms_play/README.md#play-framework-implementations
