@@ -15,4 +15,15 @@ Generally, this all looks sensible.  I'm making some random comments here as the
 5. Property `ninre:fragment` might be `mo:published_as`?
 
 
+JPNP (2018-03-21):
+
+1. Yes.
+
+2. Yes, especially the mo: ones.
+
+3. We should do something here.  Either id.numbersintonotes.net or a PURL. Maybe id.numbersintonotes.net for now, and a PURL to it later.
+
+4. Yes, change to ninre:FragmentRef, not sure about ninre:Fragment as the WS entries are not actually fragments.
+
+5. Currently ninre:fragment linking to an mo:MusicalExpression.  Type of mo:published_as is mo:MusicalExpression -> mo:MusicalManifestation, so not sure this works as things stand.
 
