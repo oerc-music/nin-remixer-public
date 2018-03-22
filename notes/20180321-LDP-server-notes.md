@@ -152,7 +152,7 @@ I think the criticism may be about elements that go beyond LDP "basic containers
 
 ## Apache Marmotta
 
-I did  a little digging around, and concluded it wasn't quite as moribund as John suggested - there's more recent work on otherv repo branches - but no full release for 3 years still isn't encouraging.
+I did  a little digging around, and concluded it wasn't quite as moribund as John suggested - there's more recent work on other repo branches - but no full release for 3 years still isn't encouraging.
 
 ## Virtuoso
 
