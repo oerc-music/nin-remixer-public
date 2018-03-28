@@ -82,6 +82,8 @@ the combination of all 3 things?
 <fraglink3> a ninre:FragmentRef ;
    ninre:fragment nindata:55a580ac-febb-49ee-b6c8-d2cca69a85f5 .
 
+nindata:d2cca69a-85f5-46c3-aded-cdb97f30199f ninre:hasCompatibleKey key:AMinor .
+
 nindata:55a580ac-febb-49ee-b6c8-d2cca69a85f5 nin:key key:AMinor .
   
 
