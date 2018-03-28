@@ -47,3 +47,56 @@ We also need to consider the context within which the compatibility service oper
 @@TODO: add reference to definition/example when available
 
 
+#Matching Fragments interface:
+
+## Set of matches specified by:
+
+ 1. The fragment matching starts from
+
+ 2. The compatibility model selected
+
+ 3. The working set in use
+
+How to reconcile this with LDP based architecture?
+
+## What does LDP give us?
+
+Read/write model, but will anything be writing directly to a URI representing 
+the combination of all 3 things?
+
+## Possible Key match representation
+
+...
+@prefix nindata: <http://numbersintonotes.net/meld/>
+@prefix key: <http://purl.org/NET/c4dm/keys.owl#>
+
+<WS1> a ldp:BasicContainer , ninre:WorkSet;
+   ldp:contains <fraglink1>, <fraglink2> , <fraglink3>.
+
+<fraglink1> a ninre:FragmentRef ;
+   ninre:fragment nindata:d2cca69a-85f5-46c3-aded-cdb97f30199f .
+
+<fraglink2> a ninre:FragmentRef ;
+   ninre:fragment nindata:a0007b2b-673c-4bf5-9ce1-aa98a1ea636a .
+
+<fraglink3> a ninre:FragmentRef ;
+   ninre:fragment nindata:55a580ac-febb-49ee-b6c8-d2cca69a85f5 .
+
+nindata:55a580ac-febb-49ee-b6c8-d2cca69a85f5 nin:key key:AMinor .
+  
+
+Could maybe infer from this:
+
+<ann1> a oa:Annotation ;
+  oa:hasTarget nindata:d2cca69a-85f5-46c3-aded-cdb97f30199f ;
+  oa:hasBody [ a ninre:Match ;
+               ninre:compatibilityType ninre:keyCompatibility ;
+               ninre:matches nindata:55a580ac-febb-49ee-b6c8-d2cca69a85f5.
+             ] .
+   # Could we use oa:hasSource here?
+
+* A set of these could be delivered in an Annotation Container (LDP Container)
+
+* But I'm not sure what an Annotation Container really provides:
+   * it doesn't facilitate filtering what annotations are returned
+   * it allows updates, but if the annotation matches are a server generated resource then new ones wouldn't be posted to an AC, but to a container for the base data
