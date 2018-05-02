@@ -25,6 +25,7 @@ An application trialling use of MELD patterns in composition of musical pieces u
     - [2018-03-28](notes/meetings/2018-03-28-meeting.md)
     - [2018-04-13](notes/meetings/2018-04-13-meeting.md)
     - [2018-04-23](notes/meetings/2018-04-23-meeting.md)
+    - [2018-01-05](notes/meetings/2018-05-01-meeting-and-SAAM-paper-planning.md) (with SAAM paper planning)
 
 
 ## Links
