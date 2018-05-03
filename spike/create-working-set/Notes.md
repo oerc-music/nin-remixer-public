@@ -5,6 +5,10 @@ Get dependencies Ubuntu:
 
     sudo apt-get install golang-go libraptor2-dev libmagic-dev
 
+CentOS:
+
+    sudo yum install golang raptor2-devel file-devel
+
 Mac seems to be (untested): `brew install go raptor libmagic`
 
 Setup paths and check go version:
@@ -37,3 +41,8 @@ Start the server:
 
 Browse it at http://localhost:8080/
 
+For the new testworkset:
+
+Edit the location in setup-testworkset.sh if necessary and
+
+    ./setup-testworkset.sh
