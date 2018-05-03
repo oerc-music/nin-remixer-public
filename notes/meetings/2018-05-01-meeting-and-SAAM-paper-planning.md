@@ -12,7 +12,7 @@ Actually, two meetings:
 ## Agenda
 
 - [ ] Confirm date for next meeting
-    - 2018-05-11 (?)
+    - 2018-05-15 (?)
 - [ ] Review actions; note any issues or blockers
 - [ ] Review software progress
 - [ ] Planning for SAAM paper
@@ -47,7 +47,7 @@ Most actions were not formally recorded.  Those that were include:
 
 ### Next meeting
 
-Next meeting: 2018-05-11 (time TBD)
+Next meeting: 2018-05-15 (time TBD)
 
 Draft agenda next meeting:
 
@@ -236,8 +236,6 @@ JP time over next 3 weeks - no breaks planned, so 12 days to next meeting.
     - may drop this unless there a clear requirement arises
 
     Multiple working set import and basic display (0.5d)
-
-- After demo: work for SAAM paper
 
 
 
