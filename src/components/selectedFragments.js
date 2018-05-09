@@ -14,7 +14,7 @@ export var FragmentSelector = function({dispatch, selectedFrags, frags, svg}) {
             //<p> Selection (flist.id) </p>
 
             return (
-            <div>
+            <div className="listcol" >
             <p> Selection </p>
             <FragList fragments={frags}
                       svg={svg}

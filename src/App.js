@@ -13,7 +13,9 @@ class App extends Component {
           <h1 className="App-title">Numbers into Notes - remixer</h1>
         </header>
         <LoadButton label="go" />
-        <FragmentSelector />
+        <div className="fragRow">
+          <FragmentSelector />
+        </div>
       </div>
     );
   }
