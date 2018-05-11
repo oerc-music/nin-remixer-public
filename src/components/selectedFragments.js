@@ -14,12 +14,12 @@ export var FragmentSelector = function({dispatch, selectedFrags, frags, svg}) {
             //<p> Selection (flist.id) </p>
 
             return (
-            <div className="listcol" >
-            <p> Selection </p>
-            <FragList fragments={frags}
-                      svg={svg}
-                      onClick={selectOnClick} />
-            <hr/>
+            <div className="listcol">
+							<p> Selection </p>
+							<FragList fragments={frags}
+												svg={svg}
+												onClick={selectOnClick} />
+							<hr/>
             </div>
             )
           })}

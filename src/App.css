@@ -22,3 +22,23 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.fragSelectionList {
+	position:fixed;
+	z-index: 1;
+	background:#ccccff
+}
+
+.fragSelectionList.hidden {
+	display:none;
+}
+
+.selectionLabel { 
+	cursor:pointer;
+}
+
+.selectionLabel .expandIndicator {
+	font-family:monospace;
+	border: 1px;
+}
+

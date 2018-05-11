@@ -4,6 +4,7 @@ import './App.css';
 import { LoadButton } from './components/load-fragments';
 import { FragList } from './components/fragmentList';
 import { FragmentSelector } from './components/selectedFragments';
+import { SelectionDropdown } from './components/selectionDropdown';
 
 class App extends Component {
   render() {
@@ -14,7 +15,7 @@ class App extends Component {
         </header>
         <LoadButton label="go" />
         <div className="fragRow">
-          <FragmentSelector />
+          <SelectionDropdown/>
         </div>
       </div>
     );
