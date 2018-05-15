@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.fragRow { overflow-x:scroll;
+  max-height: calc(100vh - 70px);
+  width:5000px;
+  text-align: left;
+ }
+.listcol { overflow-y:scroll;
+  height: calc(100vh - 70px);
+  max-width: 600px;
+  display: inline-block;}
+.selected { background: #88f;}
+
+      #seltest .ui-selected { background: #ccc; }
+      #seltest .ui-selecting { background: #FECA40; }
+      #seltest { list-style-type: none; margin: 0; padding: 0; width: 18em; }
+      #seltest li { background:#ffd; margin: 5px; padding: 0.4em; font-size: 1.4em; x-height: 18px; }
