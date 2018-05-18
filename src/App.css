@@ -42,3 +42,12 @@
 	border: 1px;
 }
 
+.assembledRow div { 
+	float:left;
+	margin-right: 30px;
+}
+
+.assembledRow {
+    position:relative;
+    clear:both;
+}

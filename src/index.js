@@ -14,7 +14,12 @@ import update from 'immutability-helper'
 const emptyState = {frags:[],
                     mei:new Map(),
                     svg:new Map(),
-                    selectedFrags: [{cursor: true}]}
+					rowIndex: 0, // hack
+                    selectedFrags: {
+						0: [{cursor: true}],
+						1: [{cursor: true}],
+						2: [{cursor: true}],
+						3: [{cursor: true}] }}
 
 function ninReducer(state = emptyState, action) {
   switch (action.type) {
@@ -29,14 +34,29 @@ function ninReducer(state = emptyState, action) {
                             svg: {$add: [[action.uri, action.svg]]} })
     case 'SELECT_FRAG':
       // Set the id of current fragment
-      var newstate = update(state, {selectedFrags: {[action.index]: {
-              $set: { id: action.id}
-              }}
-        })
+      var newstate = update(state, {
+		  selectedFrags: { 
+			  [state.rowIndex]: {
+				  [action.index]: {
+					  $set: { id: action.id}
+              	  }
+			  }
+		  }
+	  });
       // add a new blank one
-      newstate = update(newstate, {selectedFrags:
-              {$splice: [[action.index+1, 0, {cursor: true}]] }
+      newstate = update(newstate, {
+		  selectedFrags: {
+			  [state.rowIndex]: { 
+              	$splice: [[action.index+1, 0, {cursor: true}]] 
+			  }
+		  }
         })
+	  // hack -- incr rowindex
+	  newstate = update(newstate, {
+		  rowIndex: { 
+			  $set: (state.rowIndex+1)%4
+		  }
+	  })
       return newstate
     default:
       return state
