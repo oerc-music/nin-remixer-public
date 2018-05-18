@@ -19,7 +19,11 @@ JP, DW
 - [.] JP: Instrument "ontology" linking to pitch range
     - GK created Annalist collection
     - discuss pitch vs notation
+        - Use "Scientific Pitch Notation" (cf. ...)
     - [investigate QM ontology for vocab, data from wikipedia?]
+- [ ] GK: provide larger corpus of instrument data in Annalist
+    - Need a long list of instruments, hence auto-data-gathering
+    - http://www.liutaiomottola.com/formulae/freqtab.htm
 - [.] JP: Add compatibility agent (annotation service) for instrumentation (using above)
     - Needs discussion of next items
 - [ ] JP: Decide on approach for specifying instrument group (advise from DL?)
