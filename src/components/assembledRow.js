@@ -18,17 +18,25 @@ export var AssembledRow = function({dispatch, selectedFrags, frags, svg}) {
 	}
 	let fragSelectionList = React.createRef();
 	let expandIndicator = React.createRef();
-  return (
-      <div className="assembledRow">
-        { 
-          [...selectedFrags.entries()].map(([ind,item])=>{
-            //<p> Selection (flist.id) </p>
-			const frag = frags.find(f => f.id === item.id);
-			const fsvg = frag===undefined ? <InlineSVG /> : <InlineSVG src={svg.get(frag.mei)} />
-			return(<div> {fsvg} </div>)
-          })}
-      </div>
-    )
+	if(selectedFrags) { 
+	  return Object.keys(selectedFrags).map( (rowIndex) => {
+		  return (
+			  <div className="assembledRow">
+				{ 
+				  [...selectedFrags[rowIndex].entries()].map(([ind,item])=>{
+					//<p> Selection (flist.id) </p>
+					if(item) { 
+						const frag = frags.find(f => f.id === item.id);
+						const fsvg = frag===undefined ? <InlineSVG /> : <InlineSVG src={svg.get(frag.mei)} />
+						return(<div> {fsvg} </div>)
+					} else { 
+						console.log("WARNING - undefined item");
+						return (<div/>)}
+				  })}
+			  </div>
+			)
+	  })
+	} else { return <div>Awaiting selection</div> }
 }
 
 AssembledRow = connect(s=>s)(AssembledRow)
