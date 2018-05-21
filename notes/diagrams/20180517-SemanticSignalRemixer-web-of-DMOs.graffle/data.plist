@@ -337,7 +337,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{933.92616462707531, 319.53595054851053}, {88.05303955078125, 61.692296203558911}}</string>
+			<string>{{590.66789286485266, 680.7414864371824}, {88.05303955078125, 61.692296203558911}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
@@ -2709,7 +2709,7 @@ Annotated music fragment DMOs}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{70.866185188293457, 325.98422145843506}, {1112.5982666015625, 240.94486999511719}}</string>
+			<string>{{70.86613655090332, 325.98422241210938}, {1112.5982666015625, 240.94486999511719}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FontInfo</key>
@@ -2732,22 +2732,6 @@ Annotated music fragment DMOs}</string>
 			<string>Cloud</string>
 			<key>Style</key>
 			<dict>
-				<key>fill</key>
-				<dict>
-					<key>FillType</key>
-					<integer>3</integer>
-					<key>GradientColor</key>
-					<dict>
-						<key>a</key>
-						<string>0.252097</string>
-						<key>b</key>
-						<string>0.821005</string>
-						<key>g</key>
-						<string>0.821005</string>
-						<key>r</key>
-						<string>0.821005</string>
-					</dict>
-				</dict>
 				<key>shadow</key>
 				<dict>
 					<key>Draws</key>
@@ -2770,6 +2754,31 @@ Annotated music fragment DMOs}</string>
 			</dict>
 			<key>TextPlacement</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>Bounds</key>
+			<string>{{0, 113.38581848144531}, {1155.1180419921875, 474.8031005859375}}</string>
+			<key>Class</key>
+			<string>ShapedGraphic</string>
+			<key>ID</key>
+			<integer>36950</integer>
+			<key>Shape</key>
+			<string>Rectangle</string>
+			<key>Style</key>
+			<dict>
+				<key>fill</key>
+				<dict>
+					<key>Color</key>
+					<dict>
+						<key>b</key>
+						<string>0.941176</string>
+						<key>g</key>
+						<string>0.941176</string>
+						<key>r</key>
+						<string>1</string>
+					</dict>
+				</dict>
+			</dict>
 		</dict>
 	</array>
 	<key>GridInfo</key>
@@ -2849,7 +2858,7 @@ Annotated music fragment DMOs}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2018-05-18 10:49:46 +0000</string>
+	<string>2018-05-18 13:36:35 +0000</string>
 	<key>Modifier</key>
 	<string>Graham Klyne</string>
 	<key>NotesVisible</key>
@@ -2945,7 +2954,7 @@ Annotated music fragment DMOs}</string>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{28, 111}, {1416, 1066}}</string>
+		<string>{{7, -10}, {1416, 773}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>
@@ -2959,9 +2968,9 @@ Annotated music fragment DMOs}</string>
 		<key>SidebarWidth</key>
 		<integer>230</integer>
 		<key>VisibleRegion</key>
-		<string>{{-109, -70}, {1402, 924}}</string>
+		<string>{{0, 0}, {0, 0}}</string>
 		<key>Zoom</key>
-		<real>1</real>
+		<real>0.0</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
