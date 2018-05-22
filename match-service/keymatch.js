@@ -1,18 +1,17 @@
 
 var cserv = require('./matchservice-utils.js');
 
-const base = 'http://localhost:8080/ninbase/'
-const wsi = 'http://localhost:8080/ninbase/WSI/'
+var conf = require('./getConfig.js');
+
+const base = conf.base
+const wsi = conf.wsi
 
 const WSS_TYPE = "http://remix.numbersintonotes.net/vocab#WorkSetService"
 const MS_TYPE = "http://remix.numbersintonotes.net/vocab#MatchService"
 const keymatch = 'http://remix.numbersintonotes.net/vocab#keyCompatibility'
 
-//const ws = 'http://test/workset1/'
-const ws0 = 'http://test/workset2/'
-const ws1 = 'http://localhost:8080/newworkset/'
-//const targetFrag = "http://beta.numbersintonotes.net/meld/c59ef00f-1ade-4d16-9eec-ee38971bc1ca.ttl" 
-const targetFrag = "http://beta.numbersintonotes.net/meld/ce4bef91-131c-4a12-ae67-e7d33b4ca463.ttl"
+const ws1 = conf.targetWorkset
+const targetFrag = conf.targetFrag
 
 //cserv.findAnnotation(wsi, ws0)
 

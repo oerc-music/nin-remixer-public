@@ -1,0 +1,11 @@
+
+// Copy to conf.js and adjust as required
+
+module.exports = {
+  base: 'http://localhost:8080/matchbase/',
+  wsi: 'http://localhost:8080/matchbase/WSI/',
+
+  targetWorkset: 'http://localhost:8080/newworkset-780d47/',
+  targetFrag: "http://beta.numbersintonotes.net/meld/319a29fc-ad57-4a43-8773-d26e6e3993d3"
+}
+
