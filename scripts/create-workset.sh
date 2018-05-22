@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASEURI="http://localhost:8080/"
-SLUG="newworkset"
+SLUG="workset"
 
 # Create a container for the workset
 OUT=`curl -i -X POST -H "Content-Type: text/turtle" -H "Slug: ${SLUG}" -H 'Link: <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' $BASEURI --data "@container-template.ttl"`
