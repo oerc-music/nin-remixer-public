@@ -1,5 +1,6 @@
 {
   "lst": ["Wibble", "Wobble"],
-  "workset": "http://thalassa.oerc.ox.ac.uk:8080/newworkset/",
-  "workset0": "http://localhost:8080/newworkset/"
+  "workset": "http://localhost:8080/newworkset-780d47/",
+  "workset0": "http://thalassa.oerc.ox.ac.uk:8080/newworkset/",
+  "workset1": "http://localhost:8080/workset2/"
 }

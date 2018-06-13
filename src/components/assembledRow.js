@@ -6,6 +6,7 @@ import InlineSVG from 'svg-inline-react'
 
 const FragList = BareFragList
 
+// Actually this a selected grid as shows all rows
 export var AssembledRow = function({dispatch, selectedFrags, frags, svg}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
 	const triggerSelectionDropdown = () => { 

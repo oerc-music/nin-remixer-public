@@ -1,0 +1,49 @@
+#! /bin/bash
+
+# Take a URI to "MELD" output from NiN and add a FragRef for
+# it to a WorkSet container
+#
+# nin-inport <LDP container URI> <Fragment URI>
+
+# Name of user to identify as
+USER="John"
+
+## Location of LDP server and WorkSet container
+#WSBASE="http://localhost:8080/"
+#WSCONT="testworkset/"
+
+#NINBASE="http://beta.numbersintonotes.net/meld"
+
+CONTURI=$1
+FRAGURI=$2
+
+TMPFILE=$(mktemp)
+
+UUID=$(basename "$FRAGURI")
+#UUID=${UUID%.ttl}
+
+SLUG="FragRef-$UUID"
+
+echo ${CONTURI}
+echo $UUID
+echo $TMPFILE
+
+cat >$TMPFILE <<END
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix dc: <http://purl.org/dc/elements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix nin: <http://numbersintonotes.net/terms#> .
+@prefix ninre: <http://remix.numbersintonotes.net/vocab#> .
+
+<> a ninre:FragmentRef , ldp:Resource ;
+  ninre:fragment <$FRAGURI> ;
+  dc:creator "$USER";
+  dct:created "$(date -Iseconds)" .
+
+END
+
+curl -v -i -X POST -H "Content-Type: text/turtle" -H "Slug: $SLUG" -H 'Link: <http://www.w3.org/ns/ldp#Resource>; rel="type"' --data "@$TMPFILE" $CONTURI
+
