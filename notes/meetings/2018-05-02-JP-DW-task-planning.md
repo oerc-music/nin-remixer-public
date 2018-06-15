@@ -15,13 +15,13 @@ JP, DW
 - [x] JP: Update traversal code for potential extra level of recursion
            ? Do we use same motivation value to indicate recusion at higher levels too?
 - [x] JP: Add annotation service for length (agent is done; NiN needs tweaking to export length)
-- [ ] JP: Add length parameter to NiN output
-- [.] JP: Instrument "ontology" linking to pitch range
+- [x] JP: Add length parameter to NiN output
+- [x] JP: Instrument "ontology" linking to pitch range
     - GK created Annalist collection
     - discuss pitch vs notation
         - Use "Scientific Pitch Notation" (cf. ...)
     - [investigate QM ontology for vocab, data from wikipedia?]
-- [ ] GK: provide larger corpus of instrument data in Annalist
+- [x] GK: provide larger corpus of instrument data in Annalist
     - Need a long list of instruments, hence auto-data-gathering
     - http://www.liutaiomottola.com/formulae/freqtab.htm
 - [.] JP: Add compatibility agent (annotation service) for instrumentation (using above)
