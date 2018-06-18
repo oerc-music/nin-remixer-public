@@ -29,7 +29,7 @@ const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adju
       //  => and on completion of returned promise
       //  => dispatches the SET_ITEMS action with the reponse
 function fragmentsPromise(dispatch) {
-        axios.get('/data.json')
+        axios.get('/config.json')
           .then(response => {
                 getLDPcontents(response.data.workset)
                  .then(uris => {
