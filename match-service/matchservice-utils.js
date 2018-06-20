@@ -137,11 +137,13 @@ function getFragInfo(uri) {
           let n = frag.match(undefined, DC("title"), undefined)
           let k = frag.match(undefined, NIN("key"), undefined)
           let m = frag.match(undefined, NIN("mode"), undefined)
+          let l = frag.match(undefined, NIN("length"), undefined)
           //let mei = frag.match(undefined, rdf.sym("http://purl.org/ontology/mo/published_as"), undefined)
           return { id: uri,
                    title: getVal(n),
                    key: getVal(k),
                    mode: getVal(m),
+                   len: getVal(l),
                    //mei: getVal(mei)
                 }
         })

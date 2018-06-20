@@ -24,3 +24,6 @@ yarn-error.log*
 
 # FUSE temporary files
 .fuse_hidden*
+
+# Local config file
+/conf.js
