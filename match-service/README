@@ -3,7 +3,13 @@
 
 ## Key Match service
 
-# Empty container
+# Utilities
+
+To fetch FragRefs from a container and resolve them to a list of Fragments:
+
+node listfrags WORKSET-URI
+
+## Empty container
 
 Utility to remove all items from an LDP container:
 

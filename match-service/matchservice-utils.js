@@ -17,7 +17,8 @@ const NINRE_WorkSetServiceIndex = 'ninre:WorkSetServiceIndex'
 const NINRE_WorkSetService = 'ninre:WorkSetService'
 const NINRE_MatchService = 'ninre:MatchService'
 const NINRE_keyCompat = 'ninre:keyCompatibility'
-const MOTIVATION_ID = 'oa:linking'
+const MOTIVATION_ID = 'http://www.w3.org/ns/oa#linking'
+const MOTIVATION_RECURSE ='http://remix.numbersintonotes.net/vocab#seeHere'
 
 const REMIX = rdf.Namespace("http://remix.numbersintonotes.net/vocab#")
 const DC = rdf.Namespace("http://purl.org/dc/elements/")
@@ -62,7 +63,7 @@ function addAnnotation(conturi, targeturi, bodyuri, motivation) {
   var annbody = prefixes + `<> a oa:Annotation ;
     oa:hasTarget <${targeturi}> ;
     oa:hasBody <${bodyuri}> ;
-    oa:motivatedBy ${motivation} .`
+    oa:motivatedBy <${motivation}> .`
 
   return axios.post(conturi, annbody, {
       headers: {'Content-Type': 'text/turtle'}
@@ -85,6 +86,7 @@ function parseTurtle(baseuri) {
     return Promise.resolve(store)
   })
 }
+module.exports.parseTurtle = parseTurtle
 
 // Return Promise for contents of a location as rdf Store
 function getTurtle(uri) {
@@ -94,6 +96,7 @@ function getTurtle(uri) {
       .then(parseTurtle(uri))
       )
 }
+module.exports.getTurtle = getTurtle
 
 // Return Promise for contents of LDP container 
 function getLDPcontents(uri) {
@@ -138,13 +141,16 @@ function getFragInfo(uri) {
           let k = frag.match(undefined, NIN("key"), undefined)
           let m = frag.match(undefined, NIN("mode"), undefined)
           let l = frag.match(undefined, NIN("length"), undefined)
+          let hn = frag.match(undefined, NIN("highNoteMidi"), undefined)
+          let ln = frag.match(undefined, NIN("lowNoteMidi"), undefined)
           //let mei = frag.match(undefined, rdf.sym("http://purl.org/ontology/mo/published_as"), undefined)
           return { id: uri,
                    title: getVal(n),
                    key: getVal(k),
                    mode: getVal(m),
                    len: getVal(l),
-                   //mei: getVal(mei)
+                   highnote: parseInt(getVal(hn)),
+                   lownote: parseInt(getVal(ln))
                 }
         })
     )
