@@ -276,11 +276,18 @@ function findAnnotationR(conturi, targeturi) {
                             else return Promise.resolve(null)
                           },
                           uris)
-    }) // Add check for 'redirect' motivation, recurse if necessary
+    }).then(r => {
+      // Add check for 'redirect' motivation, recurse if necessary
+      if (r === null) return Promise.resolve(null)
+      if (r.motivation == MOTIVATION_RECURSE)
+        return findAnnotationR(r.body, targeturi)
+      else
+        return Promise.resolve(r)
+    })
     //.then(o => {console.log(o)})
   return p
 }
-//module.exports.findAnnotation = findAnnotation
+module.exports.findAnnotationR = findAnnotationR
 
 // Creates promise to find an annotation pointing to targetUri
 // in the LDP container outerContUri

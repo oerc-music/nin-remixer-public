@@ -5,12 +5,14 @@
 
 # Utilities
 
-To fetch FragRefs from a container and resolve them to a list of Fragments:
+* To fetch FragRefs from a container and resolve them to a list of Fragments:
 
-node listfrags WORKSET-URI
+  node listfrags WORKSET-URI
 
-## Empty container
+* Utility to remove all items from an LDP container:
 
-Utility to remove all items from an LDP container:
+  node emptycontainer CONTAINER-URI
 
-node emptycontainer.js CONTAINER-URI
+* Find an annotation matching TARGET in CONTAINER
+
+  node findAnn CONTAINER-URI TARGET-URI
