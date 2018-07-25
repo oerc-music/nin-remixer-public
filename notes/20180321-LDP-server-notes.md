@@ -45,7 +45,7 @@ It's also now possible to install via docker.
 
 - melvincarvalho(at)gmail.com
 
-Gold isnt actively maintained but if someone with Go experience had time to
+Gold isn't actively maintained but if someone with Go experience had time to
 help out, that would be welcome!
 
 

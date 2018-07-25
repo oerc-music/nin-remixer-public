@@ -463,7 +463,7 @@
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:body}</string>
+oa:hasBody}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -536,7 +536,7 @@ oa:body}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{720.18949587623467, 411.02359199523926}, {101.85768890380859, 19}}</string>
+			<string>{{716.18949587623467, 411.02359199523926}, {101.85768890380859, 19}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -600,7 +600,7 @@ oa:body}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:target}</string>
+oa:hasTarget}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -1248,7 +1248,7 @@ ldp:contains}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:body}</string>
+oa:hasBody}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -1321,7 +1321,7 @@ oa:body}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{722.83459281921387, 290.55115985870361}, {99.212593078613281, 19}}</string>
+			<string>{{718.83459281921387, 290.55115985870361}, {99.212593078613281, 19}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -1385,7 +1385,7 @@ oa:body}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:target}</string>
+oa:hasTarget}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -2181,7 +2181,7 @@ sofa:working_sets}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:body}</string>
+oa:hasBody}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -2254,7 +2254,7 @@ oa:body}</string>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{722.83459281921387, 184.25195503234863}, {99.212593078613281, 19}}</string>
+			<string>{{718.83459281921387, 184.25195503234863}, {99.212593078613281, 19}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -2318,7 +2318,7 @@ oa:body}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
 \f0\fs28 \cf0 \expnd0\expndtw0\kerning0
-oa:target}</string>
+oa:hasTarget}</string>
 				<key>VerticalPad</key>
 				<integer>1</integer>
 			</dict>
@@ -4177,7 +4177,7 @@ Compatibility service}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2018-05-22 14:21:45 +0000</string>
+	<string>2018-07-17 08:17:04 +0000</string>
 	<key>Modifier</key>
 	<string>Graham Klyne</string>
 	<key>NotesVisible</key>
@@ -4213,7 +4213,7 @@ Compatibility service}</string>
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>A9C0D250-B242-452E-A6E1-BC045C4B49A5</string>
+			<string>CD7CCCAD-3018-4154-960D-C57243F81B20</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -4263,7 +4263,7 @@ Compatibility service}</string>
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{-1197, 14}, {1194, 773}}</string>
+		<string>{{56, 4}, {1194, 773}}</string>
 		<key>ListView</key>
 		<false/>
 		<key>OutlineWidth</key>

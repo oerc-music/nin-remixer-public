@@ -1,0 +1,36 @@
+## Risk management planning
+
+(Details reformatted and reviewed from last meeting)
+
+### System failure
+
+- ease of setup on new system to avoid dependency on any specific host (using docker)
+
+- have test data running on localhost
+
+- try to ensure data can be ported
+
+- Docker containers running in alternative VM host (e.g. Trantor environment)
+
+- Codify LDP container service setup so it can be re-applied elsehwere (e.g. other apps).
+
+### Data loss
+
+- data backups (including setup and config)
+
+- Currently backing up to m/c in Phonetics
+
+### Unforeseen complications with software
+
+(Not sure what this meant.  Our software, or dependencies? #g)
+
+- regular status reviews
+
+
+### Developer availability
+
+- documentation?
+
+- automation (scripting)?
+
+- installation by another dev (Mat offered to do a trial install of the software)
