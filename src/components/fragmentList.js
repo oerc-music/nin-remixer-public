@@ -13,13 +13,16 @@ export class BareFragList extends React.Component {
       const svgs = this.props.svg
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
             <li key={itm.id}>
+              <div title={itm.id}>
               {itm.title} ({showkey(itm.keydisp, itm.mode)})
+              </div>
               {(svgs.has(itm.mei)) && (
                   <div><InlineSVG src={svgs.get(itm.mei)}/></div>
                   )}
               <button onClick={e=>{onClick(index, itm.id)}}>
                 Select
               </button>
+              <button className="playbutton">▶</button>
             </li>
             );
 

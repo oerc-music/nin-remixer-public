@@ -1,3 +1,4 @@
 {
-  "workset": "http://localhost:8080/workset-1d11db/"
+  "wsi": "http://localhost:8080/ninbase/WSI/",
+  "workset": "http://localhost:8080/workset-4dbb10/"
 }

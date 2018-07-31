@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 
 import { LoadButton } from './components/load-fragments';
 import { FragList } from './components/fragmentList';
-import { FragmentSelector } from './components/selectedFragments';
-import { AssembledRow} from './components/assembledRow';
+import { FragmentSelector, MatchSelector } from './components/selectedFragments';
+import { AssembledRow, AssembledGrid} from './components/assembledRow';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Numbers into Notes - remixer</h1>
+          <h1 className="App-title">S.O.F.A. remixer</h1>
         </header>
-        <LoadButton label="go" />
+        {this.props.hideGo ? null : <LoadButton label="go" />}
         <div className="fragRow">
-		  <FragmentSelector />
-		  <AssembledRow />
+          <MatchSelector />
+          <FragmentSelector />
         </div>
+	  <AssembledGrid />
       </div>
     );
   }
 }
 
+App=connect(s=>s)(App)
 export default App;

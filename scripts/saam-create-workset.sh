@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASEURI="http://thalassa.oerc.ox.ac.uk:8080/"
+BASEURI="http://localhost:8080/"
 SLUG="workset"
 
 # Create a container for the workset

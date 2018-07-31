@@ -16,3 +16,7 @@
 * Find an annotation matching TARGET in CONTAINER
 
   node findAnn CONTAINER-URI TARGET-URI
+
+* Find matches in a MatchService container (dealing with recursion on a motivation of ninre:seeHere):
+
+  node findMatches CONTAINER-URI TARGET-URI

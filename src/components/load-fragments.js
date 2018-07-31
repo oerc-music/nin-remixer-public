@@ -31,23 +31,28 @@ const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adju
 function fragmentsPromise(dispatch) {
         axios.get('/config.json')
           .then(response => {
-                getLDPcontents(response.data.workset)
-                 .then(uris => {
-                   return Promise.all(uris.map(getFragInfo))
-                 })
-                 .then(frags => {
-                   console.log(frags)
-                   // set the list of fragments
-                   dispatch(setFrags(frags))
-                   for (let f of frags) {
-                      axios.get(f.mei)
-                        .then(res => {
-                          let svg = vrvTk.renderData(res.data, vrvOptions)
-                          //console.log(svg)
-                          dispatch(setMei(f.mei, res.data, svg))
-                        })
-                   }
-                 })
+                if (response.data.setconfig) {
+                  dispatch({type:'SETCONFIG', config: response.data})
+                }
+                let p = getLDPcontents(response.data.workset)
+                   .then(uris => {
+                     return Promise.all(uris.map(getFragInfo))
+                   })
+                   .then(frags => {
+                     console.log(frags)
+                     // set the list of fragments
+                     dispatch(setFrags(frags))
+                     for (let f of frags) {
+                        axios.get(f.mei)
+                          .then(res => {
+                            let svg = vrvTk.renderData(res.data, vrvOptions)
+                            //console.log(svg)
+                            dispatch(setMei(f.mei, res.data, svg))
+                            dispatch({type:'HIDEGO'})
+                          })
+                     }
+                   })
+                 return p
             })
 }
 

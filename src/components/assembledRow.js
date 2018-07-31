@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { BareFragList } from './fragmentList'
 import { selectFragment } from './load-fragments'
 import InlineSVG from 'svg-inline-react'
+import _ from 'lodash'
 
 const FragList = BareFragList
 
@@ -39,8 +40,41 @@ export var AssembledRow = function({dispatch, selectedFrags, frags, svg}) {
 	  })
 	} else { return <div>Awaiting selection</div> }
 }
-
 AssembledRow = connect(s=>s)(AssembledRow)
+
+export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg}) {
+  var names = rowNames
+  const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length))), cursorCol+1)
+  console.log(cols, cursorCol)
+  return ( 
+    <div className="assembledGrid">
+    <table>
+    { Object.keys(selectedFrags).map( (rowInd) => {
+      const row = selectedFrags[rowInd]
+      return (
+        <tr>
+          <td className="instName"> {rowNames[rowInd]} </td>
+          { 
+             _.range(cols).map((i=>{
+               const cell = row[i]
+               const frag = cell ? frags.find(f => f.id === cell.id) : null;
+               const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
+               return (
+                 <td className={rowInd==cursorRow && i==cursorCol ? "selCell":null}>
+                 {fsvg}
+                 </td>
+                 )
+             })
+            )
+          }
+        </tr>
+        )
+     }) }
+    </table>
+    </div>
+  )
+}
+AssembledGrid = connect(s=>s)(AssembledGrid)
 
 //export const FragList = connect(s=>({
     //fragments: s.frags,

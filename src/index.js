@@ -8,18 +8,32 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import update from 'immutability-helper'
 
+const KEYMATCH="http://remix.numbersintonotes.net/vocab#keyCompatibility"
+const LENGTHMATCH="http://remix.numbersintonotes.net/vocab#lengthCompatibility"
+const INSTMATCH="http://remix.numbersintonotes.net/vocab#instrumentCompatibility"
 //function appReducer(s = {items:["Foo", "Boo", "Baz"]} ,a) {
 //  return s
 //}
-const emptyState = {frags:[],
+var emptyState = {
+                    frags:[],
                     mei:new Map(),
                     svg:new Map(),
-					rowIndex: 0, // hack
-                    selectedFrags: {
-						0: [{cursor: true}],
-						1: [{cursor: true}],
-						2: [{cursor: true}],
-						3: [{cursor: true}] }}
+                    hideGo: false,
+
+                    filtFrags:[],
+
+                    matchType: KEYMATCH,
+                    matchchecked: true,
+
+                    cursorRow: 0,
+                    cursorCol: 0,
+                    rowNames: ["Instrument1", "Instrument2", "Instrument3"],
+                    selectedFrags: [
+				    [null],
+				    [null],
+				    [null]
+                                   ]
+                  }
 
 function ninReducer(state = emptyState, action) {
   switch (action.type) {
@@ -35,29 +49,38 @@ function ninReducer(state = emptyState, action) {
     case 'SELECT_FRAG':
       // Set the id of current fragment
       var newstate = update(state, {
-		  selectedFrags: { 
-			  [state.rowIndex]: {
-				  [action.index]: {
-					  $set: { id: action.id}
-              	  }
-			  }
-		  }
-	  });
-      // add a new blank one
-      newstate = update(newstate, {
-		  selectedFrags: {
-			  [state.rowIndex]: { 
-              	$splice: [[action.index+1, 0, {cursor: true}]] 
-			  }
-		  }
-        })
-	  // hack -- incr rowindex
-	  newstate = update(newstate, {
-		  rowIndex: { 
-			  $set: (state.rowIndex+1)%4
-		  }
+		  selectedFrags: { [state.cursorRow]: 
+                                   { [state.cursorCol]: 
+                                     { $set: { id: action.id} } } }
 	  })
+        const nrow = (state.cursorRow + 1) % (state.selectedFrags.length)
+        newstate = update(newstate, { cursorRow: {$set: nrow}})
+        if (nrow==0) { //move to next col
+          newstate = update(newstate, { cursorCol: (c=>c+1) })
+        }
+        newstate = update(newstate, {filtFrags: {$set: []}})
       return newstate
+    case 'SETCONFIG':
+      //console.log(action);
+      var nstate = state
+      if ('rowNames' in action.config) {
+        nstate = update(nstate, {rowNames: {$set: action.config.rowNames}})
+      }
+      if ('selectedFrags' in action.config) { 
+        nstate = update(nstate, {selectedFrags: {$set: action.config.selectedFrags}})
+      }
+      if ('cursorRow' in action.config) {
+        nstate = update(nstate, {cursorRow: {$set: action.config.cursorRow}})
+      }
+      if ('cursorCol' in action.config) {
+        nstate = update(nstate, {cursorCol: {$set: action.config.cursorCol}})
+      }
+      return nstate
+    case 'HIDEGO':
+      return update (state, {hideGo: {$set: true}})
+    case 'TOGGLEMATCH':
+      return update(state, {matchchecked: (x=>!x),
+                            filtFrags: {$set: []}})
     default:
       return state
   }
