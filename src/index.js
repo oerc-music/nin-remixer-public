@@ -7,8 +7,25 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { ninReducer } from './reducer'
+import update from 'immutability-helper'
 
-const store = createStore(ninReducer, applyMiddleware(thunk))
+const mapState = store => {
+  // Hide the large Maps from state
+  return update(store.getState(), {mei: {$apply:(m=>"Map:"+m.size)},
+                                   svg: {$apply:(m=>"Map:"+m.size)}})
+}
+
+const logger = store => next => action => {
+    console.group(action.type)
+    console.info('%c dispatching', 'color: blue', action)
+    let result = next(action)
+    console.log('%c next state', 'color: green', mapState(store))
+    console.groupEnd()
+    return result
+}
+
+//const store = createStore(ninReducer, applyMiddleware(thunk))
+const store = createStore(ninReducer, applyMiddleware(thunk, logger))
 
 ReactDOM.render(
       <Provider store={store}>
