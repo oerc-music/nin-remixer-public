@@ -12,7 +12,13 @@ var emptyState = {
                     svg:new Map(),
                     hideGo: false,
 
-                    filtFrags:[],
+                    // filtUpdating contains a tag if update in progess
+                    filtIsUpdating: false,
+                    // filtSpec: [{type:MATCH-TYPE-URI,target:TARGET-URI}]
+                    filtSpec: [],
+                    //?filtNewSpec: null,
+                    // filtFrags - selected fragments
+                    filtFrags: [],
 
                     matchType: KEYMATCH,
                     matchchecked: true,
@@ -53,7 +59,6 @@ export function ninReducer(state = emptyState, action) {
         newstate = update(newstate, {filtFrags: {$set: []}})
       return newstate
     case 'SETCONFIG':
-      //console.log(action);
       var nstate = state
       if ('rowNames' in action.config) {
         nstate = update(nstate, {rowNames: {$set: action.config.rowNames}})
@@ -73,6 +78,11 @@ export function ninReducer(state = emptyState, action) {
     case 'TOGGLEMATCH':
       return update(state, {matchchecked: (x=>!x),
                             filtFrags: {$set: []}})
+    case 'FILT_UPDATING':
+      return update(state, {filtIsUpdating: {$set: action.val}})
+    case 'FILT_SETFRAGS':
+      return update(state, {filtSpec: {$set: action.spec},
+                            filtFrags: {$set: action.frags}})
     default:
       return state
   }

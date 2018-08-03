@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { getLDPcontents, getFragInfo } from '../actions/rdf'
+import { withFragFilter } from '../actionsFrags'
 
 // Action Creator
 export function setFrags(frags) {
@@ -16,7 +17,7 @@ export function setMei(uri, mei, svg) {
 // Action Creator
 export function selectFragment(index, id) {
   console.log("making SELECT_FRAG:", index, id)
-  return { type: 'SELECT_FRAG', index, id}
+  return withFragFilter({ type: 'SELECT_FRAG', index, id})
 }
 
 // already loaded in page as script

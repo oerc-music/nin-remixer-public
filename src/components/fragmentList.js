@@ -39,7 +39,7 @@ export class BareFragList extends React.Component {
 //export const ConnTestList = connect(s=>s)(TestList)
 //export const FTestList = connect(s=>{return {items: s.frags.map(i=>i.title)};})(TestList)
 export const FragList = connect(s=>({
-    fragments: s.frags,
+    fragments: s.filtFrags,
     svg: s.svg
   }),dispatch=> ({
     onClick: (index, id)=> {dispatch(selectFragment(index, id))}

@@ -32,6 +32,7 @@ MatchSelector = connect(s=>s)(MatchSelector)
 export var FragmentSelector = function({dispatch, selectedFrags,
                                         frags, filtFrags, svg}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
+  console.log(frags,filtFrags)
   return (
         <div className="listcol">
           <FragList fragments={filtFrags.length?filtFrags:frags}
