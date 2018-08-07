@@ -1,11 +1,11 @@
 import update from 'immutability-helper'
 
+
 const KEYMATCH="http://remix.numbersintonotes.net/vocab#keyCompatibility"
 const LENGTHMATCH="http://remix.numbersintonotes.net/vocab#lengthCompatibility"
 const INSTMATCH="http://remix.numbersintonotes.net/vocab#instrumentCompatibility"
-//function appReducer(s = {items:["Foo", "Boo", "Baz"]} ,a) {
-//  return s
-//}
+
+
 var emptyState = {
                     frags:[],
                     mei:new Map(),
@@ -30,8 +30,19 @@ var emptyState = {
 				    [null],
 				    [null],
 				    [null]
-                                   ]
+                                   ],
+
+                    wsi: null,
+                    workset: null
                   }
+
+// Helper to set a state entry from a config object
+function setState(state, config, name) {
+      if (name in config) {
+        return update(state, {[name]: {$set: config[name]}})
+      }
+      return state
+}
 
 export function ninReducer(state = emptyState, action) {
   switch (action.type) {
@@ -60,18 +71,12 @@ export function ninReducer(state = emptyState, action) {
       return newstate
     case 'SETCONFIG':
       var nstate = state
-      if ('rowNames' in action.config) {
-        nstate = update(nstate, {rowNames: {$set: action.config.rowNames}})
-      }
-      if ('selectedFrags' in action.config) { 
-        nstate = update(nstate, {selectedFrags: {$set: action.config.selectedFrags}})
-      }
-      if ('cursorRow' in action.config) {
-        nstate = update(nstate, {cursorRow: {$set: action.config.cursorRow}})
-      }
-      if ('cursorCol' in action.config) {
-        nstate = update(nstate, {cursorCol: {$set: action.config.cursorCol}})
-      }
+      nstate = setState(nstate, action.config, "wsi")
+      nstate = setState(nstate, action.config, "workset")
+      nstate = setState(nstate, action.config, "rowNames")
+      nstate = setState(nstate, action.config, "selectedFragments")
+      nstate = setState(nstate, action.config, "cursorRow")
+      nstate = setState(nstate, action.config, "cursorCol")
       return nstate
     case 'HIDEGO':
       return update (state, {hideGo: {$set: true}})

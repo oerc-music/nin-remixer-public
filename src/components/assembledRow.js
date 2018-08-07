@@ -45,7 +45,7 @@ AssembledRow = connect(s=>s)(AssembledRow)
 export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg}) {
   var names = rowNames
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length))), cursorCol+1)
-  console.log(cols, cursorCol)
+  //console.log(cols, cursorCol)
   return ( 
     <div className="assembledGrid">
     <table>

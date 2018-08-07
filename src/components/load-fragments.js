@@ -32,9 +32,10 @@ const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adju
 function fragmentsPromise(dispatch) {
         axios.get('/config.json')
           .then(response => {
-                if (response.data.setconfig) {
-                  dispatch({type:'SETCONFIG', config: response.data})
-                }
+                dispatch({type:'SETCONFIG', config: response.data})
+                //if (response.data.setconfig) {
+                //  dispatch({type:'SETCONFIG', config: response.data})
+                //}
                 let p = getLDPcontents(response.data.workset)
                    .then(uris => {
                      return Promise.all(uris.map(getFragInfo))
@@ -53,7 +54,7 @@ function fragmentsPromise(dispatch) {
                           })
                      }
                    })
-                 return p
+                return p
             })
 }
 

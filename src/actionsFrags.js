@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { findMatchService, findAnnotationMatches, idlog }
+    from './matchservice-utils'
 import _ from 'lodash'
 
 // wrap an action to a thunk which dispatches
@@ -11,10 +13,16 @@ export function withFragFilter(action) {
     let filt = []
     // work out needed filters
     if (s.matchType) {
-      if (s.selectedFrags[s.cursorRow][s.cursorCol-1])
-      filt = [{type: s.matchtype,
-               target: s.selectedFrags[s.cursorRow][s.cursorCol-1]
-              }]
+      if (s.selectedFrags[s.cursorRow][s.cursorCol-1]
+          && s.selectedFrags[s.cursorRow][s.cursorCol-1].id)
+        filt.push({type: s.matchType,
+               target: s.selectedFrags[s.cursorRow][s.cursorCol-1].id
+                 })
+      if (s.selectedFrags[s.cursorRow][s.cursorCol+1]
+          && s.selectedFrags[s.cursorRow][s.cursorCol+1].id)
+        filt.push({type: s.matchType,
+               target: s.selectedFrags[s.cursorRow][s.cursorCol+1].id
+        })
     }
     // sort and uniq filters to canonical form
     filt = _(filt).sortBy(['type', 'target'])
@@ -24,7 +32,8 @@ export function withFragFilter(action) {
     if (! _.isEqual(filt, s.filtSpec)) {
       // 
       dispatch({type: 'FILT_UPDATING', val: true})
-      filterFragments(s.frags, filt)
+      filterFragments(getState().frags, filt,
+                      getState().wsi, getState().workset)
         .then(fs => {
           dispatch({type: 'FILT_SETFRAGS',
                     frags: fs,
@@ -35,7 +44,21 @@ export function withFragFilter(action) {
   }
 }
 
-function filterFragments(frags) {
-  return Promise.resolve(_.take(frags, 8))
+function filterFragments(frags, filtspec, wsi, wset) {
+  let mtype, targ
+  console.log("filtspec:",filtspec)
+  if (filtspec.length) {
+    mtype = filtspec[0].type
+    targ = filtspec[0].target
+  }
+  let p = findMatchService(wsi, mtype, wset)
+    .then(mservice => findAnnotationMatches(mservice, targ))
+    .then(idlog)
+    .then(fragids => frags.filter(f=>fragids.includes(f.id)))
+    .then(idlog)
+    .catch(e => {console.log(e);return Promise.resolve(_.take(frags, 8))})
+  return p
+  //return Promise.resolve(_.take(frags, 8))
+        // .then(x=> new Promise(r=>setTimeout(()=>r(x),100)))
 }
 
