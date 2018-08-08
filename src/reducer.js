@@ -27,9 +27,9 @@ var emptyState = {
                     cursorCol: 0,
                     rowNames: ["Instrument1", "Instrument2", "Instrument3"],
                     selectedFrags: [
-				    [null],
-				    [null],
-				    [null]
+				    [],
+				    [],
+				    []
                                    ],
 
                     wsi: null,

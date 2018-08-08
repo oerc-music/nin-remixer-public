@@ -18,7 +18,7 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
                                   id: id })}
   const filts = Array.from(filtSpec.entries()).map(([index, ent]) =>
       <li key={ent.type+ent.target}>
-      {ent.type} "->" {ent.target}
+      {ent.type} -> {ent.target}
       </li>
       )
   return (
