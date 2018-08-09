@@ -45,3 +45,11 @@ An application trialling use of MELD patterns in composition of musical pieces u
 - http://marmotta.apache.org
     - https://git-wip-us.apache.org/repos/asf?p=marmotta.git
     - [Mirror of Marmotta git repo on github](https://github.com/apache/marmotta)
+
+## Documentation
+
+- [create-working-set/](spike/create-working-set/Notes.md) for notes on seting up GOLD.
+
+- [scripts/](scripts/README) for scripts to load data into a Workset container from NumbersIntoNotes.
+
+- [match-service/](match-service/README) for match-service setup.
