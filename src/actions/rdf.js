@@ -66,9 +66,12 @@ export function getFragInfo(uri) {
       getTurtle(uri)
         .then(store => {
           const fragnode = store.any(rdf.sym(uri), REMIX("fragment"), undefined)
-          return getTurtle(getNodeURI(fragnode))
+          return getNodeURI(fragnode)
         })
-        .then(frag => {
+        .then(furi => {
+          return getTurtle(furi).then(ttl=>({furi:furi, frag:ttl}))
+        })
+        .then(({furi, frag}) => {
           //var n= frag.statementsMatching(undefined, DC("title"), undefined)
           let n= frag.match(undefined, DC("title"), undefined)
           let k = frag.match(undefined, NIN("key"), undefined)
@@ -76,7 +79,8 @@ export function getFragInfo(uri) {
           let mei = frag.match(undefined, rdf.sym("http://purl.org/ontology/mo/published_as"), undefined)
 
           //console.log(get([0, 'object', 'value'])(n) )
-          return { id: uri,
+          return { id: furi,
+                   fragref: uri,
                    title: get([0, 'object', 'value'])(n),
                    key: getVal(k),
                    mode: getVal(m),

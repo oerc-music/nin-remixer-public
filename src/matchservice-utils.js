@@ -28,6 +28,7 @@ function idlog(x) {
         console.log(x)
         return x
 }
+module.exports.idlog = idlog
 
 function createWSIcontainer(baseuri, slug) {
   //const worksetIndTemplate = prefixes + "<> a ldp:BasicContainer, ninre:WorkSetServiceIndex . "

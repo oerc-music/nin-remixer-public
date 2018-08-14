@@ -10,11 +10,17 @@ const updateMatch = function(dispatch, id) {
   //var p = 
 }
 
-export var MatchSelector = function({dispatch, matchtype, matchchecked}) {
+export var MatchSelector = function({dispatch, matchtype, matchchecked,
+                                     filtSpec }) {
   const id = matchtype
   const checked = matchchecked
   const handleChange = (id) => {dispatch({type:'TOGGLEMATCH',
                                   id: id })}
+  const filts = Array.from(filtSpec.entries()).map(([index, ent]) =>
+      <li key={ent.type+ent.target}>
+      {ent.type} -> {ent.target}
+      </li>
+      )
   return (
          <div className="matchSel">
            Match By:
@@ -24,18 +30,23 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked}) {
                 onChange={handleChange} />
              Key Compatibility
            </label>
+           <br/>
+           <ul>{filts}</ul>
          </div>
          )
 }
 MatchSelector = connect(s=>s)(MatchSelector)
 
 export var FragmentSelector = function({dispatch, selectedFrags,
+                                        filtIsUpdating,
                                         frags, filtFrags, svg}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
+  console.log(frags,filtFrags)
   return (
         <div className="listcol">
           <FragList fragments={filtFrags.length?filtFrags:frags}
                     svg={svg}
+                    selecting={! filtIsUpdating}
                     onClick={selectOnClick} />
         </div>
   )

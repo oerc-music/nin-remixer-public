@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { getLDPcontents, getFragInfo } from '../actions/rdf'
+import { withFragFilter } from '../actionsFrags'
 
 // Action Creator
 export function setFrags(frags) {
@@ -16,7 +17,7 @@ export function setMei(uri, mei, svg) {
 // Action Creator
 export function selectFragment(index, id) {
   console.log("making SELECT_FRAG:", index, id)
-  return { type: 'SELECT_FRAG', index, id}
+  return withFragFilter({ type: 'SELECT_FRAG', index, id})
 }
 
 // already loaded in page as script
@@ -31,9 +32,10 @@ const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adju
 function fragmentsPromise(dispatch) {
         axios.get('/config.json')
           .then(response => {
-                if (response.data.setconfig) {
-                  dispatch({type:'SETCONFIG', config: response.data})
-                }
+                dispatch({type:'SETCONFIG', config: response.data})
+                //if (response.data.setconfig) {
+                //  dispatch({type:'SETCONFIG', config: response.data})
+                //}
                 let p = getLDPcontents(response.data.workset)
                    .then(uris => {
                      return Promise.all(uris.map(getFragInfo))
@@ -52,7 +54,7 @@ function fragmentsPromise(dispatch) {
                           })
                      }
                    })
-                 return p
+                return p
             })
 }
 

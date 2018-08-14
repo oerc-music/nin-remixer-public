@@ -8,6 +8,7 @@ const showkey = (key, mode) => key + (mode === "minor" ? " minor" : "")
 export class BareFragList extends React.Component {
    render() {
       //const dispatch = this.props.dispatch
+      const selectDisabled = ! this.props.selecting
       const onClick = this.props.onClick
       const items = this.props.fragments
       const svgs = this.props.svg
@@ -19,7 +20,8 @@ export class BareFragList extends React.Component {
               {(svgs.has(itm.mei)) && (
                   <div><InlineSVG src={svgs.get(itm.mei)}/></div>
                   )}
-              <button onClick={e=>{onClick(index, itm.id)}}>
+              <button onClick={e=>{onClick(index, itm.id)}}
+                      disabled={selectDisabled}>
                 Select
               </button>
               <button className="playbutton">▶</button>
@@ -39,7 +41,7 @@ export class BareFragList extends React.Component {
 //export const ConnTestList = connect(s=>s)(TestList)
 //export const FTestList = connect(s=>{return {items: s.frags.map(i=>i.title)};})(TestList)
 export const FragList = connect(s=>({
-    fragments: s.frags,
+    fragments: s.filtFrags,
     svg: s.svg
   }),dispatch=> ({
     onClick: (index, id)=> {dispatch(selectFragment(index, id))}
