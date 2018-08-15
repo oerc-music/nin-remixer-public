@@ -2,20 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { BareFragList } from './fragmentList'
 import { selectFragment } from './load-fragments'
+import { withFragFilter } from '../actionsFrags'
 
 const FragList = BareFragList
-
-const updateMatch = function(dispatch, id) {
-  dispatch({type:'TOGGLEMATCH', id: id})
-  //var p = 
-}
 
 export var MatchSelector = function({dispatch, matchtype, matchchecked,
                                      filtSpec }) {
   const id = matchtype
   const checked = matchchecked
-  const handleChange = (id) => {dispatch({type:'TOGGLEMATCH',
-                                  id: id })}
+  const handleChange = (id) => {dispatch(withFragFilter(
+                                           {type:'TOGGLEMATCH',
+                                            id: id }
+                                           ))}
   const filts = Array.from(filtSpec.entries()).map(([index, ent]) =>
       <li key={ent.type+ent.target}>
       {ent.type} -> {ent.target}
