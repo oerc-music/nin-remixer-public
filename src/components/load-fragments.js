@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { getLDPcontents, getFragInfo } from '../actions/rdf'
 import { withFragFilter } from '../actionsFrags'
+import { extractNotesMEI } from '../audioHandling'
 
 // Action Creator
 export function setFrags(frags) {
@@ -50,10 +51,11 @@ function fragmentsPromise(dispatch) {
                             let svg = vrvTk.renderData(res.data, vrvOptions)
                             //console.log(svg)
                             dispatch(setMei(f.mei, res.data, svg))
-                            dispatch({type:'HIDEGO'})
+                            //extractNotesMEI(res.data)
                           })
                      }
                    })
+                   .then(()=> { dispatch({type:'HIDEGO'}) })
                 return p
             })
 }
