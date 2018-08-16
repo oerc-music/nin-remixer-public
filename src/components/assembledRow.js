@@ -74,7 +74,11 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
     </div>
   )
 }
-AssembledGrid = connect(s=>s)(AssembledGrid)
+AssembledGrid = connect(s=>s,
+                  dispatch=>({
+                          selCell: (row, col) => {} //focus on cell
+                          }) 
+                )(AssembledGrid)
 
 //export const FragList = connect(s=>({
     //fragments: s.frags,
