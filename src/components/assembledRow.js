@@ -42,7 +42,7 @@ export var AssembledRow = function({dispatch, selectedFrags, frags, svg}) {
 }
 AssembledRow = connect(s=>s)(AssembledRow)
 
-export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg}) {
+export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell}) {
   var names = rowNames
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length))), cursorCol+1)
   //console.log(cols, cursorCol)
@@ -60,7 +60,7 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
                const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
                return (
-                 <td className={rowInd==cursorRow && i==cursorCol ? "selCell":null}>
+                 <td className={rowInd==cursorRow && i==cursorCol ? "selCell":null} onClick={e=>{selCell(rowInd, i)}} >
                  {fsvg}
                  </td>
                  )
@@ -76,7 +76,10 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
 }
 AssembledGrid = connect(s=>s,
                   dispatch=>({
-                          selCell: (row, col) => {} //focus on cell
+                          selCell: (row, col) => {
+                              //focus cursor on cell
+                              dispatch({type:"SET_CURSOR"})
+                          }
                           }) 
                 )(AssembledGrid)
 
