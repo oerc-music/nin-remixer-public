@@ -150,8 +150,8 @@ function getFragInfo(uri) {
                    key: getVal(k),
                    mode: getVal(m),
                    len: getVal(l),
-                   highnote: parseInt(getVal(hn)),
-                   lownote: parseInt(getVal(ln))
+                   highnote: parseInt(getVal(hn),10),
+                   lownote: parseInt(getVal(ln),10)
                 }
         })
     )
@@ -179,7 +179,7 @@ function getAnnotation(annuri, targeturi, bodyuri = null) {
                         rdf.sym('http://www.w3.org/ns/oa#hasBody'))
       if (bodyuri) {
         // If a bodyuri supplied, check it matches
-        if (bodyuri != getNodeURI(match))
+        if (bodyuri !== getNodeURI(match))
           return Promise.resolve(null)
       }
       let motivation = graph.any(rdf.sym(annuri),
@@ -222,7 +222,7 @@ function findAnnotation(conturi, targeturi) {
       // fetch annotations from the URIs
       // until one matches
       // promiseUntil (condition, combineFn, action, initialArg)
-      return promiseUntil((r, arg)=>(r !== null || arg.length == 0),
+      return promiseUntil((r, arg)=>(r !== null || arg.length === 0),
                           arg=>(arg.slice(1)),
                           arg=>{
                             if (arg.length >0) return getAnnotation(arg[0], targeturi)
@@ -240,7 +240,7 @@ module.exports.findAnnotation = findAnnotation
 function findExistingAnn(cont, target, body) {
   let p = getLDPcontents(cont)
     .then(uris => {
-      return promiseUntil((r, arg)=>(r !== null || arg.length == 0),
+      return promiseUntil((r, arg)=>(r !== null || arg.length === 0),
                           arg=>(arg.slice(1)),
                           arg=>{
                             if (arg.length >0)
@@ -270,7 +270,7 @@ function findAnnotationR(conturi, targeturi) {
       // fetch annotations from the URIs
       // until one matches
       // promiseUntil (condition, combineFn, action, initialArg)
-      return promiseUntil((r, arg)=>(r !== null || arg.length == 0),
+      return promiseUntil((r, arg)=>(r !== null || arg.length === 0),
                           arg=>(arg.slice(1)),
                           arg=>{
                             if (arg.length >0) return getAnnotation(arg[0], targeturi)
@@ -280,7 +280,7 @@ function findAnnotationR(conturi, targeturi) {
     }).then(r => {
       // Add check for 'redirect' motivation, recurse if necessary
       if (r === null) return Promise.resolve(null)
-      if (r.motivation == MOTIVATION_RECURSE)
+      if (r.motivation === MOTIVATION_RECURSE)
         return findAnnotationR(r.body, targeturi)
       else
         return Promise.resolve(r)
