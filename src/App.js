@@ -6,6 +6,7 @@ import { LoadButton } from './components/load-fragments';
 import { FragList } from './components/fragmentList';
 import { FragmentSelector, MatchSelector } from './components/selectedFragments';
 import { AssembledGrid} from './components/assembledRow';
+import { goTest } from './miditest'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">S.O.F.A. remixer</h1>
         </header>
+        <button onClick={goTest}>test</button>
         {this.props.hideGo ? null : <LoadButton label="go" />}
         <div className="fragRow">
           <MatchSelector />
