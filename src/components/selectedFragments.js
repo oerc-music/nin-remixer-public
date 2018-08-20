@@ -8,7 +8,7 @@ const FragList = BareFragList
 
 export var MatchSelector = function({dispatch, matchtype, matchchecked,
                                      filtSpec }) {
-  const id = matchtype
+  //const id = matchtype
   const checked = matchchecked
   const handleChange = (id) => {dispatch(withFragFilter(
                                            {type:'TOGGLEMATCH',

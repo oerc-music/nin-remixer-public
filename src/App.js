@@ -5,7 +5,7 @@ import './App.css';
 import { LoadButton } from './components/load-fragments';
 import { FragList } from './components/fragmentList';
 import { FragmentSelector, MatchSelector } from './components/selectedFragments';
-import { AssembledRow, AssembledGrid} from './components/assembledRow';
+import { AssembledGrid} from './components/assembledRow';
 
 class App extends Component {
   render() {

@@ -40,7 +40,7 @@ export function withFragFilter(action) {
     }
     // sort and uniq filters to canonical form
     filt = _(filt).sortBy(['type', 'target'])
-            .uniqWith((x,y)=> x.type == y.type && x.target==y.target)
+            .uniqWith((x,y)=> x.type === y.type && x.target === y.target)
             .value()
     // compare to existing filter
     if (! _.isEqual(filt, s.filtSpec)) {
@@ -75,7 +75,7 @@ function filterFragments(frags, filtspec, wsi, wset) {
     .then(idlog)
     .then(fragids => frags.filter(f=>fragids.includes(f.id)))
     .then(idlog)
-    .catch(e => {console.log(e);return [];Promise.resolve(_.take(frags, 8))})
+    .catch(e => {console.log(e);return [];})
   if (filtspec.length !== 0) {
     p = p.then(fr => filterFragments(fr, nextfiltspec, wsi, wset))
   }
