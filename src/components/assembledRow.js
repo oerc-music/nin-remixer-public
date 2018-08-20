@@ -49,10 +49,11 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
   return ( 
     <div className="assembledGrid">
     <table>
+    <tbody>
     { Object.keys(selectedFrags).map( (rowInd) => {
       const row = selectedFrags[rowInd]
       return (
-        <tr>
+        <tr key={rowInd}>
           <td className="instName"> {rowNames[rowInd]} </td>
           { 
              _.range(cols).map((i=>{
@@ -60,7 +61,8 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
                const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
                return (
-                 <td className={rowInd==cursorRow && i==cursorCol ? "selCell":null}>
+                 <td key={rowInd.toString()+"-"+i}
+                   className={rowInd==cursorRow && i==cursorCol ? "selCell":null}>
                  {fsvg}
                  </td>
                  )
@@ -70,6 +72,7 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
         </tr>
         )
      }) }
+    </tbody>
     </table>
     </div>
   )
