@@ -5,7 +5,7 @@ import { withFragFilter } from '../actionsFrags'
 import InlineSVG from 'svg-inline-react'
 import _ from 'lodash'
 
-export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell}) {
+export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell, filtIsUpdating}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
   //console.log(cols, cursorCol)
   return ( 
@@ -22,9 +22,14 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
                const cell = row[i]
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
                const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
+               let cursorClass = []
+               if (Number(rowInd)===cursorRow && i===cursorCol) {
+                  cursorClass.push("selCell")
+                  if (filtIsUpdating) cursorClass.push("filtUpdating")
+               }
                return (
                  <td key={rowInd+"-"+i}
-                   className={Number(rowInd)===cursorRow && i===cursorCol ? "selCell":null} onClick={e=>{selCell(Number(rowInd), i)}} >
+                   className={cursorClass.join(' ')} onClick={e=>{selCell(Number(rowInd), i)}} >
                  {fsvg}
                  </td>
                  )

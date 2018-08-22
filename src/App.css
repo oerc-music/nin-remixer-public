@@ -101,3 +101,6 @@
     float: left;
     margin-right: 25px;
 }
+td.filtUpdating {
+    background-color: #dce0e2;
+}
