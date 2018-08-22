@@ -78,6 +78,9 @@ export function ninReducer(state = emptyState, action) {
       nstate = setState(nstate, action.config, "cursorRow")
       nstate = setState(nstate, action.config, "cursorCol")
       return nstate
+    case 'SET_CURSOR':
+      return update(state, {cursorRow: {$set: action.row},
+                            cursorCol: {$set: action.col} })
     case 'HIDEGO':
       return update (state, {hideGo: {$set: true}})
     case 'TOGGLEMATCH':
