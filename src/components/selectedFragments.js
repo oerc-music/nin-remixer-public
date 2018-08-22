@@ -7,7 +7,7 @@ import { withFragFilter } from '../actionsFrags'
 const FragList = BareFragList
 
 export var MatchSelector = function({dispatch, matchtype, matchchecked,
-                                     filtSpec }) {
+                                     filtSpec, frags, filtFrags }) {
   //const id = matchtype
   const checked = matchchecked
   const handleChange = (id) => {dispatch(withFragFilter(
@@ -29,7 +29,10 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
              Key Compatibility
            </label>
            <br/>
-           <ul>{filts}</ul>
+           <div className="debugInfo">
+             <div className="countPanel">{filtFrags.length} / {frags.length}</div>
+             <div><ul>{filts}</ul></div>
+           </div>
          </div>
          )
 }

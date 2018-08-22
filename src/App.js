@@ -15,8 +15,9 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">S.O.F.A. remixer</h1>
         </header>
-        <button onClick={goTest}>test</button>
-        {this.props.hideGo ? null : <LoadButton label="go" />}
+        {this.props.hideGo ? null : [
+                <button onClick={goTest}>test</button>,
+                <LoadButton label="go" /> ]}
         <div className="fragRow">
           <MatchSelector />
           <FragmentSelector />
