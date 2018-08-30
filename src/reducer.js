@@ -64,7 +64,7 @@ export function ninReducer(state = emptyState, action) {
 	  })
         const nrow = (state.cursorRow + 1) % (state.selectedFrags.length)
         newstate = update(newstate, { cursorRow: {$set: nrow}})
-        if (nrow==0) { //move to next col
+        if (nrow===0) { //move to next col
           newstate = update(newstate, { cursorCol: (c=>c+1) })
         }
         newstate = update(newstate, {filtFrags: {$set: []}})
