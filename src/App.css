@@ -26,7 +26,8 @@
 .fragSelectionList {
 	position:fixed;
 	z-index: 1;
-	background:#ccccff
+	background:#ccccff;
+        clear: both;
 }
 
 .fragSelectionList.hidden {
@@ -64,11 +65,8 @@
 
 .assembledRow {
     position:relative;
-    clear:both;
 }
-.smalltext {
-    text-size: small;
-}
+
 .selCell {
     background-color: #aaeeff;
 }
@@ -94,4 +92,15 @@
 
 .assembledGrid tr {
     height: 45px;
+}
+
+.debugInfo div {
+    font-size: x-small;
+}
+.countPanel {
+    float: left;
+    margin-right: 25px;
+}
+td.filtUpdating {
+    background-color: #dce0e2;
 }

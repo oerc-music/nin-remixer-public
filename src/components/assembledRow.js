@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectFragment } from './load-fragments'
+import { withFragFilter } from '../actionsFrags'
 import InlineSVG from 'svg-inline-react'
 import _ from 'lodash'
 
-export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell}) {
-  const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length))), cursorCol+1)
+export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell, filtIsUpdating}) {
+  const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
   //console.log(cols, cursorCol)
   return ( 
     <div className="assembledGrid">
@@ -21,9 +22,14 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
                const cell = row[i]
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
                const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
+               let cursorClass = []
+               if (Number(rowInd)===cursorRow && i===cursorCol) {
+                  cursorClass.push("selCell")
+                  if (filtIsUpdating) cursorClass.push("filtUpdating")
+               }
                return (
-                 <td key={rowInd.toString()+"-"+i}
-                   className={rowInd===cursorRow && i===cursorCol ? "selCell":null} onClick={e=>{selCell(rowInd, i)}} >
+                 <td key={rowInd+"-"+i}
+                   className={cursorClass.join(' ')} onClick={e=>{selCell(Number(rowInd), i)}} >
                  {fsvg}
                  </td>
                  )
@@ -42,7 +48,10 @@ AssembledGrid = connect(s=>s,
                   dispatch=>({
                           selCell: (row, col) => {
                               //focus cursor on cell
-                              dispatch({type:"SET_CURSOR"})
+                              dispatch(withFragFilter(
+                                       {type:"SET_CURSOR",
+                                        row: row,
+                                        col: col}))
                           }
                           }) 
                 )(AssembledGrid)
