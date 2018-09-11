@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import InlineSVG from 'svg-inline-react'
 import { selectFragment } from './load-fragments'
+import { playMei, midiStart } from '../audioHandling'
 
 const showkey = (key, mode) => key + (mode === "minor" ? " minor" : "")
 
@@ -12,6 +13,9 @@ export class BareFragList extends React.Component {
       const onClick = this.props.onClick
       const items = this.props.fragments
       const svgs = this.props.svg
+      const meis = this.props.mei
+      console.log("SVGS",svgs)
+      console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
             <li key={itm.id}>
               <div title={itm.id}>
@@ -24,7 +28,11 @@ export class BareFragList extends React.Component {
                       disabled={selectDisabled}>
                 Select
               </button>
-              <button className="playbutton">▶</button>
+              <button onClick={e=>{let m=meis.get(itm.mei)
+                                   playMei(m)
+                                   }}
+                      className="playbutton">▶</button>
+              //<button onClick={e=>{ midiStart() }} className="playbutton">PLAY</button>
             </li>
             );
 
@@ -40,9 +48,10 @@ export class BareFragList extends React.Component {
 
 //export const ConnTestList = connect(s=>s)(TestList)
 //export const FTestList = connect(s=>{return {items: s.frags.map(i=>i.title)};})(TestList)
-export const FragList = connect(s=>({
-    fragments: s.filtFrags,
-    svg: s.svg
-  }),dispatch=> ({
-    onClick: (index, id)=> {dispatch(selectFragment(index, id))}
-}) )(BareFragList)
+
+//export const FragList = connect(s=>({
+//    fragments: s.filtFrags,
+//    svg: s.svg
+//  }),dispatch=> ({
+//    onClick: (index, id)=> {dispatch(selectFragment(index, id))}
+//}) )(BareFragList)
