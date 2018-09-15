@@ -31,8 +31,8 @@ export class BareFragList extends React.Component {
               <button onClick={e=>{let m=meis.get(itm.mei)
                                    playMei(m)
                                    }}
+                      disabled={this.props.disablePlay}
                       className="playbutton">▶</button>
-              //<button onClick={e=>{ midiStart() }} className="playbutton">PLAY</button>
             </li>
             );
 

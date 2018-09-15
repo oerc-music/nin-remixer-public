@@ -66,7 +66,7 @@ export let LoadButton = function({dispatch, label}) {
       //  => which dispatches
       //  => a function (intercepted by redux-thunk)
       <button onClick={ e=> {
-              initMidi()
+              initMidi(dispatch)
               dispatch(fragmentsPromise)} } >
       {label}
       </button>

@@ -65,12 +65,12 @@ export function midiStart() {
   MIDI.Player.start()
 }
 
-export function initMidi() {
+export function initMidi(dispatch) {
   MIDI.loadPlugin({
     soundfontUrl: "http://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
     instruments: [ "acoustic_grand_piano", "acoustic_guitar_nylon", "violin" ],
-    onsuccess: ()=>{console.log("MIDI Loaded")}
-  })
-
+    onsuccess: ()=>{console.log("MIDI Loaded")
+                    if (dispatch) dispatch({type:"MIDI_LOADED"})
+                   } })
 }
 
