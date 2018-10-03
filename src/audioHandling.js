@@ -62,8 +62,10 @@ export function playMei(mei) {
   } catch (e) {
     console.log("Failed to create midi", e)
   }
-  if (midiDat)
+  if (midiDat) {
     MIDI.Player.loadFile(midiDat, MIDI.Player.start)
+    //MIDI.Player.on('endOfFile', ()=>console.log("PLAYBACK ENDED"))
+  }
 }
 
 export function midiStart() {
