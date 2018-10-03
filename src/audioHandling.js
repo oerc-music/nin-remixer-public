@@ -56,9 +56,14 @@ export function createMidiMEI(mei) {
 }
 
 export function playMei(mei) {
-  let midiDat = createMidiMEI(mei)
-  //MIDI.Player.timewarp = 1
-  MIDI.Player.loadFile(midiDat, MIDI.Player.start)
+  let midiDat
+  try {
+    midiDat = createMidiMEI(mei)
+  } catch (e) {
+    console.log("Failed to create midi", e)
+  }
+  if (midiDat)
+    MIDI.Player.loadFile(midiDat, MIDI.Player.start)
 }
 
 export function midiStart() {
