@@ -22,6 +22,7 @@ var emptyState = {
 
                     matchType: KEYMATCH,
                     matchchecked: true,
+                    midiLoaded: false,
 
                     cursorRow: 0,
                     cursorCol: 0,
@@ -86,6 +87,8 @@ export function ninReducer(state = emptyState, action) {
     case 'TOGGLEMATCH':
       return update(state, {matchchecked: (x=>!x),
                             filtFrags: {$set: []}})
+    case 'MIDI_LOADED':
+      return update(state, {midiLoaded: {$set: true}})
     case 'FILT_UPDATING':
       return update(state, {filtIsUpdating: {$set: action.val}})
     case 'FILT_SETFRAGS':

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { getLDPcontents, getFragInfo } from '../actions/rdf'
 import { withFragFilter } from '../actionsFrags'
-import { extractNotesMEI } from '../audioHandling'
+import { extractNotesMEI, initMidi } from '../audioHandling'
 
 // Action Creator
 export function setFrags(frags) {
@@ -17,7 +17,7 @@ export function setMei(uri, mei, svg) {
 
 // Action Creator
 export function selectFragment(index, id) {
-  console.log("making SELECT_FRAG:", index, id)
+  //console.log("making SELECT_FRAG:", index, id)
   return withFragFilter({ type: 'SELECT_FRAG', index, id})
 }
 
@@ -65,7 +65,9 @@ export let LoadButton = function({dispatch, label}) {
       // An event handler
       //  => which dispatches
       //  => a function (intercepted by redux-thunk)
-      <button onClick={ e=> {dispatch(fragmentsPromise)} } >
+      <button onClick={ e=> {
+              initMidi(dispatch)
+              dispatch(fragmentsPromise)} } >
       {label}
       </button>
      )

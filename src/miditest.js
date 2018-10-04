@@ -6,22 +6,25 @@ const testtrack = 'data:audio/mid;base64,TVRoZAAAAAYAAQABAMBNVHJrAAAARwD/WAQEAhg
 let mw = MidiWriter
 
 function midiTest() {
-  console.log("LOAD DONE")
+  console.log("TESTMIDI - LOAD DONE")
 
   let track = new mw.Track()
-  track.addEvent(new mw.ProgramChangeEvent({instrument: 0}))
+  track.addEvent(new mw.ProgramChangeEvent({instrument: 40}))
   let note = new mw.NoteEvent({pitch:['C4', 'D4', 'E4'], duration: '4'})
   let note2 = new mw.NoteEvent({pitch:'C4', duration: '4'})
   track.addEvent(note)
   track.addEvent(note)
   track.addEvent(note2)
-  track.addEvent(note)
-  track.addEvent(note2)
+  //track.addEvent(note)
+  //track.addEvent(note2)
   
   let track2 = new mw.Track()
   // Instrument numbers from https://en.wikipedia.org/wiki/General_MIDI
   // Offset by 1 as 0-based
-  track2.addEvent(new mw.ProgramChangeEvent({instrument: 24}))
+  // 0 Piano
+  // 24 Guitar
+  // 40 Violin
+  track2.addEvent(new mw.ProgramChangeEvent({instrument: 0}))
   track2.addEvent(new mw.NoteEvent({pitch: 'G3', duration: '2'}))
   track2.addEvent(new mw.NoteEvent({pitch: 'G3', duration: '2'}))
   track2.addEvent(new mw.NoteEvent({pitch: 'A5', duration: '2'}))
@@ -47,11 +50,9 @@ export const goTest = e=>{
   // Available instruments listed in instruments-fluidR3.json
   MIDI.loadPlugin({
     soundfontUrl: "http://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
-    instruments: [ "acoustic_grand_piano", "acoustic_guitar_nylon" ],
+    instruments: [ "acoustic_grand_piano", "acoustic_guitar_nylon", "violin" ],
     onsuccess: midiTest
   })
 }
-
-
 
 

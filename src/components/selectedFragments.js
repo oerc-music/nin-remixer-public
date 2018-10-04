@@ -39,15 +39,17 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
 MatchSelector = connect(s=>s)(MatchSelector)
 
 export var FragmentSelector = function({dispatch, selectedFrags,
-                                        filtIsUpdating,
-                                        frags, filtFrags, svg}) {
+                                        filtIsUpdating, midiLoaded,
+                                        frags, filtFrags, svg, mei}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
   console.log(frags,filtFrags)
   return (
         <div className="listcol">
           <FragList fragments={filtFrags.length?filtFrags:frags}
                     svg={svg}
+                    mei={mei}
                     selecting={! filtIsUpdating}
+                    disablePlay={! midiLoaded}
                     onClick={selectOnClick} />
         </div>
   )
