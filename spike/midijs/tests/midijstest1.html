@@ -54,10 +54,7 @@ window.onload = function () {
             MIDI.programChange(2, MIDI.GM.byName[instrumentName2].number);
             var dur = 0.5;
             var gap = 0.2;
-            // MIDI.Player.currentTime = 0;
-            // var t0  = MIDI.Player.currentTime + 2;
-            t0 = 4;
-            // MIDI.Player.currentTime = t0;
+            var t0  = 1;  // Delay to start
             // Simple notes
             logvalue("Simple notes");
             for (i in notes) {
@@ -161,6 +158,10 @@ function logvalue(v) {
 
 
 </script>
+
+<div>
+    <button id="Play">Play</button>
+</div>
 
 <div id="log">
     <h2>Log</h2>
