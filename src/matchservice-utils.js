@@ -367,4 +367,16 @@ function findOrCreateContainer(outerContUri, targetUri,
 }
 module.exports.findOrCreateContainer = findOrCreateContainer
 
+function getMatchServices(wsi, workset) {
+  let p = findAnnotation(wsi, workset)
+     .then( ({body})=> getLDPcontents(body))
+     .then( uris => Promise.all(uris.map(uri =>
+         getTurtle(uri)
+         .then(store=> {
+           const target = store.any(rdf.sym(uri), rdf.sym('http://www.w3.org/ns/oa#hasTarget'), undefined)
+           return Promise.resolve(getNodeURI(target))
+         }))) )
+  return p
+}
+module.exports.getMatchServices = getMatchServices
 
