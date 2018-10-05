@@ -14,8 +14,8 @@ export class BareFragList extends React.Component {
       const items = this.props.fragments
       const svgs = this.props.svg
       const meis = this.props.mei
-      console.log("SVGS",svgs)
-      console.log("MEIS",meis)
+      //console.log("SVGS",svgs)
+      //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
             <li key={itm.id}>
               <div title={itm.id}>

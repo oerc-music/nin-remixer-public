@@ -1,4 +1,5 @@
 {
   "wsi": "http://localhost:8080/ninbase/WSI/",
-  "workset": "http://localhost:8080/workset-e82a66/"
+  "workset": "http://localhost:8080/workset-4dbb10/",
+  "rowNames": ["Piano", "Violin", "Flute"]
 }

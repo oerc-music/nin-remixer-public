@@ -60,6 +60,10 @@ function fragmentsPromise(dispatch) {
             })
 }
 
+export function loadConfig(dispatch) {
+
+}
+
 export let LoadButton = function({dispatch, label}) {
   return (
       // An event handler

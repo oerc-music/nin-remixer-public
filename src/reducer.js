@@ -10,7 +10,9 @@ var emptyState = {
                     frags:[],
                     mei:new Map(),
                     svg:new Map(),
+
                     hideGo: false,
+                    fragsLoaded: false,
 
                     // filtUpdating contains a tag if update in progess
                     filtIsUpdating: false,
@@ -24,7 +26,7 @@ var emptyState = {
                     matchchecked: true,
                     midiLoaded: false,
 
-                    cursorRow: 0,
+                    cursorRow: -1,
                     cursorCol: 0,
                     rowNames: ["Instrument1", "Instrument2", "Instrument3"],
                     selectedFrags: [
@@ -78,6 +80,8 @@ export function ninReducer(state = emptyState, action) {
       nstate = setState(nstate, action.config, "selectedFragments")
       nstate = setState(nstate, action.config, "cursorRow")
       nstate = setState(nstate, action.config, "cursorCol")
+      nstate = update(nstate, {fragsLoaded: {$set: true},
+                               cursorRow: {$apply: (v)=>(v==-1?0:v)}})
       return nstate
     case 'SET_CURSOR':
       return update(state, {cursorRow: {$set: action.row},
