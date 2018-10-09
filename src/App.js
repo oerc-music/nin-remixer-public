@@ -15,13 +15,14 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">S.O.F.A. remixer</h1>
         </header>
-        {this.props.hideGo ? null : [
-                //<button onClick={goTest}>test</button>,
+        {this.props.hideGo ? null :
                 <div className="loadWS">
-                <LoadButton label="load" />
-                <input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
+                <LoadButton label="load" workset={this.props.workset} />
+                <input value={this.props.workset?this.props.workset:""}
+                   onChange={e=>this.props.dispatch({type:"UPDATE_WORKSET",val:e.target.value})} />
                 </div>
-                ]}
+                //<input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
+                }
         {! this.props.fragsLoaded ? null :
         <div className="fragRow">
           <MatchSelector />

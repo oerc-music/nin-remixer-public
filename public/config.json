@@ -1,5 +1,8 @@
 {
   "wsi": "http://localhost:8080/ninbase/WSI/",
   "workset": "http://localhost:8080/workset-4dbb10/",
-  "rowNames": ["Piano", "Violin", "Flute"]
+  "rowNames": ["Piano", "Violin", "Flute"],
+  "rowURIs": ["http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/piano/entity_data.ttl",
+             "http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/clarinet/entity_data.ttl",
+             "http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/violin/entity_data.ttl"]
 }

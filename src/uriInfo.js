@@ -10,7 +10,8 @@ let instrumentLabels = new Map([
      [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/violin/entity_data.ttl', 'Violin' ],
      [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/viola/entity_data.ttl', 'Viola' ],
      [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/banjo/entity_data.ttl', 'Banjo' ],
-     [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/tuba/entity_data.ttl', 'Tuba' ]
+     [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/tuba/entity_data.ttl', 'Tuba' ],
+     [ 'http://fast-project.annalist.net/annalist/c/FAST_musical_instruments_catalogue/d/Instrument/piano/entity_data.ttl', 'Piano' ]
     ])
 
 function matchServiceLabel(uri) {
@@ -20,3 +21,9 @@ function matchServiceLabel(uri) {
 }
 module.exports.matchServiceLabel = matchServiceLabel
 
+function instrumentLabel(uri) {
+  let m = instrumentLabels.get(uri)
+  if (!m) { console.log("No Label for:", uri)}
+  return m
+}
+module.exports.instrumentLabel = instrumentLabel

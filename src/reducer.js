@@ -29,6 +29,7 @@ var emptyState = {
                     cursorRow: -1,
                     cursorCol: 0,
                     rowNames: ["Instrument1", "Instrument2", "Instrument3"],
+                    rowURIs: [],
                     selectedFrags: [
 				    [],
 				    [],
@@ -77,12 +78,15 @@ export function ninReducer(state = emptyState, action) {
       nstate = setState(nstate, action.config, "wsi")
       nstate = setState(nstate, action.config, "workset")
       nstate = setState(nstate, action.config, "rowNames")
+      nstate = setState(nstate, action.config, "rowURIs")
       nstate = setState(nstate, action.config, "selectedFragments")
       nstate = setState(nstate, action.config, "cursorRow")
       nstate = setState(nstate, action.config, "cursorCol")
       nstate = update(nstate, {fragsLoaded: {$set: true},
                                cursorRow: {$apply: (v)=>(v==-1?0:v)}})
       return nstate
+    case 'UPDATE_WORKSET':
+      return update(state, {workset: {$set: action.val}})
     case 'SET_CURSOR':
       return update(state, {cursorRow: {$set: action.row},
                             cursorCol: {$set: action.col} })

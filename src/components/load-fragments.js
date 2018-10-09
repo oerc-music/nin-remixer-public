@@ -25,24 +25,20 @@ export function selectFragment(index, id) {
 const vrvTk = new window.verovio.toolkit();
 const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adjustPageHeight: 1};
 
-      // The event handler dispatches
+      //  Returns a function which the event handler dispatches
       //  => a function (intercepted by redux-thunk)
       //  => which (when run by redux-thunk) initiates a HTTP request
       //  => and on completion of returned promise
       //  => dispatches the SET_ITEMS action with the reponse
-function fragmentsPromise(dispatch) {
-        axios.get('/config.json')
-          .then(response => {
-                dispatch({type:'SETCONFIG', config: response.data})
-                //if (response.data.setconfig) {
-                //  dispatch({type:'SETCONFIG', config: response.data})
-                //}
-                let p = getLDPcontents(response.data.workset)
+function fragmentsPromise(workset) {
+        return (dispatch => {
+                //console.log("FRAGDISP", dispatch)
+                let p = getLDPcontents(workset)
                    .then(uris => {
-                     return Promise.all(uris.map(getFragInfo))
+                     return Promise.all(uris.map(i=>getFragInfo(i).catch(e=>e)))
                    })
                    .then(frags => {
-                     console.log(frags)
+                     //console.log("LOGFRAGS",frags)
                      // set the list of fragments
                      dispatch(setFrags(frags))
                      for (let f of frags) {
@@ -61,17 +57,20 @@ function fragmentsPromise(dispatch) {
 }
 
 export function loadConfig(dispatch) {
-
+        axios.get('/config.json')
+          .then(response => {
+                dispatch({type:'SETCONFIG', config: response.data})
+          })
 }
 
-export let LoadButton = function({dispatch, label}) {
+export let LoadButton = function({dispatch, label, workset}) {
   return (
       // An event handler
       //  => which dispatches
       //  => a function (intercepted by redux-thunk)
       <button onClick={ e=> {
               initMidi(dispatch)
-              dispatch(fragmentsPromise)} } >
+              dispatch(fragmentsPromise(workset))} } >
       {label}
       </button>
      )
