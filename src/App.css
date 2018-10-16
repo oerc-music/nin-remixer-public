@@ -44,11 +44,6 @@
         margin-left: 15px;
 }
 
-.listcol {
-        border: 1px solid #d8d8d8;
-        margin: 10px;
-}
-
 .selectionLabel { 
 	cursor:pointer;
 }
@@ -73,6 +68,11 @@
 .playbutton {
     margin-left: 15px;
 }
+
+.assembledGrid {
+  overflow-x:scroll;
+}
+
 .assembledGrid .instName {
     padding-right: 10px;
     padding-left: 10px;
@@ -95,6 +95,7 @@
 }
 
 .debugInfo div {
+    display: none;
     font-size: x-small;
 }
 .countPanel {

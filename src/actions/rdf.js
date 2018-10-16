@@ -61,6 +61,11 @@ const get = p => o => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o)
 
 const getVal = get([0, 'object', 'value'])
 
+function idlog(x) {
+        console.log(x)
+        return x
+}
+
 export function getFragInfo(uri) {
   return (
       getTurtle(uri)
@@ -71,6 +76,7 @@ export function getFragInfo(uri) {
         .then(furi => {
           return getTurtle(furi).then(ttl=>({furi:furi, frag:ttl}))
         })
+        //.then(idlog)
         .then(({furi, frag}) => {
           //var n= frag.statementsMatching(undefined, DC("title"), undefined)
           let n= frag.match(undefined, DC("title"), undefined)

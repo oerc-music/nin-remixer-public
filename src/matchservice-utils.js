@@ -19,6 +19,7 @@ const NINRE_MatchService = 'ninre:MatchService'
 const NINRE_keyCompat = 'ninre:keyCompatibility'
 const MOTIVATION_ID = 'http://www.w3.org/ns/oa#linking'
 const MOTIVATION_RECURSE ='http://remix.numbersintonotes.net/vocab#seeHere'
+const INSTRUMENT_SERVICE ='http://remix.numbersintonotes.net/vocab#instrumentCompatibility'
 
 const REMIX = rdf.Namespace("http://remix.numbersintonotes.net/vocab#")
 const DC = rdf.Namespace("http://purl.org/dc/elements/")
@@ -367,4 +368,28 @@ function findOrCreateContainer(outerContUri, targetUri,
 }
 module.exports.findOrCreateContainer = findOrCreateContainer
 
+function getMatchServices(wsi, workset) {
+  let p = findAnnotation(wsi, workset)
+     .then( ({body})=> getLDPcontents(body))
+     .then( uris => Promise.all(uris.map(uri =>
+         getTurtle(uri)
+         .then(store=> {
+           const target = store.any(rdf.sym(uri), rdf.sym('http://www.w3.org/ns/oa#hasTarget'), undefined)
+           return Promise.resolve(getNodeURI(target))
+         }))) )
+  return p
+}
+module.exports.getMatchServices = getMatchServices
 
+function getAvailInstruments(wsi, workset) {
+  let p = findMatchService(wsi, INSTRUMENT_SERVICE, workset)
+      .then( servloc => getLDPcontents(servloc))
+      .then( uris => Promise.all(uris.map(uri =>
+          getTurtle(uri)
+          .then(store => {
+             const target = store.any(rdf.sym(uri), rdf.sym('http://www.w3.org/ns/oa#hasTarget'), undefined)
+             return Promise.resolve(getNodeURI(target))
+          } ))))
+  return p
+}
+module.exports.getAvailInstruments = getAvailInstruments
