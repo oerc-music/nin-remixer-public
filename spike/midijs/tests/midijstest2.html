@@ -55,10 +55,11 @@ window.onload = function () {
             var velocity = 127; // how hard the note hits
             MIDI.noteOn(0, note, velocity, t0+(0*td));
             MIDI.noteOff(0, note, t0+(1*td));
-            MIDI.noteOn(1, note, velocity, t0+(2*td));
-            MIDI.noteOff(1, note, t0+(3*td));
-            MIDI.noteOn(2, note, velocity, t0+(4*td));
-            MIDI.noteOff(2, note, t0+(5*td));
+            // MIDI.noteOn(1, note, velocity, t0+(2*td));
+            // MIDI.noteOff(1, note, t0+(3*td));
+            // MIDI.noteOn(2, note, velocity, t0+(4*td));
+            // MIDI.noteOff(2, note, t0+(5*td));
+            logvalue("MIDI.getContext().currentTime: "+MIDI.getContext().currentTime);
         }
     });
 };
@@ -79,16 +80,17 @@ function PlayStuff(elem) {
     playcount = playcount + 1;
     logclear();
     logvalue("Play count: "+playcount);
-    var delay = 0; // play one note every quarter second
     var notes = [50, 52, 53, 55, 57]; // the MIDI notes
     var morenotes = notes.concat([59, 61, 63, 65]);
     var velocity = 127; // how hard the note hits
     var dur = 0.5;
     var gap = 0.25;
-    var t0  = 1;  // Delay to start
+    logvalue("MIDI.getContext().currentTime: "+MIDI.getContext().currentTime);
+    var t0  = MIDI.getContext().currentTime;  // Delay to start
+    t0 = 0;
     // Simple notes
     logvalue("Simple notes");
-    for (i in notes) {
+    for (var i in notes) {
         var note = notes[i];
         var t    = t0 + ((dur+gap)*(Number(i)));
         logvalue("i "+i+", t "+t+", note "+note);
@@ -96,6 +98,27 @@ function PlayStuff(elem) {
         MIDI.noteOff(0, note, t + dur);
     }
     if (1) {
+        // Two notes with different instruments
+        logvalue("Two notes with different instruments");
+        t0  = t0 + ((dur+gap)*notes.length);
+        for (i in notes) {
+            var j = Number(i)+2;
+            var note = notes[i];
+            var t     = t0 + ((dur+gap)*(Number(i)));
+            logvalue("i "+i+", t "+t+", note "+note);
+            MIDI.noteOn(0, note, velocity, t);
+            MIDI.noteOff(0, note, t + dur);
+        }
+        for (var i in notes) {
+            var j = Number(i)+2;
+            var note = morenotes[j];
+            var t     = t0 + ((dur+gap)*(Number(i)));
+            logvalue("i "+i+", j "+j+", t "+t+", note "+note);
+            MIDI.noteOn(2, note, velocity, t);
+            MIDI.noteOff(2, note, t + dur);
+        }
+    }
+    if (0) {
         // Simple chords
         logvalue("Simple chords");
         t0  = t0 + ((dur+gap)*notes.length);
@@ -108,7 +131,7 @@ function PlayStuff(elem) {
             MIDI.chordOff(1, chord, t + dur);
         }
     }
-    if (1) {
+    if (0) {
         // Note + chord
         logvalue("Note + chord");
         t0  = t0 + ((dur+gap)*notes.length);
@@ -128,7 +151,7 @@ function PlayStuff(elem) {
             MIDI.chordOff(1, chord, t + dur);
         }
     }
-    if (1) {
+    if (0) {
         // Two chords with different instruments
         logvalue("Two chords with different instruments");
         t0  = t0 + ((dur+gap)*notes.length);
@@ -149,7 +172,7 @@ function PlayStuff(elem) {
             MIDI.chordOff(2, chord, t + dur);
         }
     }
-    if (1) {
+    if (0) {
         // Note + 2 chords
         logvalue("Note + two chords");
         t0  = t0 + ((dur+gap)*notes.length);
