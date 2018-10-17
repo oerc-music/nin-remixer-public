@@ -38,6 +38,12 @@ export function withFragFilter(action) {
         continue
       }
     }
+    // instrument match
+    if (s.rowURIs[s.cursorRow]) {
+      filt.push({type: INSTMATCH,
+                 target: s.rowURIs[s.cursorRow]
+      })
+    }
     // sort and uniq filters to canonical form
     filt = _(filt).sortBy(['type', 'target'])
             .uniqWith((x,y)=> x.type === y.type && x.target === y.target)
