@@ -25,6 +25,7 @@ var emptyState = {
                     matchType: KEYMATCH,
                     matchchecked: true,
                     midiLoaded: false,
+                    availInstrServices: [],
 
                     cursorRow: -1,
                     cursorCol: 0,
@@ -85,6 +86,8 @@ export function ninReducer(state = emptyState, action) {
       nstate = update(nstate, {fragsLoaded: {$set: true},
                                cursorRow: {$apply: (v)=>(v==-1?0:v)}})
       return nstate
+    case 'SET_INSTRUMENTS':
+      return update(state, {availInstrServices: {$set: action.instruments}})
     case 'UPDATE_WORKSET':
       return update(state, {workset: {$set: action.val}})
     case 'SET_CURSOR':

@@ -382,6 +382,7 @@ function getMatchServices(wsi, workset) {
 module.exports.getMatchServices = getMatchServices
 
 function getAvailInstruments(wsi, workset) {
+  console.log(wsi, workset)
   let p = findMatchService(wsi, INSTRUMENT_SERVICE, workset)
       .then( servloc => getLDPcontents(servloc))
       .then( uris => Promise.all(uris.map(uri =>
