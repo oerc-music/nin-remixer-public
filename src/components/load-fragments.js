@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { getLDPcontents, getFragInfo } from '../actions/rdf'
+import { getLDPcontents, getFragInfo } from '../actionsRdf'
 import { withFragFilter } from '../actionsFrags'
 import { extractNotesMEI, initMidi } from '../audioHandling'
 import { getAvailInstruments } from '../matchservice-utils'

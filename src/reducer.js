@@ -29,8 +29,9 @@ var emptyState = {
 
                     cursorRow: -1,
                     cursorCol: 0,
-                    rowNames: ["Instrument1", "Instrument2", "Instrument3"],
-                    rowURIs: [],
+                    rowBeingEdited: -1,
+                    //rowNames: ["Instrument1", "Instrument2", "Instrument3"],
+                    rowURIs: [null, null, null],
                     selectedFrags: [
 				    [],
 				    [],
@@ -74,11 +75,17 @@ export function ninReducer(state = emptyState, action) {
         }
         newstate = update(newstate, {filtFrags: {$set: []}})
       return newstate
+    case 'ROW_EDITING':
+      return update(state, {rowBeingEdited: {$set: action.val}})
+    case 'ROW_SET':
+      let nstate = update(state, {rowBeingEdited: {$set: -1}})
+      nstate = update(nstate, {rowURIs: {$splice: [[action.ind,1,action.uri]]}})
+      return nstate
     case 'SETCONFIG':
       var nstate = state
       nstate = setState(nstate, action.config, "wsi")
       nstate = setState(nstate, action.config, "workset")
-      nstate = setState(nstate, action.config, "rowNames")
+      //nstate = setState(nstate, action.config, "rowNames")
       nstate = setState(nstate, action.config, "rowURIs")
       nstate = setState(nstate, action.config, "selectedFragments")
       nstate = setState(nstate, action.config, "cursorRow")

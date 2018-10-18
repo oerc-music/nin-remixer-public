@@ -2,10 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { selectFragment } from './load-fragments'
 import { withFragFilter } from '../actionsFrags'
+import InstrumentSelector from './InstrumentSelector'
+import { instrumentLabel } from '../uriInfo'
 import InlineSVG from 'svg-inline-react'
 import _ from 'lodash'
 
-export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRow, cursorCol, frags, svg, selCell, filtIsUpdating}) {
+export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, selCell, filtIsUpdating}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
   //console.log(cols, cursorCol)
   return ( 
@@ -16,7 +18,12 @@ export var AssembledGrid = function({dispatch, rowNames, selectedFrags, cursorRo
       const row = selectedFrags[rowInd]
       return (
         <tr key={rowInd}>
-          <td className="instName"> {rowNames[rowInd]} </td>
+          { (rowInd === rowBeingEdited)
+             ?  <td>
+                  <InstrumentSelector ind={rowInd} />
+                </td>
+             :  <td onClick={editInstrument(rowInd)} className="instName"> {instrumentLabel(rowURIs[rowInd])} </td>
+          }
           { 
              _.range(cols).map((i=>{
                const cell = row[i]
@@ -52,6 +59,10 @@ AssembledGrid = connect(s=>s,
                                        {type:"SET_CURSOR",
                                         row: row,
                                         col: col}))
+                          },
+                          editInstrument: (row) => e => {
+                              dispatch({type: "ROW_EDITING",
+                                        val: row})
                           }
                           }) 
                 )(AssembledGrid)
