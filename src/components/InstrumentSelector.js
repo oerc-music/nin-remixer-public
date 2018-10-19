@@ -13,7 +13,8 @@ class InstrumentSelector extends React.Component {
   render() {
    let services = this.props.services
 
-   return <select ref="selbox" onChange={this.props.onchange(this.props.ind)} >
+   return <select ref="selbox" onChange={this.props.onchange(this.props.ind)}
+           onBlur={this.props.onblur} >
             { services && services.length ? <option value="">-- Choose an instrument --</option>
                        : <option value="">No instruments loaded yet</option>
             }
@@ -33,8 +34,8 @@ function mapDispatchToProps(dispatch) {
   return {
      test: e=>{dispatch((d,gs)=>{console.log("TEST",gs());return true})},
      onchange: (i)=>e=>{dispatch({type:"ROW_SET",
-                                    ind:i, uri:e.target.value})
-     }
+                                    ind:i, uri:e.target.value}) },
+     onblur: e=>{dispatch({type:"ROW_EDITING", val: -1})}
   }
 }
 
