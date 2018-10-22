@@ -3,12 +3,18 @@ Scripts to load data into a Workset container.
 
 ## create-workset.sh
 
-This script creates a container and loads a set of fragments.  The script and
-container-template.ttl file need tweaking for location and initial fragments.
+This script creates a container and loads a set of fragments.
+
+The BASEURI of the LDP container, file containing a list of fragments,
+plus other metadata can be specified in a config file.
+
+Run with:
+
+./create-workset.sh CONFIG
 
 ## nin-import
 
-Add a fragment to container:
+Add a single fragment to an existing container:
 
 nin-import CONTAINER-URI FRAGMENT-URI
 
