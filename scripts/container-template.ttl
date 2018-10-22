@@ -9,5 +9,5 @@
 @prefix ninre: <http://remix.numbersintonotes.net/vocab#> .
 
 <> a ldp:BasicContainer, ldp:Container , ninre:WorkSet ;
-   dc:author "John Pybus" ;
-   dct:created "2018-03-14T11:44:00" .
+   dc:author "AUTHOR" ;
+   dct:created "CREATED" .
