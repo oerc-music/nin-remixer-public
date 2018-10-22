@@ -19,8 +19,8 @@ const NIN = rdf.Namespace("http://numbersintonotes.net/terms#")
 const RDFS = rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#")
 const SOFA = rdf.Namespace("http://meld.linkedmusic.org/sofa/terms/")
 
-const workset = process.argv[2]
-const targetInst = process.argv[3]
+const workset = conf.targetWorkset
+const targetInst = conf.targetFrag
 
 function idlog(x) {
         console.log(x)

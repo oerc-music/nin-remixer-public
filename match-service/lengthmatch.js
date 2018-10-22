@@ -10,11 +10,8 @@ const WSS_TYPE = "http://remix.numbersintonotes.net/vocab#WorkSetService"
 const MS_TYPE = "http://remix.numbersintonotes.net/vocab#MatchService"
 const LENMATCH = 'http://remix.numbersintonotes.net/vocab#lengthCompatibility'
 
-const ws1 = conf.targetWorkset
-//const targetFrag = conf.targetFrag
-
-const workset = process.argv[2]
-const targetFrag = process.argv[3]
+const targetFrag = conf.targetFrag
+const workset = conf.targetWorkset
 
 function idlog(x) {
         console.log(x)
@@ -69,5 +66,18 @@ async function doAnnotations(ws, tfragid) {
   }
 }
 
-doAnnotations(workset, targetFrag)
+async function doAll(workset) {
+  const frags = await getFrags(workset)
+  for (let tfrag of frags) {
+    console.log("ANNOTATIONS FOR:", tfrag.id)
+    await doAnnotations(workset, tfrag.id)
+  }
+}
+
+if (conf.doAll) {
+  doAll(workset)
   .catch(e=>console.log(e))
+} else {
+  doAnnotations(workset, targetFrag)
+  .catch(e=>console.log(e))
+}
