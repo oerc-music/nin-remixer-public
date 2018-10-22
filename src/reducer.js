@@ -50,6 +50,16 @@ function setState(state, config, name) {
       return state
 }
 
+function svgbbox(svg){
+  let r
+  try {
+    let d = document.getElementById("svgtest")
+    d.innerHTML=svg
+    r = d.firstElementChild.getBBox()
+  } catch (e) { console.log(e) }
+  return r
+}
+
 export function ninReducer(state = emptyState, action) {
   switch (action.type) {
     case 'SET_FRAGS':
@@ -58,7 +68,7 @@ export function ninReducer(state = emptyState, action) {
       }
       return update (state, {frags: {$set: action.frags}})
     case 'SET_MEI':
-      //console.log(state)
+      console.log("SVGBBOX:", svgbbox(action.svg))
       return update(state, {mei: {$add: [[action.uri, action.mei]]},
                             svg: {$add: [[action.uri, action.svg]]} })
     case 'SELECT_FRAG':

@@ -42,7 +42,7 @@ export var FragmentSelector = function({dispatch, selectedFrags,
                                         filtIsUpdating, midiLoaded,
                                         frags, filtFrags, svg, mei}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
-  console.log(frags,filtFrags)
+  //console.log(frags,filtFrags)
   return (
         <div className="listcol">
           <FragList fragments={filtFrags.length?filtFrags:frags}
