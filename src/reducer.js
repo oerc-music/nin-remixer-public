@@ -10,6 +10,7 @@ var emptyState = {
                     frags:[],
                     mei:new Map(),
                     svg:new Map(),
+                    svgwidth:new Map(),
 
                     hideGo: false,
                     fragsLoaded: false,
@@ -68,9 +69,12 @@ export function ninReducer(state = emptyState, action) {
       }
       return update (state, {frags: {$set: action.frags}})
     case 'SET_MEI':
-      console.log("SVGBBOX:", svgbbox(action.svg))
-      return update(state, {mei: {$add: [[action.uri, action.mei]]},
+      let bbox = svgbbox(action.svg)
+      console.log("SVGBBOX:", bbox)
+      var nstate = update(state, {mei: {$add: [[action.uri, action.mei]]},
                             svg: {$add: [[action.uri, action.svg]]} })
+      if (bbox) nstate = update(nstate, {svgwidth: {$add: [[action.uri, bbox.width]]}})
+      return nstate
     case 'SELECT_FRAG':
       // Set the id of current fragment
       var newstate = update(state, {
@@ -88,7 +92,7 @@ export function ninReducer(state = emptyState, action) {
     case 'ROW_EDITING':
       return update(state, {rowBeingEdited: {$set: action.val}})
     case 'ROW_SET':
-      let nstate = update(state, {rowBeingEdited: {$set: -1}})
+      var nstate = update(state, {rowBeingEdited: {$set: -1}})
       nstate = update(nstate, {rowURIs: {$splice: [[action.ind,1,action.uri]]}})
       return nstate
     case 'SETCONFIG':

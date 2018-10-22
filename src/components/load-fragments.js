@@ -26,6 +26,16 @@ export function selectFragment(index, id) {
 const vrvTk = new window.verovio.toolkit();
 const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adjustPageHeight: 1};
 
+function getSvgBounds(svg) {
+  let res
+  try {
+    let d = document.getElementById("svgtest")
+    d.innerHTML=svg
+    res = d.firstElementChild.getBBox()
+  } catch (e) { console.log(e) }
+  return res
+}
+
       //  Returns a function which the event handler dispatches
       //  => a function (intercepted by redux-thunk)
       //  => which (when run by redux-thunk) initiates a HTTP request

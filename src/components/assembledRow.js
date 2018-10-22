@@ -7,7 +7,13 @@ import { instrumentLabel } from '../uriInfo'
 import InlineSVG from 'svg-inline-react'
 import _ from 'lodash'
 
-export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, selCell, filtIsUpdating}) {
+function WrappedSVG({src, width}) {
+  return (<div style={{width: width+'px', 'overflow-x': 'hidden'}}>
+             <InlineSVG src={src} />
+          </div>)
+}
+
+export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
   //console.log(cols, cursorCol)
   return ( 
@@ -28,7 +34,7 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
              _.range(cols).map((i=>{
                const cell = row[i]
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
-               const fsvg = frag ? <InlineSVG src={svg.get(frag.mei)} /> : null
+               const fsvg = frag ? <WrappedSVG width={svgwidth.get(frag.mei)} src={svg.get(frag.mei)} /> : null
                let cursorClass = []
                if (Number(rowInd)===cursorRow && i===cursorCol) {
                   cursorClass.push("selCell")
