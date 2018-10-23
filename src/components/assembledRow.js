@@ -13,6 +13,15 @@ function WrappedSVG({src, width}) {
           </div>)
 }
 
+function mkInstLabel(uri, row) {
+  let l = instrumentLabel(uri)
+  if (l) {
+    return l
+  } else {
+    return <i>Instrument {(row+1)} </i>
+  }
+}
+
 export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
   //console.log(cols, cursorCol)
@@ -28,7 +37,9 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
              ?  <td>
                   <InstrumentSelector ind={rowInd} />
                 </td>
-             :  <td onClick={editInstrument(rowInd)} className="instName"> {instrumentLabel(rowURIs[rowInd])} </td>
+             :  <td onClick={editInstrument(rowInd)} className="instName">
+                  {mkInstLabel(rowURIs[rowInd], parseInt(rowInd))}
+                </td>
           }
           { 
              _.range(cols).map((i=>{
