@@ -24,7 +24,7 @@ if (process.argv[narg]) {
   narg += 1
 }
 
-if (localconf.doAll && process.argv[narg]) {
+if (!localconf.doAll && process.argv[narg]) {
   localconf.targetFrag = process.argv[narg]
 }
 
