@@ -24,7 +24,7 @@ export function selectFragment(index, id) {
 
 // already loaded in page as script
 const vrvTk = new window.verovio.toolkit();
-const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adjustPageHeight: 1};
+const vrvOptions = { pageHeight: 400, pageWidth: 2500, scale: 25, border:0, adjustPageHeight: 1};
 
 function getSvgBounds(svg) {
   let res

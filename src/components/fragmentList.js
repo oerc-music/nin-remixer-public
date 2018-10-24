@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import InlineSVG from 'svg-inline-react'
+import WrappedSVG from './WrappedSVG'
 import { selectFragment } from './load-fragments'
 import { playMei, midiStart } from '../audioHandling'
 
@@ -22,7 +22,8 @@ export class BareFragList extends React.Component {
               {itm.title} ({showkey(itm.keydisp, itm.mode)})
               </div>
               {(svgs.has(itm.mei)) && (
-                  <div><InlineSVG src={svgs.get(itm.mei)}/></div>
+                  <div><WrappedSVG src={svgs.get(itm.mei)}
+                          width={this.props.svgwidth.get(itm.mei)}/></div>
                   )}
               <button onClick={e=>{onClick(index, itm.id)}}
                       disabled={selectDisabled}>

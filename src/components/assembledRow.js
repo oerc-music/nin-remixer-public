@@ -3,15 +3,10 @@ import { connect } from 'react-redux'
 import { selectFragment } from './load-fragments'
 import { withFragFilter } from '../actionsFrags'
 import InstrumentSelector from './InstrumentSelector'
+import WrappedSVG from './WrappedSVG'
 import { instrumentLabel } from '../uriInfo'
 import InlineSVG from 'svg-inline-react'
 import _ from 'lodash'
-
-function WrappedSVG({src, width}) {
-  return (<div style={{width: width+'px', 'overflow-x': 'hidden'}}>
-             <InlineSVG src={src} />
-          </div>)
-}
 
 function mkInstLabel(uri, row) {
   let l = instrumentLabel(uri)
