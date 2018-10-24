@@ -29,7 +29,7 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
       return (
         <tr key={rowInd}>
           { (rowInd === rowBeingEdited)
-             ?  <td>
+             ?  <td className="instName">
                   <InstrumentSelector ind={rowInd} />
                 </td>
              :  <td onClick={editInstrument(rowInd)} className="instName">

@@ -67,7 +67,9 @@ export function ninReducer(state = emptyState, action) {
       for (let f of action.frags) {
         f.keydisp = f.key.replace('b','♭')
       }
-      return update (state, {frags: {$set: action.frags}})
+      var nstate = update(state, {fragsLoaded: {$set: true},
+                               cursorRow: {$apply: (v)=>(v==-1?0:v)}})
+      return update (nstate, {frags: {$set: action.frags}})
     case 'SET_MEI':
       let bbox = svgbbox(action.svg)
       console.log("SVGBBOX:", bbox)
@@ -104,8 +106,6 @@ export function ninReducer(state = emptyState, action) {
       nstate = setState(nstate, action.config, "selectedFragments")
       nstate = setState(nstate, action.config, "cursorRow")
       nstate = setState(nstate, action.config, "cursorCol")
-      nstate = update(nstate, {fragsLoaded: {$set: true},
-                               cursorRow: {$apply: (v)=>(v==-1?0:v)}})
       return nstate
     case 'SET_INSTRUMENTS':
       return update(state, {availInstrServices: {$set: action.instruments}})

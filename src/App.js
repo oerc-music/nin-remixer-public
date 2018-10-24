@@ -23,13 +23,13 @@ class App extends Component {
                 </div>
                 //<input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
                 }
+	<AssembledGrid />
         {! this.props.fragsLoaded ? null :
         <div className="fragRow">
           <MatchSelector />
           <FragmentSelector />
         </div>
         }
-	  <AssembledGrid />
       </div>
     );
   }

@@ -6,6 +6,8 @@ import { playMei, midiStart } from '../audioHandling'
 
 const showkey = (key, mode) => key + (mode === "minor" ? " minor" : "")
 
+//const scalefac = 1.0
+
 export class BareFragList extends React.Component {
    render() {
       //const dispatch = this.props.dispatch
@@ -17,11 +19,12 @@ export class BareFragList extends React.Component {
       //console.log("SVGS",svgs)
       //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
-            <li key={itm.id}>
+            <span key={itm.id}>
               <div title={itm.id}>
               {itm.title} ({showkey(itm.keydisp, itm.mode)})
               </div>
               {(svgs.has(itm.mei)) && (
+                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
                   <div><WrappedSVG src={svgs.get(itm.mei)}
                           width={this.props.svgwidth.get(itm.mei)}/></div>
                   )}
@@ -34,14 +37,12 @@ export class BareFragList extends React.Component {
                                    }}
                       disabled={this.props.disablePlay}
                       className="playbutton">▶</button>
-            </li>
+            </span>
             );
 
       return (
          <div className="fraglist">
-           <ul>
              {listItems}
-           </ul>
          </div>
          );
    }
