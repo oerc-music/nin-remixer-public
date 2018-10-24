@@ -4,7 +4,7 @@ import InlineSVG from 'svg-inline-react'
 
 
 export default function WrappedSVG({src, width}) {
-  return (<div style={{width: width+'px', 'overflow-x': 'hidden'}}>
+  return (<div style={{width: width+'px', overflowX: 'hidden'}}>
              <InlineSVG src={src} />
           </div>)
 }

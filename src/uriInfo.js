@@ -473,6 +473,39 @@ let instrumentDetails = new Map([
 ['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/sousaphone', {label: 'Sousaphone', minmidi: 28, maxmidi: 58 }]
 ])
 
+let instrumentSoundfont = new Map([
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/accordion', 'MusyngKite/accordion-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/bagpipe', 'MusyngKite/bagpipe-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/banjo', 'MusyngKite/banjo-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/celo', 'MusyngKite/cello-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/clarinet', 'MusyngKite/clarinet-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/contrabass', 'MusyngKite/contrabass-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/didgeridoo', 'MusyngKite/choir_aahs-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/electric_bass', 'MusyngKite/electric_bass_pick-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/electric_guitar', 'MusyngKite/electric_guitar_clean-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/english_horn', 'MusyngKite/english_horn-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/flute', 'MusyngKite/flute-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/guitar_nylon', 'MusyngKite/acoustic_guitar_nylon-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/guitar_steel', 'MusyngKite/acoustic_guitar_steel-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/harp', 'MusyngKite/orchestral_harp-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/kazoo', 'MusyngKite/blown_bottle-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/lute', 'MusyngKite/string_ensemble_1-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/oboe', 'MusyngKite/oboe-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/piano', 'MusyngKite/acoustic_grand_piano-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/piccolo', 'MusyngKite/piccolo-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/recorder', 'MusyngKite/recorder-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/saxhorn', 'MusyngKite/tenor_sax-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/theremin', 'MusyngKite/sitar-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/trombone', 'MusyngKite/trombone-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/tuba', 'MusyngKite/tuba-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/ukulele', 'MusyngKite/pizzicato_strings-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/vienna_horn', 'MusyngKite/french_horn-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/viola', 'MusyngKite/viola-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/violin', 'MusyngKite/violin-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/violoncello', 'MusyngKite/cello-mp3.js'],
+['http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/warm_synth', 'MusyngKite/synth_brass_1-mp3.js']
+])
+
 function matchServiceLabel(uri) {
   let m = serviceLabels.get(uri)
   if (!m) { console.log("No Label for:", uri)}
@@ -495,3 +528,10 @@ function getInstrumentDetails(uri) {
   return d
 }
 module.exports.getInstrumentDetails = getInstrumentDetails
+
+function getSoundfont(uri) {
+  let d = instrumentSoundfont.get(String(uri))
+  if (!d) { console.log("No Soundfont for:", uri)}
+  return d
+}
+module.exports.getSoundfont = getSoundfont

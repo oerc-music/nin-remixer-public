@@ -16,6 +16,7 @@ export class BareFragList extends React.Component {
       const items = this.props.fragments
       const svgs = this.props.svg
       const meis = this.props.mei
+      const row = this.props.cursorRow
       //console.log("SVGS",svgs)
       //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
@@ -33,7 +34,7 @@ export class BareFragList extends React.Component {
                 Select
               </button>
               <button onClick={e=>{let m=meis.get(itm.mei)
-                                   playMei(m)
+                                   playMei(m, row)
                                    }}
                       disabled={this.props.disablePlay}
                       className="playbutton">▶</button>

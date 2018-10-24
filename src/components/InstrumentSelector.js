@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { instrumentLabel } from '../uriInfo'
+import { loadInstrument } from '../audioHandling'
 import _ from 'lodash'
 
 function InstrumentOption({uri}) {
@@ -33,8 +34,11 @@ class InstrumentSelector extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
      test: e=>{dispatch((d,gs)=>{console.log("TEST",gs());return true})},
-     onchange: (i)=>e=>{dispatch({type:"ROW_SET",
-                                    ind:i, uri:e.target.value}) },
+     onchange: (i)=>e=>{
+             loadInstrument(e.target.value, i)
+               .then(dispatch({type: "MIDI_LOADED"}))
+             dispatch({type:"ROW_SET",
+                       ind:i, uri:e.target.value}) },
      onblur: e=>{dispatch({type:"ROW_EDITING", val: -1})}
   }
 }

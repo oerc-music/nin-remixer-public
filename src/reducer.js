@@ -127,6 +127,8 @@ export function ninReducer(state = emptyState, action) {
                             filtFrags: {$set: []}})
     case 'MIDI_LOADED':
       return update(state, {midiLoaded: {$set: true}})
+    case 'MIDI_LOADING':
+      return update(state, {midiLoaded: {$set: false}})
     case 'FILT_UPDATING':
       return update(state, {filtIsUpdating: {$set: action.val}})
     case 'FILT_SETFRAGS':

@@ -1,6 +1,8 @@
 import MIDI from 'midi.js'
 import Soundfont from 'soundfont-player'
-//
+import { getSoundfont } from './uriInfo'
+import _ from 'lodash'
+
 //import MidiWriter from 'midi-writer-js'
 var MidiWriter = require('midi-writer-js')
 
@@ -60,12 +62,12 @@ export function createMidiMEI(mei) {
   return data
 }
 
-export function playMei(mei) {
+export function playMei(mei, iind) {
   if (useMIDIjs)
           playMeiMIDI(mei)
   else {
           //testSoundfont()
-          playMeiSoundfont(mei)
+          playMeiSoundfont(mei, iind)
   }
 }
 
@@ -85,14 +87,18 @@ function playMeiMIDI(mei) {
 // tempo BPM
 var tempo = 70
 var ctx, inst1, inst2
+var instruments = []
+const defSoundfont = 'MusyngKite/bright_acoustic_piano-mp3.js'
 
-function playMeiSoundfont(mei) {
+function playMeiSoundfont(mei, iindex) {
   let parser = new DOMParser()
   let xml = parser.parseFromString(mei, "text/xml")
   let meas = xml.getElementsByTagName("measure")
 
   let period = 60/tempo
   let time = ctx.currentTime + 0.1
+  const instr = instruments[iindex]
+  if (!instr) { return }
 
   for (let m of meas) {
     //console.log(m)
@@ -107,7 +113,7 @@ function playMeiSoundfont(mei) {
         console.log(d)
         if (d) {
           //console.log("Scheduling:", a.pnum, time, period/d)
-          inst1.play(a.pnum.nodeValue, time, {duration: (period/d)})
+          instr.play(a.pnum.nodeValue, time, {duration: (period/d)})
           time += period/d
         }
       }
@@ -130,7 +136,18 @@ export function midiStart() {
   }
 }
 
-export function initMidi(dispatch) {
+export function loadInstrument(instr, index) {
+
+   let instLoc = getSoundfont(instr)
+   if (!instLoc) instLoc = defSoundfont
+   return Soundfont.instrument(ctx, instLoc)
+            .then(player => {
+                    console.log("Loaded ", instLoc, instr)
+                    instruments[index] = player })
+
+}
+
+export function initMidi(dispatch, uris) {
   if (useMIDIjs) {
   MIDI.loadPlugin({
     soundfontUrl: "http://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
@@ -139,17 +156,25 @@ export function initMidi(dispatch) {
                     if (dispatch) dispatch({type:"MIDI_LOADED"})
                    } })
   } else {
-
     ctx = new AudioContext()
 //    sfont = new Soundfont(ctx)
 //    inst = sfont.instrument('acoustic_grand_piano')
-    Soundfont.instrument(ctx, 'violin')
-    .then(player => {
-      inst2 = player
-      return Soundfont.instrument(ctx,"acoustic_grand_piano")
-    })
-    .then(player => {
-      inst1 = player
+    Promise.all(_.range(uris.length).map(i=>{
+       let instLoc = getSoundfont(uris[i])
+       if (!instLoc) instLoc = defSoundfont
+       return Soundfont.instrument(ctx, instLoc)
+                .then(player=>{
+                        console.log("Loaded ", instLoc, uris[i])
+                        instruments[i] = player })
+       })
+    //Soundfont.instrument(ctx, 'violin')
+    //.then(player => {
+      //inst2 = player
+      //return Soundfont.instrument(ctx,"acoustic_grand_piano")
+                      //"/FluidR3_GM/trumpet-mp3.js""MusyngKite/electric_piano_1-mp3.js")
+      //return Soundfont.instrument(ctx, "MusyngKite/banjo-mp3.js")
+    )
+    .then(() => {
       console.log("MIDI loaded - using Soundfont")
       dispatch({type:"MIDI_LOADED"})
     })

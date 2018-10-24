@@ -79,14 +79,14 @@ function loadInstruments(dispatch, wsi, workset) {
     .then(inst => dispatch({type:'SET_INSTRUMENTS', instruments: inst}))
 }
 
-export let LoadButton = function({dispatch, label, wsi, workset}) {
+export let LoadButton = function({dispatch, label, wsi, workset, rowURIs}) {
   return (
       // An event handler
       //  => which dispatches
       //  => a function (intercepted by redux-thunk)
       <button onClick={ e=> {
               loadInstruments(dispatch, wsi, workset)
-              initMidi(dispatch)
+              initMidi(dispatch, rowURIs)
               dispatch(mkFragmentsPromise(workset))} } >
       {label}
       </button>
