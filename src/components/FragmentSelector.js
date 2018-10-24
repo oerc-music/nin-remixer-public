@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BareFragList } from './fragmentList'
+import { BareFragList } from './FragList'
 import { selectFragment } from './load-fragments'
 import { withFragFilter } from '../actionsFrags'
 

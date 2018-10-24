@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import './App.css';
 
 import { LoadButton, loadConfig } from './components/load-fragments';
-import { FragList } from './components/fragmentList';
-import { FragmentSelector, MatchSelector } from './components/selectedFragments';
-import { AssembledGrid} from './components/assembledRow';
+import { FragList } from './components/FragList';
+import { FragmentSelector, MatchSelector } from './components/FragmentSelector';
+import { AssembledGrid} from './components/AssembledGrid';
 import { goTest } from './miditest'
 
 class App extends Component {
