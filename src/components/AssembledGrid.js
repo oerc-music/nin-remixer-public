@@ -17,8 +17,13 @@ function mkInstLabel(uri, row) {
   }
 }
 
-export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating}) {
+export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating, clearCell}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
+
+  function mkGridCell(width, src, sel, row, col) {
+    return <div> {sel?<button onClick={e=>clearCell(row, col)} className="overlayBtn">X</button>:null} <WrappedSVG width={width} src={src} /> </div>
+  }
+
   //console.log(cols, cursorCol)
   return ( 
     <div className="assembledGrid">
@@ -40,12 +45,16 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
              _.range(cols).map((i=>{
                const cell = row[i]
                const frag = cell ? frags.find(f => f.id === cell.id) : null;
-               const fsvg = frag ? <WrappedSVG width={svgwidth.get(frag.mei)} src={svg.get(frag.mei)} /> : null
                let cursorClass = []
+               let selected = false
                if (Number(rowInd)===cursorRow && i===cursorCol) {
+                  selected = true
                   cursorClass.push("selCell")
                   if (filtIsUpdating) cursorClass.push("filtUpdating")
                }
+               const fsvg = frag ?
+                              mkGridCell(svgwidth.get(frag.mei), svg.get(frag.mei), selected, cursorRow, cursorCol)
+                              : null
                return (
                  <td key={rowInd+"-"+i}
                    className={cursorClass.join(' ')} onClick={e=>{selCell(Number(rowInd), i)}} >
@@ -75,6 +84,12 @@ AssembledGrid = connect(s=>s,
                           editInstrument: (row) => e => {
                               dispatch({type: "ROW_EDITING",
                                         val: row})
+                          },
+                          clearCell: (row, col) => {
+                              dispatch(withFragFilter(
+                                       {type: "CLEAR_CELL",
+                                         row: row,
+                                         col, col}))
                           }
                           }) 
                 )(AssembledGrid)

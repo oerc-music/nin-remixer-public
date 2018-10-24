@@ -105,3 +105,14 @@
 td.filtUpdating {
     background-color: #dce0e2;
 }
+
+.overlayBtn {
+  position: absolute;
+  visibility: hidden;
+}
+
+td:hover .overlayBtn {
+  visibility: visible;
+}
+
+

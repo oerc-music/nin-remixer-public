@@ -114,6 +114,12 @@ export function ninReducer(state = emptyState, action) {
     case 'SET_CURSOR':
       return update(state, {cursorRow: {$set: action.row},
                             cursorCol: {$set: action.col} })
+    case 'CLEAR_CELL':
+      return update(state, {
+		  selectedFrags: { [state.cursorRow]: 
+                                   { [state.cursorCol]: 
+                                     { $set: undefined } } }
+	  })
     case 'HIDEGO':
       return update (state, {hideGo: {$set: true}})
     case 'TOGGLEMATCH':
