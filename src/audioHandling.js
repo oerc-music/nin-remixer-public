@@ -82,6 +82,8 @@ function playMeiMIDI(mei) {
   }
 }
 
+// tempo BPM
+var tempo = 70
 var ctx, inst1, inst2
 
 function playMeiSoundfont(mei) {
@@ -89,9 +91,7 @@ function playMeiSoundfont(mei) {
   let xml = parser.parseFromString(mei, "text/xml")
   let meas = xml.getElementsByTagName("measure")
 
-  //let notes = []
-  //let rest = ["4"]
-  let period = 60/70
+  let period = 60/tempo
   let time = ctx.currentTime + 0.1
 
   for (let m of meas) {
@@ -103,10 +103,10 @@ function playMeiSoundfont(mei) {
         let a = n.attributes
         console.log("NOTE", a.pnum, a.pname, a.oct, a.dur)
         // Assume coming as "16","8","4" etc fractions of semibreve
-        let d = parseInt(a.dur.nodeValue)
+        let d = parseInt(a.dur.nodeValue, 10)
         console.log(d)
         if (d) {
-          console.log("Scheduling:", a.pnum, time, period/d)
+          //console.log("Scheduling:", a.pnum, time, period/d)
           inst1.play(a.pnum.nodeValue, time, {duration: (period/d)})
           time += period/d
         }
@@ -114,7 +114,7 @@ function playMeiSoundfont(mei) {
       if (n.nodeName === "rest") {
         let a = n.attributes
         console.log("REST", a.dur)
-        let d = parseInt(a.dur.nodeValue)
+        let d = parseInt(a.dur.nodeValue, 10)
         // Assume coming as "16","8","4" etc fractions of semibreve
         if (d) { time += period/d }
       }
