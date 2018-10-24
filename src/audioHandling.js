@@ -1,11 +1,11 @@
 import MIDI from 'midi.js'
-//import Soundfont from 'soundfont-player'
-var Soundfont = require('soundfont-player')
+import Soundfont from 'soundfont-player'
+//
 //import MidiWriter from 'midi-writer-js'
 var MidiWriter = require('midi-writer-js')
 
-const useMIDIjs = true
-//const useMIDIjs = false
+//const useMIDIjs = true
+const useMIDIjs = false
 
 export function extractNotesMEI(mei) {
   let parser = new DOMParser()
@@ -63,8 +63,10 @@ export function createMidiMEI(mei) {
 export function playMei(mei) {
   if (useMIDIjs)
           playMeiMIDI(mei)
-  else
-          testSoundfont()
+  else {
+          //testSoundfont()
+          playMeiSoundfont(mei)
+  }
 }
 
 function playMeiMIDI(mei) {
@@ -80,13 +82,18 @@ function playMeiMIDI(mei) {
   }
 }
 
-function extractNotesMEISoundfont(mei) {
+var ctx, inst1, inst2
+
+function playMeiSoundfont(mei) {
   let parser = new DOMParser()
   let xml = parser.parseFromString(mei, "text/xml")
-
-  let notes = []
-  let rest = ["4"]
   let meas = xml.getElementsByTagName("measure")
+
+  //let notes = []
+  //let rest = ["4"]
+  let period = 60/70
+  let time = ctx.currentTime + 0.1
+
   for (let m of meas) {
     //console.log(m)
     let noteElms = m.getElementsByTagName("layer")[0].children
@@ -95,32 +102,24 @@ function extractNotesMEISoundfont(mei) {
       if (n.nodeName === "note") {
         let a = n.attributes
         console.log("NOTE", a.pnum, a.pname, a.oct, a.dur)
-        // Assume duration specified in CMN compatible with midi library
-        // TO-FIX
-        if (rest.length > 0) {
-          notes.push(new MidiWriter.NoteEvent({pitch: parseInt(a.pnum.value, 10),
-                                               duration: a.dur.value,
-                                               wait: rest}))
-          rest = []
-        } else {
-          notes.push(new MidiWriter.NoteEvent({pitch: parseInt(a.pnum.value, 10),
-                                               duration: a.dur.value }))
+        // Assume coming as "16","8","4" etc fractions of semibreve
+        let d = parseInt(a.dur.nodeValue)
+        console.log(d)
+        if (d) {
+          console.log("Scheduling:", a.pnum, time, period/d)
+          inst1.play(a.pnum.nodeValue, time, {duration: (period/d)})
+          time += period/d
         }
       }
       if (n.nodeName === "rest") {
         let a = n.attributes
         console.log("REST", a.dur)
-        // Assume duration specified in CMN compatible with midi library
-        // TO-FIX
-        rest.push(a.dur.value)
+        let d = parseInt(a.dur.nodeValue)
+        // Assume coming as "16","8","4" etc fractions of semibreve
+        if (d) { time += period/d }
       }
     } // for n
   } // for m
-  return notes
-}
-
-function playMeiSoundfont(mei) {
-  let notes
 }
 
 export function midiStart() {
@@ -130,8 +129,6 @@ export function midiStart() {
 
   }
 }
-
-var ctx, inst1, inst2
 
 export function initMidi(dispatch) {
   if (useMIDIjs) {
@@ -148,11 +145,11 @@ export function initMidi(dispatch) {
 //    inst = sfont.instrument('acoustic_grand_piano')
     Soundfont.instrument(ctx, 'violin')
     .then(player => {
-      inst1 = player
+      inst2 = player
       return Soundfont.instrument(ctx,"acoustic_grand_piano")
     })
     .then(player => {
-      inst2 = player
+      inst1 = player
       console.log("MIDI loaded - using Soundfont")
       dispatch({type:"MIDI_LOADED"})
     })
