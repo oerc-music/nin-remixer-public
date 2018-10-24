@@ -137,7 +137,6 @@ export function midiStart() {
 }
 
 export function loadInstrument(instr, index) {
-
    let instLoc = getSoundfont(instr)
    if (!instLoc) instLoc = defSoundfont
    return Soundfont.instrument(ctx, instLoc)

@@ -20,15 +20,7 @@ export class BareFragList extends React.Component {
       //console.log("SVGS",svgs)
       //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
-            <span key={itm.id}>
-              <div title={itm.id}>
-              {itm.title} ({showkey(itm.keydisp, itm.mode)})
-              </div>
-              {(svgs.has(itm.mei)) && (
-                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
-                  <div><WrappedSVG src={svgs.get(itm.mei)}
-                          width={this.props.svgwidth.get(itm.mei)}/></div>
-                  )}
+            <div className="fragItem" key={itm.id}>
               <button onClick={e=>{onClick(index, itm.id)}}
                       disabled={selectDisabled}>
                 Select
@@ -38,7 +30,15 @@ export class BareFragList extends React.Component {
                                    }}
                       disabled={this.props.disablePlay}
                       className="playbutton">▶</button>
-            </span>
+              <span title={itm.id}>
+              {itm.title} ({showkey(itm.keydisp, itm.mode)})
+              </span>
+              {(svgs.has(itm.mei)) && (
+                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
+                  <div><WrappedSVG src={svgs.get(itm.mei)}
+                          width={this.props.svgwidth.get(itm.mei)}/></div>
+                  )}
+            </div>
             );
 
       return (

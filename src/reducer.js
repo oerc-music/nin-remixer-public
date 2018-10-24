@@ -72,7 +72,7 @@ export function ninReducer(state = emptyState, action) {
       return update (nstate, {frags: {$set: action.frags}})
     case 'SET_MEI':
       let bbox = svgbbox(action.svg)
-      console.log("SVGBBOX:", bbox)
+      //console.log("SVGBBOX:", bbox)
       var nstate = update(state, {mei: {$add: [[action.uri, action.mei]]},
                             svg: {$add: [[action.uri, action.svg]]} })
       if (bbox) nstate = update(nstate, {svgwidth: {$add: [[action.uri, bbox.width]]}})

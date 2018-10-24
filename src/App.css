@@ -69,6 +69,15 @@
     margin-left: 15px;
 }
 
+.gridDiv {
+    text-align: left;
+}
+
+.gridDiv button {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 .assembledGrid {
   overflow-x:scroll;
 }
@@ -117,4 +126,9 @@ td:hover .overlayBtn {
 
 .loadWS input {
   width: 350px;
+}
+
+.fragItem {
+  display: inline-block;
+  border: 1px solid;
 }

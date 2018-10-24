@@ -16,5 +16,5 @@ Run with:
 
 Add a single fragment to an existing container:
 
-nin-import CONTAINER-URI FRAGMENT-URI
+./nin-import CONTAINER-URI FRAGMENT-URI
 

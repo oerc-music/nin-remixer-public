@@ -23,7 +23,10 @@ class App extends Component {
                 </div>
                 //<input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
                 }
-	<AssembledGrid />
+        <div className="gridDiv">
+          {! this.props.fragsLoaded ? null : <button> ▶ playback </button>}
+	  <AssembledGrid />
+        </div>
         {! this.props.fragsLoaded ? null :
         <div className="fragRow">
           <MatchSelector />
