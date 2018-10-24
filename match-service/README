@@ -41,6 +41,12 @@ To create matches for all fragments that are playable by an instrument:
 
 node instrumentmatch.js <workset-uri> <instrument-uri>
 
+## Script to run all services on a workset
+
+Run all services:
+
+./runMatchAgents.sh <workset-uri> [optional_instrument_uri_file]
+
 # Utilities
 
 * To fetch FragRefs from a container and resolve them to a list of Fragments:

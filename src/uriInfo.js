@@ -490,7 +490,7 @@ function instrumentLabel(uri) {
 module.exports.instrumentLabel = instrumentLabel
 
 function getInstrumentDetails(uri) {
-  let d = instrumentDetails.get(uri)
+  let d = instrumentDetails.get(String(uri))
   if (!d) { console.log("No details for:", uri)}
   return d
 }

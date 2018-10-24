@@ -34,7 +34,7 @@ function getFrags(ws) {
    )
 }
 
-function getOrCreateKeyMatch(ws) {
+function getOrCreateMatchCont(ws) {
   return (
     cserv.findOrCreateContainer(wsi, ws, base, WSS_TYPE, 'WSS')
       //.then(idlog)
@@ -44,6 +44,21 @@ function getOrCreateKeyMatch(ws) {
       .catch(e=>console.log(e))
    )
 } 
+
+var matchCache = new Set()
+
+async function setupContainer(ws) {
+  const cont = await getOrCreateMatchCont(ws)
+  console.log("CONT:",cont)
+  const exmatches = await cserv.getAnnotations(cont.body)
+  //console.log(exmatches)
+  for (let mi in exmatches) {
+     let m = exmatches[mi]
+     console.log("Adding to cache:", m.target, m.body)
+     matchCache.add(m.target+" "+m.body)
+  }
+  return cont
+}
 
 function compat(key, minor) {
   var order = ["C", "G", "D", "A", "E", "B", "F#", "C#", "Ab", "Eb", "Bb", "F"];
@@ -74,42 +89,50 @@ function keyCompatible(compatKeys, tfrag, frag) {
 //      * get fragment key
 //      * check compatibility
 //      * add annotation (check if exists)
-async function doAnnotations(ws, tfragid) {
-  const cont = await getOrCreateKeyMatch(ws)
+async function doAnnotations(cont, ws, tfragid) {
   const frags = await getFrags(ws)
-  console.log(cont, frags)
+  //console.log("MCONT+FRAGS", cont, frags)
   const tfrag = await cserv.getFragInfo(tfragid)
-  console.log(tfrag)
+  //console.log("TARGET FRAG", tfrag)
 
   const compatKeys = compat(tfrag.key, tfrag.mode == "minor")
-  console.log(compatKeys)
+  //console.log(compatKeys)
 
   for (let f of frags) {
     if (keyCompatible(compatKeys, tfrag, f)) {
        console.log( "compatible:", tfrag.id, f.id)
        console.log(f.key, f.mode)
        // Add Annotation 
-       let exists = await cserv.findExistingAnn(cont.body, tfrag.id, f.id)
+       //let exists = await cserv.findExistingAnn(cont.body, tfrag.id, f.id)
+       let exists = matchCache.has(tfrag.id+" "+f.id)
        if (exists)
          console.log("Ann already exists:", tfrag.id, f.id)
-       else
+       else { // Doesn't exist so add
          await cserv.addAnnotation(cont.body, tfrag.id, f.id)
+         matchCache.add(tfrag.id+" "+f.id)
+       }
     }
   }
 }
 
-async function doAll(workset) {
+async function doAll(cont, workset) {
   const frags = await getFrags(workset)
   for (let tfrag of frags) {
     console.log("ANNOTATIONS FOR:", tfrag.id)
-    await doAnnotations(workset, tfrag.id)
+    await doAnnotations(cont, workset, tfrag.id)
   }
 }
 
 if (conf.doAll) {
-  doAll(workset)
+  setupContainer(workset)
+  .then(cont=>
+    doAll(cont, workset)
+   )
   .catch(e=>console.log(e))
 } else {
-  doAnnotations(workset, targetFrag)
+  setupContainer(workset)
+  .then(cont =>
+    doAnnotations(cont, workset, targetFrag)
+   )
   .catch(e=>console.log(e))
 }
