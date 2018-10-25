@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import './App.css';
+import './App.css'
 
-import { LoadButton, loadConfig } from './components/load-fragments';
-import { FragList } from './components/FragList';
-import { FragmentSelector, MatchSelector } from './components/FragmentSelector';
-import { AssembledGrid} from './components/AssembledGrid';
+import { LoadButton, loadConfig } from './components/load-fragments'
+import { FragList } from './components/FragList'
+import { FragmentSelector, MatchSelector } from './components/FragmentSelector'
+import { AssembledGrid } from './components/AssembledGrid'
+import { playMeiGrid } from  './audioHandling'
 import { goTest } from './miditest'
 
 class App extends Component {
@@ -24,7 +25,13 @@ class App extends Component {
                 //<input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
                 }
         <div className="gridDiv">
-          {! this.props.fragsLoaded ? null : <button> ▶ playback </button>}
+          {! this.props.fragsLoaded ? null :
+                  <button onClick={e=>{
+                          console.log("PLAY GRID")
+                          playMeiGrid(this.props.mei, this.props.selectedFrags,
+                                       this.props.frags) }
+                  }>
+                                                 ▶ playback </button> }
 	  <AssembledGrid />
         </div>
         {! this.props.fragsLoaded ? null :

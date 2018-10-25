@@ -128,6 +128,63 @@ function playMeiSoundfont(mei, iindex) {
   } // for m
 }
 
+export function playMeiGrid(meiMap, fragGrid, fragments) {
+  let period = 60/tempo
+  let starttime = ctx.currentTime + 0.1
+  let nrows = fragGrid.length
+  let ncols = _.max(_.map(fragGrid,x=>x.length))
+
+  let fragmap = new Map(_.map(fragments, x=>([x.id, x.mei])))
+  //console.log(fragGrid, nrows, ncols)
+  console.log(meiMap)
+
+  for (let c in _.range(ncols)) {
+    let coltime = starttime
+    for (let r in _.range(nrows)) {
+      let frag = fragGrid[r][c]
+      let mei
+      if (frag && frag.id) { mei = meiMap.get(fragmap.get(frag.id)) }
+      if (! mei) {console.log(frag, mei); continue}
+      let parser = new DOMParser()
+      let xml = parser.parseFromString(mei, "text/xml")
+      let meas = xml.getElementsByTagName("measure")
+    
+      let time = starttime
+      const instr = instruments[r]
+      //if (!instr) { return }
+    
+      for (let m of meas) {
+        //console.log(m)
+        let noteElms = m.getElementsByTagName("layer")[0].children
+        for (let n of noteElms) {
+          //console.log(n)
+          if (n.nodeName === "note") {
+            let a = n.attributes
+            console.log("NOTE", a.pnum, a.pname, a.oct, a.dur)
+            // Assume coming as "16","8","4" etc fractions of semibreve
+            let d = parseInt(a.dur.nodeValue, 10)
+            console.log(d)
+            if (d) {
+              //console.log("Scheduling:", a.pnum, time, period/d)
+              instr.play(a.pnum.nodeValue, time, {duration: (period/d)})
+              time += period/d
+            }
+          }
+          if (n.nodeName === "rest") {
+            let a = n.attributes
+            console.log("REST", a.dur)
+            let d = parseInt(a.dur.nodeValue, 10)
+            // Assume coming as "16","8","4" etc fractions of semibreve
+            if (d) { time += period/d }
+          }
+        } // for n
+      } // for m
+      coltime = Math.max(coltime, time)
+    }
+    starttime = coltime
+  }
+}
+
 export function midiStart() {
   if (useMIDIjs)
     MIDI.Player.start()
