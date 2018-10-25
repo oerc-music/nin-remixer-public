@@ -28,6 +28,15 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
                 onChange={handleChange} />
              Key Compatibility
            </label>
+           <label>
+             <input type="checkbox" checked={false} disabled/>
+             Matching Length
+           </label>
+           <label>
+             <input type="checkbox" checked={false} disabled/>
+             Instrument Match
+           </label>
+           <span style={{marginLeft:"20px"}}>( {filtFrags.length} / {frags.length} )</span>
            <br/>
            <div className="debugInfo">
              <div className="countPanel">{filtFrags.length} / {frags.length}</div>
@@ -43,9 +52,12 @@ export var FragmentSelector = function({dispatch, selectedFrags, cursorRow,
                                         filtFrags, svg, svgwidth, mei}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
   //console.log(frags,filtFrags)
+        //<FragList fragments={filtFrags.length?filtFrags:frags}
+  filtFrags.length || (filtFrags = frags)
   return (
-        <div className="listcol">
-          <FragList fragments={filtFrags.length?filtFrags:frags}
+        <div className="nlistcol">
+          { ! filtFrags && <div>"No Fragments"</div> }
+          <FragList fragments={filtFrags}
                     svg={svg}
                     svgwidth={svgwidth}
                     mei={mei}

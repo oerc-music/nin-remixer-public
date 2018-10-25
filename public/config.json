@@ -2,8 +2,8 @@
   "wsi": "http://ldp.linkedmusic.org:8080/WSI/",
   "workset": "http://ldp.linkedmusic.org:8080/workset-4afa63/",
   "rowURIs": [
-          "http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/piano",
-          "http://fast-project.annalist.net/annalist/c/MusicalInstruments/d/Instrument/violin",
+          "",
+          "",
           ""
         ]
 }

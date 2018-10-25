@@ -22,16 +22,15 @@ class App extends Component {
                 <input value={this.props.workset?this.props.workset:""}
                    onChange={e=>this.props.dispatch({type:"UPDATE_WORKSET",val:e.target.value})} />
                 </div>
-                //<input value="http://thalassa.oerc.ox.ac.uk:8080/workset-e82a66/" />
                 }
         <div className="gridDiv">
           {! this.props.fragsLoaded ? null :
                   <button onClick={e=>{
                           console.log("PLAY GRID")
-                          playMeiGrid(this.props.mei, this.props.selectedFrags,
-                                       this.props.frags) }
-                  }>
-                                                 ▶ playback </button> }
+                          playMeiGrid(this.props.mei,
+                                      this.props.selectedFrags,
+                                      this.props.frags) }
+                  }> ▶ playback </button> }
 	  <AssembledGrid />
         </div>
         {! this.props.fragsLoaded ? null :
