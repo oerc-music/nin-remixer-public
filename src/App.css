@@ -69,6 +69,15 @@
     margin-left: 15px;
 }
 
+.gridDiv {
+    text-align: left;
+}
+
+.gridDiv button {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 .assembledGrid {
   overflow-x:scroll;
 }
@@ -104,4 +113,22 @@
 }
 td.filtUpdating {
     background-color: #dce0e2;
+}
+
+.overlayBtn {
+  position: absolute;
+  visibility: hidden;
+}
+
+td:hover .overlayBtn {
+  visibility: visible;
+}
+
+.loadWS input {
+  width: 350px;
+}
+
+.fragItem {
+  display: inline-block;
+  border: 1px solid;
 }

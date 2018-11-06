@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BareFragList } from './fragmentList'
+import { BareFragList } from './FragList'
 import { selectFragment } from './load-fragments'
 import { withFragFilter } from '../actionsFrags'
 
@@ -28,6 +28,15 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
                 onChange={handleChange} />
              Key Compatibility
            </label>
+           <label>
+             <input type="checkbox" checked={false} disabled/>
+             Matching Length
+           </label>
+           <label>
+             <input type="checkbox" checked={false} disabled/>
+             Instrument Match
+           </label>
+           <span style={{marginLeft:"20px"}}>( {filtFrags.length} / {frags.length} )</span>
            <br/>
            <div className="debugInfo">
              <div className="countPanel">{filtFrags.length} / {frags.length}</div>
@@ -38,19 +47,24 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
 }
 MatchSelector = connect(s=>s)(MatchSelector)
 
-export var FragmentSelector = function({dispatch, selectedFrags,
-                                        filtIsUpdating, midiLoaded,
-                                        frags, filtFrags, svg, mei}) {
+export var FragmentSelector = function({dispatch, selectedFrags, cursorRow,
+                                        filtIsUpdating, midiLoaded, frags,
+                                        filtFrags, svg, svgwidth, mei}) {
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
-  console.log(frags,filtFrags)
+  //console.log(frags,filtFrags)
+        //<FragList fragments={filtFrags.length?filtFrags:frags}
+  filtFrags.length || (filtFrags = frags)
   return (
-        <div className="listcol">
-          <FragList fragments={filtFrags.length?filtFrags:frags}
+        <div className="nlistcol">
+          { ! filtFrags && <div>"No Fragments"</div> }
+          <FragList fragments={filtFrags}
                     svg={svg}
+                    svgwidth={svgwidth}
                     mei={mei}
                     selecting={! filtIsUpdating}
                     disablePlay={! midiLoaded}
-                    onClick={selectOnClick} />
+                    onClick={selectOnClick}
+                    cursorRow={cursorRow} />
         </div>
   )
 }

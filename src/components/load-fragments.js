@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { getLDPcontents, getFragInfo } from '../actions/rdf'
+import { getLDPcontents, getFragInfo } from '../actionsRdf'
 import { withFragFilter } from '../actionsFrags'
 import { extractNotesMEI, initMidi } from '../audioHandling'
+import { getAvailInstruments } from '../matchservice-utils'
 
 // Action Creator
 export function setFrags(frags) {
@@ -23,14 +24,24 @@ export function selectFragment(index, id) {
 
 // already loaded in page as script
 const vrvTk = new window.verovio.toolkit();
-const vrvOptions = { pageHeight: 400, pageWidth: 2000, scale: 25, border:0, adjustPageHeight: 1};
+const vrvOptions = { pageHeight: 400, pageWidth: 2500, scale: 25, border:0, adjustPageHeight: 1};
+
+function getSvgBounds(svg) {
+  let res
+  try {
+    let d = document.getElementById("svgtest")
+    d.innerHTML=svg
+    res = d.firstElementChild.getBBox()
+  } catch (e) { console.log(e) }
+  return res
+}
 
       //  Returns a function which the event handler dispatches
       //  => a function (intercepted by redux-thunk)
       //  => which (when run by redux-thunk) initiates a HTTP request
       //  => and on completion of returned promise
       //  => dispatches the SET_ITEMS action with the reponse
-function fragmentsPromise(workset) {
+function mkFragmentsPromise(workset) {
         return (dispatch => {
                 //console.log("FRAGDISP", dispatch)
                 let p = getLDPcontents(workset)
@@ -63,17 +74,23 @@ export function loadConfig(dispatch) {
           })
 }
 
-export let LoadButton = function({dispatch, label, workset}) {
+function loadInstruments(dispatch, wsi, workset) {
+  getAvailInstruments(wsi, workset)
+    .then(inst => dispatch({type:'SET_INSTRUMENTS', instruments: inst}))
+}
+
+export let LoadButton = function({dispatch, label, wsi, workset, rowURIs}) {
   return (
       // An event handler
       //  => which dispatches
       //  => a function (intercepted by redux-thunk)
       <button onClick={ e=> {
-              initMidi(dispatch)
-              dispatch(fragmentsPromise(workset))} } >
+              loadInstruments(dispatch, wsi, workset)
+              initMidi(dispatch, rowURIs)
+              dispatch(mkFragmentsPromise(workset))} } >
       {label}
       </button>
      )
 }
-LoadButton=connect()(LoadButton)
+LoadButton=connect(s=>s)(LoadButton)
 

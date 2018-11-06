@@ -11,17 +11,17 @@ body {
 .fragRow {
   x-overflow-x:scroll;
   max-height: calc(97.5vh - 315px);
-  width: 600px;
+  x-width: 600px;
   text-align: left;
   border: 1px solid #b8b8b8;
   margin: 10px;
-  margin-left: 150px;
+  x-margin-left: 150px;
  }
 
 .listcol { overflow-y:scroll;
   height: calc(97.5vh - 399.9px);
   x-height: 400px;
-  max-width: 800px;
+  x-max-width: 800px;
   display: inline-block;
   border: 1px solid #d8d8d8;
   margin: 10px;

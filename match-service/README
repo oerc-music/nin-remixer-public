@@ -1,7 +1,51 @@
 
+# Setup
+
+Configuration is kept in the file ../conf.js, this includes:
+
+* The URI for the base LDP container.
+
+* The URI for the WSI (Workset Services Index)
+
+* Default URIs for Target WorkSet and Target Fragment
+
+To create a WSI, set the base in conf.js and use:
+
+  node create-wsi
+
 # Match services
 
 ## Key Match service
+
+To create matches for all fragment in a workset run as:
+
+node keymatch.js ALL <workset-uri>
+
+To run just one added fragment:
+
+node keymatch.js <workset-uri> <target-fragment>
+
+## Length Match service
+
+To create matches for all fragment in a workset run as:
+
+node lengthmatch.js ALL <workset-uri>
+
+To run just one added fragment:
+
+node lengthmatch.js <workset-uri> <target-fragment>
+
+## Instrument Match service
+
+To create matches for all fragments that are playable by an instrument:
+
+node instrumentmatch.js <workset-uri> <instrument-uri>
+
+## Script to run all services on a workset
+
+Run all services:
+
+./runMatchAgents.sh <workset-uri> [optional_instrument_uri_file]
 
 # Utilities
 

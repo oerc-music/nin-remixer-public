@@ -28,11 +28,14 @@ const logger = store => next => action => {
 //const store = createStore(ninReducer, applyMiddleware(thunk, logger))
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(ninReducer,
-                          composeEnhancers(applyMiddleware(thunk, logger)))
+                          composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
       <Provider store={store}>
+        <div>
          <App />
+         <div style={{position:"fixed",visibility:"hidden"}} id="svgtest" />
+        </div>
       </Provider>,
       document.getElementById('root'))
 

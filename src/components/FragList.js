@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import InlineSVG from 'svg-inline-react'
+import WrappedSVG from './WrappedSVG'
 import { selectFragment } from './load-fragments'
 import { playMei, midiStart } from '../audioHandling'
 
 const showkey = (key, mode) => key + (mode === "minor" ? " minor" : "")
+
+//const scalefac = 1.0
 
 export class BareFragList extends React.Component {
    render() {
@@ -14,33 +16,34 @@ export class BareFragList extends React.Component {
       const items = this.props.fragments
       const svgs = this.props.svg
       const meis = this.props.mei
+      const row = this.props.cursorRow
       //console.log("SVGS",svgs)
       //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
-            <li key={itm.id}>
-              <div title={itm.id}>
-              {itm.title} ({showkey(itm.keydisp, itm.mode)})
-              </div>
-              {(svgs.has(itm.mei)) && (
-                  <div><InlineSVG src={svgs.get(itm.mei)}/></div>
-                  )}
+            <div className="fragItem" key={itm.id}>
               <button onClick={e=>{onClick(index, itm.id)}}
                       disabled={selectDisabled}>
                 Select
               </button>
               <button onClick={e=>{let m=meis.get(itm.mei)
-                                   playMei(m)
+                                   playMei(m, row)
                                    }}
                       disabled={this.props.disablePlay}
                       className="playbutton">▶</button>
-            </li>
+              <span title={itm.id}>
+              {itm.title} ({showkey(itm.keydisp, itm.mode)})
+              </span>
+              {(svgs.has(itm.mei)) && (
+                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
+                  <div><WrappedSVG src={svgs.get(itm.mei)}
+                          width={this.props.svgwidth.get(itm.mei)}/></div>
+                  )}
+            </div>
             );
 
       return (
          <div className="fraglist">
-           <ul>
              {listItems}
-           </ul>
          </div>
          );
    }

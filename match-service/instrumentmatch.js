@@ -1,6 +1,7 @@
 
 var cserv = require('./matchservice-utils.js');
 var rdf = require('rdflib');
+var uriInfo = require('../src/uriInfo');
 
 var conf = require('./getConfig.js');
 
@@ -19,8 +20,8 @@ const NIN = rdf.Namespace("http://numbersintonotes.net/terms#")
 const RDFS = rdf.Namespace("http://www.w3.org/2000/01/rdf-schema#")
 const SOFA = rdf.Namespace("http://meld.linkedmusic.org/sofa/terms/")
 
-const workset = process.argv[2]
-const targetInst = process.argv[3]
+const workset = conf.targetWorkset
+const targetInst = conf.targetFrag
 
 function idlog(x) {
         console.log(x)
@@ -78,6 +79,19 @@ function getInstInfo(uri) {
   )
 }
 
+function getLocalInstInfo(uri) {
+  console.log(uri)
+  let i=uriInfo.getInstrumentDetails(uri)
+  console.log(i)
+  return Promise.resolve(
+           { id: uri,
+             name: i.label,
+             minmidi: i.minmidi,
+             maxmidi: i.maxmidi
+           }
+         )
+}
+
 function instCompatible(inst, frag) {
         return (frag.highnote <= inst.maxmidi
                  && frag.lownote >= inst.minmidi)
@@ -87,7 +101,7 @@ async function doAnnotations(ws, tid) {
   const cont = await getOrCreateMatchSubCont(ws, tid)
   const frags = await getFrags(ws)
   console.log(cont, frags)
-  const instinfo = await getInstInfo(tid)
+  const instinfo = await getLocalInstInfo(tid)
   console.log(instinfo)
 
   for (let f of frags) {
@@ -103,5 +117,7 @@ async function doAnnotations(ws, tid) {
   }
 }
 
+console.log("WORKSET", workset)
+console.log("TARGET INSTRUMENT", targetInst)
 doAnnotations(workset, targetInst)
   .catch(e=>console.log(e))

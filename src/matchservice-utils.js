@@ -160,10 +160,10 @@ function getFragInfo(uri) {
 module.exports.getFragInfo = getFragInfo
 
 // promise to fetch annotation from annuri
-// check match to targeturi
+// check match to targeturi (if supplied)
 //    (and if supplied to bodyuri)
 // and return bodyuri (assumed to be a uri rather than literal)
-function getAnnotation(annuri, targeturi, bodyuri = null) {
+function getAnnotation(annuri, targeturi = null, bodyuri = null) {
   //console.log("getAnn", annuri, targeturi)
   return axios.get(annuri, {responseType: 'text',
                              headers: {'Accept':'text/turtle'}})
@@ -172,16 +172,24 @@ function getAnnotation(annuri, targeturi, bodyuri = null) {
       let match = graph.any(rdf.sym(annuri),
                             rdf.sym('http://www.w3.org/ns/oa#hasTarget'))
       //console.log(match)
-      if (!match || getNodeURI(match) !== targeturi) {
-        console.log("nomatch for", targeturi)
+      if (!match) { 
+        console.log("No target", annuri)
         return Promise.resolve(null)
+      }
+      if (targeturi) { // If have target check that it matches
+        if (getNodeURI(match) !== targeturi) {
+          console.log("nomatch for", targeturi)
+          return Promise.resolve(null)
+        }
+      } else { // No targeturi given, fill in
+        targeturi = getNodeURI(match)
       }
       match = graph.any(rdf.sym(annuri),
                         rdf.sym('http://www.w3.org/ns/oa#hasBody'))
       if (bodyuri) {
         // If a bodyuri supplied, check it matches
         if (bodyuri !== getNodeURI(match))
-          return Promise.resolve(null)
+        return Promise.resolve(null)
       }
       let motivation = graph.any(rdf.sym(annuri),
                              rdf.sym('http://www.w3.org/ns/oa#motivatedBy'))
@@ -301,6 +309,39 @@ function findMatchService(wsi, matchtype, workset) {
 }
 module.exports.findMatchService = findMatchService
 
+function getAnnotations(conturi) {
+  var p = axios.get(conturi, {responseType: 'text',
+                              headers:{'Accept':'text/turtle'}})
+      .then(parseTurtle(conturi)).then(graph => {
+      //extract content URIs from LDP container graph
+      var matches = graph.each(rdf.sym(conturi),
+                               rdf.sym('http://www.w3.org/ns/ldp#contains'),
+                               undefined)
+      var uris = matches.map(getNodeURI)
+      //console.log(conturi, "contains:", uris)
+      return Promise.resolve(uris)
+    }).then(uris =>
+      // fetch annotations from the URIs
+      Promise.all(uris.map(u=>(
+               getAnnotation(u)
+                .then(a=>{
+                  if (a && a.motivation === MOTIVATION_RECURSE)
+                    { return getAnnotation(a.body) }
+                  else if (a) { return a }
+                  else { return null }
+                })
+                .catch(e => {return e})
+               //.then(idlog)
+         )))
+         //.then(idlog)
+         // flatten the list (from recursive call)
+         // and filter out nulls
+         .then(anns=>anns.reduce((a,v)=> a.concat(v),[]).filter(a=>a))
+    )
+  return p
+}
+module.exports.getAnnotations = getAnnotations
+
 // Find Matches for target in container
 // returns a list of matches for target, handling recursion if necessary
 function findAnnotationMatches(conturi, targeturi) {
@@ -382,6 +423,7 @@ function getMatchServices(wsi, workset) {
 module.exports.getMatchServices = getMatchServices
 
 function getAvailInstruments(wsi, workset) {
+  console.log(wsi, workset)
   let p = findMatchService(wsi, INSTRUMENT_SERVICE, workset)
       .then( servloc => getLDPcontents(servloc))
       .then( uris => Promise.all(uris.map(uri =>
