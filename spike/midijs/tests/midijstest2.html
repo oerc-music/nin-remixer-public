@@ -60,6 +60,12 @@ window.onload = function () {
             // MIDI.noteOn(2, note, velocity, t0+(4*td));
             // MIDI.noteOff(2, note, t0+(5*td));
             logvalue("MIDI.getContext().currentTime: "+MIDI.getContext().currentTime);
+
+            // for (var i in MIDI.audioBuffers) {
+            //     MIDI.audioBuffers[i].currentTime = MIDI.getContext().currentTime+1;
+            //     logvalue("MIDI.audioBuffers["+i+"]: currentTime "+
+            //              MIDI.audioBuffers[i].currentTime);
+            // }
         }
     });
 };
