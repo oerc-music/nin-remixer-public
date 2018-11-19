@@ -97,6 +97,13 @@ export function ninReducer(state = emptyState, action) {
       var nstate = update(state, {rowBeingEdited: {$set: -1}})
       nstate = update(nstate, {rowURIs: {$splice: [[action.ind,1,action.uri]]}})
       return nstate
+    case 'ROW_ADD':
+      return update(state, {selectedFrags: {$push: [[]]}})
+    case 'ROW_DEL':
+      var nstate = update(state, {selectedFrags: {$splice:[[action.ind,1]]},
+                                  rowURIs: {$splice:[[action.ind,1]]},
+                                  rowBeingEdited: {$set: -1}})
+      return nstate
     case 'SETCONFIG':
       var nstate = state
       nstate = setState(nstate, action.config, "wsi")
