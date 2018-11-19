@@ -70,7 +70,7 @@ export var AssembledGrid = function({dispatch, rowURIs, addRow, delRow, rowBeing
      }) }
     </tbody>
     </table>
-    <button onClick={e=>{addRow()}} >+</button>
+    <button onClick={e=>{addRow()}} className="instAdd">+</button>
     </div>
   )
 }
