@@ -17,7 +17,7 @@ function mkInstLabel(uri, row) {
   }
 }
 
-export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating, clearCell}) {
+export var AssembledGrid = function({dispatch, rowURIs, addRow, delRow, rowBeingEdited, editInstrument, selectedFrags, cursorRow, cursorCol, frags, svg, svgwidth, selCell, filtIsUpdating, clearCell}) {
   const cols = Math.max(_.max(_.map(selectedFrags, (x=>x.length)))+1, cursorCol+1)
 
   function mkGridCell(width, src, sel, row, col) {
@@ -38,6 +38,7 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
                   <InstrumentSelector ind={rowInd} />
                 </td>
              :  <td onClick={editInstrument(rowInd)} className="instName">
+                  <button onClick={e=>{e.stopPropagation();delRow(rowInd)}}>x</button>
                   {mkInstLabel(rowURIs[rowInd], parseInt(rowInd))}
                 </td>
           }
@@ -69,6 +70,7 @@ export var AssembledGrid = function({dispatch, rowURIs, rowBeingEdited, editInst
      }) }
     </tbody>
     </table>
+    <button onClick={e=>{addRow()}} className="instAdd">+</button>
     </div>
   )
 }
@@ -90,7 +92,15 @@ AssembledGrid = connect(s=>s,
                                        {type: "CLEAR_CELL",
                                          row: row,
                                          col, col}))
+                          },
+                          addRow: () => {
+                              dispatch({type: "ROW_ADD"})
+                          },
+                          delRow: (row) => {
+                              dispatch({type: "ROW_DEL",
+                                        ind: row})
                           }
+
                           }) 
                 )(AssembledGrid)
 

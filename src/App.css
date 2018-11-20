@@ -132,3 +132,15 @@ td:hover .overlayBtn {
   display: inline-block;
   border: 1px solid;
 }
+
+button.instAdd {
+  margin-left: 50px;
+}
+
+td.instName button {
+  visibility: hidden;
+}
+
+td.instName:hover button {
+  visibility: visible;
+}
