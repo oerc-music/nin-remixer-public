@@ -47,3 +47,8 @@ It appears that `/profile/` may be a container, and `card` a document within tha
 
 @@Need to figure out how to login using Curl??
 
+
+## Browser client authentication and pod access support
+
+See: https://github.com/solid/solid-auth-client
+
