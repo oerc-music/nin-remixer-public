@@ -4,7 +4,7 @@ Mainly via: matchservice-utils.js
 
 Also note: actionsRdf.js, load-fragments.js
 
-These files contain all references to axoius, the HTTP client library used.
+These files contain all references to axios(?), the HTTP client library used.
 
 ## matchservice-utils.js
 
