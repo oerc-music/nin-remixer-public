@@ -132,3 +132,15 @@ When a colums is added or deleted, the state can be updated by a POST or DELETE 
 @@There was some discussion about whether the selected filter criteria should be saved.  To some extent, that would be covered by saving active match annotations for each selected fragment.
 
 
+## Sequence data access patterns
+
+@@This is a prompt/placeholder from a meeting held 2018-12-04 (KP/DL/JP/GK), to hopefully seed continuing thoughts and discussions.@@
+
+Can we crystalize data access and update patterns to sequence-oriented data that are applicable across different MELD applications?  And can such patterns be implemented in common MELD core library components?
+
+SOFA pushes the MELD design by being update-intensive compared with other MELD applications (except maybe the Jam sesssion, where the nature of the updates was more linear - or additive?).
+
+(MELD interactions with sequence: more common to "blus" between grid "columns" than between "rows".)
+
+(GK: think about alternative grid designs in LDP - esp. grid as single resource)
+
