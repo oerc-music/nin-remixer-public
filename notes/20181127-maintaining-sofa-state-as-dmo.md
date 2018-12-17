@@ -142,5 +142,5 @@ SOFA pushes the MELD design by being update-intensive compared with other MELD a
 
 (MELD interactions with sequence: more common to "blus" between grid "columns" than between "rows".)
 
-(GK: think about alternative grid designs in LDP - esp. grid as single resource)
+(GK: think about alternative grid designs in LDP - esp. grid-like thing - a _quilt_? - as single resource.)
 
