@@ -1,5 +1,63 @@
 # Quilts: a family of representation for MELD scores
 
+> NOTE:  My original approach started looking to be not-very-tractable, so I'm taking a slightly new tack.  Rather than trying to design a uniform interface, I'm planning to articulate some use cases and define interfaces for these, with the goal of recognizing sharable elements.  My original notes are currently retained at the end of the document: look for "Original notes".
+
+## Background
+
+All MELD applications, at some level, deal with a structural representation of some music.  What these notes attempt is a chaacterization of some properties that should be exhibited by these representations.
+
+A typical form of representation might reflect the structure of a musical score, which presents as a two-dimentsional structure with successive bars or measures arrayed horizaontally, and different "voices" or instruments arrayed vertically.
+
+A simplistic appoach might be to present the structure as a grid, but discussions have suggested there are enough exceptions to make this could be rather limiting. So, to frame the discussion, a more general 2-dimansional arraying of the data is being considered, which we call a "quilt" (think of a patchwork quilt of random rectangular elements), and constraints on this general structure that reflect music representation requirements of MELD applications.
+
+
+## Definitions
+
+@@ Set out some terms and structural elements used to discuss the issues.
+
+A ***fragment*** is a piece of music that may be part of some musical work.
+
+A ***sequence*** is an ordered list of fragments that may part of some musical work.  The fragments within a sequence are not necessarily dense (i.e. congiguous with respect to the complete musical work) - elements of the music may be omited from a sequence if they are not relevant to some particular purpose.   Within a sequence, *index* values (see below) may be used to identify particular fragments.  Where the fragments within a sequence are complete with respect to the duration of some musical work, the sequence is ***dense***;' otherwise, it is ***sparse***.
+
+A ***quilt*** is a collection of *fragments* that are arrayed over two dimensions.  There is no assumed alignment of fragments in either dimension.
+
+A ***@@cosequence*** is a *quilt* in which *fragments* all lie in distinct rows (sequences), but which are not necessarily column-aligned.
+
+A ***grid*** is a *quilt* (and also a *cosequence*) in which *fragments* all lie in diutinct rows and columns. 
+
+An ***index*** is a value that may be used singly to identify a fragment within a sequence, or pair-wise to identify a fragment within a quilt.
+
+@@types of indexes: continuous, discrete positional, discrete ordered, discrete unordered...
+
+
+## Use cases
+
+Score
+
+Muzicode
+
+Single-voice midi
+
+Multi-moice midi
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Original notes
+
 ## Structural options
 
 Define:
