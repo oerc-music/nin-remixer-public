@@ -9,12 +9,10 @@ All MELD applications, at some level, deal with a structural representation of s
 
 A typical form of representation might reflect the structure of a musical score, which presents as a two-dimentsional structure with successive bars or measures arrayed horizaontally, and different "voices" or instruments arrayed vertically.
 
-A simplistic appoach might be to present the structure as a grid, but discussions have suggested there are enough exceptions to make this could be rather limiting. So, to frame the discussion, a more general 2-dimansional arraying of the data is being considered, which we call a "quilt" (think of a patchwork quilt of random rectangular elements), and constraints on this general structure that reflect music representation requirements of MELD applications.
+A simplistic appoach might be to present the structure as a grid, but discussions have suggested there are enough exceptions to mean this could be rather limiting. So, to frame the discussion, a more general 2-dimensional arraying of the data is being considered, which we call a "quilt" (think of a patchwork quilt of random rectangular elements), and constraints on this general structure that reflect music representation requirements of MELD applications.
 
 
 ## Definitions
-
-@@ Set out some terms and structural elements used to discuss the issues.
 
 A ***fragment*** is a piece of music that may be part of some musical work.
 
@@ -62,7 +60,7 @@ Operations supported:
 
 (@@Do we have any implementations of this?)
 
-A sequence of fragments that are contiguous in time (but for which specific timings are not given or used).
+A sequence of fragments that are contiguous in time, but for which specific timings are not given or used.  (The fragments might, but do not necessarily, correspond to MIDI events, to provide a very direct corespondence between the sequence and MIDI data.)
 
 Operations supported:
 
@@ -97,10 +95,10 @@ Operations supported:
 - @@insert cell in all rows in grid: subsequent cell index values are bumped up.
 - @@remoce cell from all rows in grid: subsequent cell index values are reduced.
 
-
 ## Interfaces
 
-@@Return to this following revoew of use-cases
+@@Return to this following review of use-cases
+
 
 
 
