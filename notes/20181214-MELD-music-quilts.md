@@ -2,6 +2,7 @@
 
 > NOTE:  My original approach started looking to be not-very-tractable, so I'm taking a slightly new tack.  Rather than trying to design a uniform interface, I'm planning to articulate some use cases and define interfaces for these, with the goal of recognizing sharable elements.  My original notes are currently retained at the end of the document: look for "Original notes".
 
+
 ## Background
 
 All MELD applications, at some level, deal with a structural representation of some music.  What these notes attempt is a chaacterization of some properties that should be exhibited by these representations.
@@ -23,40 +24,92 @@ A ***quilt*** is a collection of *fragments* that are arrayed over two dimension
 
 A ***@@cosequence*** is a *quilt* in which *fragments* all lie in distinct rows (sequences), but which are not necessarily column-aligned.
 
-A ***grid*** is a *quilt* (and also a *cosequence*) in which *fragments* all lie in diutinct rows and columns. 
+A ***grid*** is a *quilt* (and also a *cosequence*) in which *fragments* all lie in distinct rows and columns. 
 
 An ***index*** is a value that may be used singly to identify a fragment within a sequence, or pair-wise to identify a fragment within a quilt.
 
-@@types of indexes: continuous, discrete positional, discrete ordered, discrete unordered...
+An ***index value*** is used to designate a particular fragment in a *sequence*.  A pair of indexes may bve used to access a fragment in a *quilt*.  Index values may be one of the following kinds:
+
+- ***continuous*** index values (typically time) have each fragment covering a range of index values, but with any givem index value corresponding to a single fragment in any sequeece.
+
+- ***discrete positional*** index values (e.g. bar or measure number) indicate a fragment by its ordinal position in a sequence.  Each fragment in a sequence corresponds to a single index value, and successive fragments in a sequence have successive index values.
+
+- ***discrete ordered*** index values (e.g. name of instrument, ordered alphabeitcally) indicate an element in a sequence by a unique value; the values are ordered. New values may be added between any pair of existing values.
+
+- ***discrete unordered*** index values (e.g. id for instrument, with no ordering) indicate an element in a sequence by a unique value.  No ordering is defibnes on the index values used.
 
 
 ## Use cases
 
-Score
+@@review these@@
 
-Muzicode
+### Score
 
-Single-voice midi
+@@@discuss with DL?@@@
 
-Multi-moice midi
+### Muzicodes in Climb!
 
-...
+Muzicodes for Climb! use a single sequence of non-contiguous fragments to reference Muzocodes in a score.  Climb! does not depend on MELD for accessing the score for display p;urposes, just to trigger events that update the displatyg.
 
+Uses a *sequence* structure.
 
+Operations supported:
 
-
-
-
-
-
+- access any fragment of a sequence using *discrete ordered* index value.
 
 
+### Single-voice midi
+
+(@@Do we have any implementations of this?)
+
+A sequence of fragments that are contiguous in time (but for which specific timings are not given or used).
+
+Operations supported:
+
+- access any member of sequence using *discrete positional* index value.
+- @@ update fragment?
+- @@ insert fragment?
+- @@ delete fragment?
+
+### Multi-moice midi
+
+(@@Not currently implemented as described - but see SOFA use-case below.)
+
+A *cosequence* of fragments that are grouped into separate sequences for each voice.  It is **not** specified here that fragments from different voices are grouped according to common index values - different voices may use unrelated sequence identifiers.
+
+Operations supported:
+
+- access single-voice midi sequence using a *discrete unordered* voice identifier
+- access fragment using voice identifier and *discrete positional* index value.
+- add new voice (sequence) with specified index.
+- remove voice (sequence) with specified index.
+
+### SOFA
+
+Uses a *grid* structure.
+
+Operations supported:
+
+- read any cell from grid
+- update any cell in grid
+- append cell to all rows of grid: uses next available positional index value.
+- delete cells from end of eacgh row of grid.
+- @@insert cell in all rows in grid: subsequent cell index values are bumped up.
+- @@remoce cell from all rows in grid: subsequent cell index values are reduced.
+
+
+## Interfaces
+
+@@Return to this following revoew of use-cases
 
 
 
 
+----
 
-# Original notes
+# Original notes 
+
+@@ DO NOT UPDATE; RETAINED AS RECORD OF EARLIER ATTEMPT. @@
 
 ## Structural options
 
