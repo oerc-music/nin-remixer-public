@@ -69,6 +69,8 @@ While working in a session, each change to the music grid, and certain other cha
 
 ## Session state representation (proposal)
 
+**NOTE: I now think this representation may be sub-optimal.  I am now thinking a single row of multi-scell columns may be more effective for SOFA.  Also, the "grid" item would enumerate possible entries andn provide metadata for labeling, ordering, etc.**
+
 A session state is represented as an LDP container.  Within the container are:
 
 1. Exactly one "grid" item, which is referenced in the container metadata.
@@ -142,5 +144,5 @@ SOFA pushes the MELD design by being update-intensive compared with other MELD a
 
 (MELD interactions with sequence: more common to "blus" between grid "columns" than between "rows".)
 
-(GK: think about alternative grid designs in LDP - esp. grid-like thing - a _quilt_? - as single resource.)
+(GK: think about alternative grid designs in LDP - esp. grid-like thing - a _quilt_? - as single resource.  See [notes/20181214-MELD-music-quilts.md](./20181214-MELD-music-quilts.md).)
 
