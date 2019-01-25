@@ -27,3 +27,65 @@ E.g.:
     1: bar
 
 
+
+## Other notes
+
+## Getting syntax errors?
+
+TL;DR: Try this:
+
+    . ~/.nvm/nvm.sh
+    . ~/.nvm/bash_completion
+
+Longer version:
+
+The above scripts require a more recent version of node than comes by default with MacOS El Capitan.  Use 'nvm' to work with alternative versions of node.
+
+The following commands install `nvm`:
+
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+To activate `nvm`, use:
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+To use `nvm` to install a recent version of node,muse some combination of the following:
+
+    nvm
+    nvm install latest
+    nvm ls-remote
+    nvm install v10.15.0
+    node -v
+
+<!-- (saved from `history`)
+    293  node nodejs_command_line.js foo bar
+    294  node -v
+    295  which node
+    296  nvm
+    297  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    298  export NVM_DIR="$HOME/.nvm"
+    299  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    300  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    301  nvm
+    302  ls -al
+    303  nvm install latest
+    304  nvm ls-remote
+    305  nvm install v10.15.0
+    306  node -v
+    307  ls
+    308  node nodejs_command_line.js
+    309  node nodejs_command_line.js foo bar
+    310  node nodejs_command_line.js foo bar
+    311  npn install commander --save
+    312  npm install commander --save
+    313  npm audit
+    314  npm audit fix
+    315  npn audit fix --force
+    316  npm audit fix --force
+    317  npm audit
+    318  node nodejs_command_line.js foo bar
+    319  which node
+    320  node commander-test.js foo bar
+-->
