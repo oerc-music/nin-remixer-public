@@ -29,7 +29,7 @@ A session state is represented as an LDP container.  Within the container are:
               ] ;
             .
 
-2. A number of "col" items, one for each "time-segment" within the composition.
+2. A number of "column" items, one for each "time-segment" within the composition.
 
         <composition-col-uri> a sofa:Col ;
             sofa:parent_grid <grid-uri> ;    // Back reference to grid item
@@ -88,15 +88,18 @@ When a column is deleted, the state can be updated by:
     2. a DELETE operation for the column item, and 
     3. a PUT to update the grid item description.
 
+@@There was some discussion about whether the selected filter criteria should be saved in the structure.  To some extent, that would be covered by saving active match annotations for each selected fragment.  These considerations might be covered by "other" metadata not explicitly mentioned above.
 
-@@There was some discussion about whether the selected filter criteria should be saved in the structure.  To some extent, that would be covered by saving active match annotations for each selected fragment.  These considerations might be covered by 
 
+## NOTES
 
-## NOTES:
+The design as outlined includes back-references from colmns to the grid, and from cells to columns.  I am assumung these are cheap to add at the point of creation (the necessary information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow greater design flexibility in future (e.g. multiple grids in a container).
 
-The design as outlined includes back-references from colmns to the grid, and from cells to columns.  I am assumiung these are cheap to add at the p;oint of creation (the necessaruy information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow grater design flexibility in future (e.g. multiple grids in a container).
+Proper interpretation of comumn items will require access to the corresponding grid item, so that relevant row header information can be accessed.  The row count in the grid item is definitive; the row count in the column item ism intended for local data management purposes.
 
-Using `rdf:Seq` instead of lists:  I've (maybe arbitrarily) opted to use `rdf:Seq` instead of lists to reopresent the ordered sequences of ciolumns and cells.  The advantage is simpler RDF structure.  The disadvantages are: (a) an open-ended property set used; more RDF to change when inserting or removing an element.
+Using `rdf:Seq` instead of lists:  I've (maybe arbitrarily) opted to use `rdf:Seq` instead of lists to reopresent the ordered sequences of ciolumns and cells.  The advantage is simpler RDF structure.  The disadvantages are: (a) an open-ended property set used; (b) more RDF to change when inserting or removing an element.
 
-The column-first representation of the grid means that most operations are either O(1) or O(Nrows) in the number of web access required (where Nrows is presumed to be small).  The current design has rows added ort removed from the bottom of the grid.  Adding or removing a row iun the middle of the grid will require updating each column (or adopting some convention for ignoring deleted rows).
+The column-first representation of the grid means that anticipated common operations are either O(1) or O(_Nrows_) in the number of web accesses required (where _Nrows_ is presumed to be small).  The current design has rows added or removed from the bottom of the grid.  Adding or removing a row iun the middle of the grid will require updating each column (or adopting some convention for ignoring deleted rows).
+
+Garbage collection and dynamic structure:  I am assuming that when a column item is deleted, referenced cell items are also deleted.  Thus, each cell item is referenced by exactly one column.  Similarly, when a column item is accessed, if its row count is creater than the grid row count, the surpluse cell items can be deleted and the column item upodated accordingly.  An implementation could choose to automatically extend a column item with "empty" cell references of the grid row count is greater than the column row count.
 
