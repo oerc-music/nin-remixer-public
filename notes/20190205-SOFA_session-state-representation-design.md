@@ -2,49 +2,54 @@
 
 A session state is represented as an LDP container.  Within the container are:
 
-1.  Exactly one "grid" item, which is referenced in the container metadata.
+1.  Exactly one "grid" item, which is referenced by a known property in the container metadata.
 
         <composition-grid-URI> a sofa:Grid ;
             sofa:workingSet <working-set-URI> ;
-            sofa:matchService <match-service-URI> ;
-             :
+            sofa:matchServiceIndex <match-service-index-URI> ;
+            sofa:row_header     // Repeated property, no inherent ordering
+                [ sofa:rowid  <rowid1> ;
+                  sofa:rowpos "N1"^^xsd:int ;   // Row position on grid
+                  sofa:instrument <instrument-type-URI> ;
+                  sofa:pitch_range ... ;
+                    :
+                  (other composition-row metadata)
+                ],
+                [ sofa:rowid <rowid2> ;
+                  sofa:rowpos "N2"^^xsd:int ;
+                  sofa:instrument <instrument-type-URI> ;
+                  sofa:pitch_range ... ;
+                    :
+                ]
+                  :
+                ;
+            sofa:cols     // RDF list...
+                ( <col-1-URI>
+                  <col-2-URI>
+                   :
+                ) ;
+              :
             (other composition-wide metadata)
-             :
-            sofa:num_rows ... ;
-            sofa:row_headers
-              [ a rdf:Seq ;
-                rdf:\_1 
-                  [ sofa:instrument <instrument-type-URI> ;
-                    sofa:pitch_range ... ;
-                     :
-                    (other composition-row metadata)
-                  ] ;
-                 :
-              ] ;
-            sofa:num_cols ... ;
-            sofa:cols 
-              [ a rdf:Seq ;
-                rdf:\_1 <col-1-URI> ;
-                 :
-              ] ;
+              :
             .
 
 2. A number of "column" items, one for each "time-segment" within the composition.
 
         <composition-col-uri> a sofa:Col ;
-            sofa:parent_grid <grid-uri> ;    // Back reference to grid item
-            sofa:num_rows ... ; // Number of instantiated rows in this column
-            sofa:cols
-              [ a rdf:Seq ;
-                rdf:\_1 <cell-1-URI> ;
-                 :
-              ] ;
+            sofa:ref_grid <grid-uri> ;    // Back reference to grid item
+            sofa:row 
+                [ sofa:rowid <rowid1> ; sofa:ref_cell <cell-1-URI> ],
+                [ sofa:rowid <rowid2> ; sofa:ref_cell <cell-2-URI> ],
+                  :
+                ;
+              ) ;
             .
 
 3. A number of "cell" items, referenced from the sofa:Col entities.
 
         <composition-cell-URI> a sofa:Cell ;
-            sofa:parent_col <col-uri> ;    // Back reference to column item
+            sofa:col    <col-uri> ;     // Back reference to column item
+            sofa:rowid  <rowid> ;       // Back-reference to row id
             sofa:fragment <fragment-description-URI> ;
              :
             (other composition fragment metadata)
@@ -57,7 +62,7 @@ A session state is represented as an LDP container.  Within the container are:
 
 The above items are represented as web resources contained by the session state container, each containing an RDF graph represented in some suitable format for which LDP support is mandatory (e.g, Turtle).
 
-@@diagram@@
+![Rough diagram of SOFA grid DMO](images/20190205-SOFA-grid-DMO-design-outline.jpg)
 
 
 ## Access patterns
@@ -93,13 +98,11 @@ When a column is deleted, the state can be updated by:
 
 ## NOTES
 
-The design as outlined includes back-references from colmns to the grid, and from cells to columns.  I am assumung these are cheap to add at the point of creation (the necessary information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow greater design flexibility in future (e.g. multiple grids in a container).
+The design as outlined includes back-references from colmns to the grid, and from cells to columns.  I am assuming these are cheap to add at the point of creation (the necessary information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow greater design flexibility in future (e.g. multiple grids in a container).
 
-Proper interpretation of comumn items will require access to the corresponding grid item, so that relevant row header information can be accessed.  The row count in the grid item is definitive; the row count in the column item ism intended for local data management purposes.
+Proper interpretation of column items will require access to the corresponding grid item, so that relevant row header information can be accessed.  The rows in the grid item are definitive.
 
-Using `rdf:Seq` instead of lists:  I've (maybe arbitrarily) opted to use `rdf:Seq` instead of lists to reopresent the ordered sequences of ciolumns and cells.  The advantage is simpler RDF structure.  The disadvantages are: (a) an open-ended property set used; (b) more RDF to change when inserting or removing an element.
-
-The column-first representation of the grid means that anticipated common operations are either O(1) or O(_Nrows_) in the number of web accesses required (where _Nrows_ is presumed to be small).  The current design has rows added or removed from the bottom of the grid.  Adding or removing a row iun the middle of the grid will require updating each column (or adopting some convention for ignoring deleted rows).
+The column-first representation of the grid means that anticipated common operations are either O(1) or O(_Nrows_) in the number of web accesses required (where _Nrows_ is presumed to be small).  The current design has rows added or removed from the bottom of the grid.  Adding or removing a row in the middle of the grid will require updating each column (or adopting some convention for ignoring deleted rows).
 
 Garbage collection and dynamic structure:  I am assuming that when a column item is deleted, referenced cell items are also deleted.  Thus, each cell item is referenced by exactly one column.  Similarly, when a column item is accessed, if its row count is creater than the grid row count, the surpluse cell items can be deleted and the column item upodated accordingly.  An implementation could choose to automatically extend a column item with "empty" cell references of the grid row count is greater than the column row count.
 
