@@ -4,7 +4,7 @@ A session state is represented as an LDP container.  Within the container are:
 
 1.  Exactly one "grid" item, which is referenced by a known property in the container metadata.
 
-        <composition-grid-URI> a sofa:Grid ;
+        <composition-grid-URI> a sofa:Grid_item ;
             sofa:workingSet <working-set-URI> ;
             sofa:matchServiceIndex <match-service-index-URI> ;
             sofa:row_header     // Repeated property, no inherent ordering
@@ -35,9 +35,9 @@ A session state is represented as an LDP container.  Within the container are:
 
 2. A number of "column" items, one for each "time-segment" within the composition.
 
-        <composition-col-uri> a sofa:Col ;
-            sofa:ref_grid <grid-uri> ;    // Back reference to grid item
-            sofa:row 
+        <composition-col-uri> a sofa:Col_item ;
+            sofa:grid <grid-uri> ;      // Back reference to grid item
+            sofa:row        // Repeated property, no inherent ordering 
                 [ sofa:rowid <rowid1> ; sofa:ref_cell <cell-1-URI> ],
                 [ sofa:rowid <rowid2> ; sofa:ref_cell <cell-2-URI> ],
                   :
@@ -47,7 +47,7 @@ A session state is represented as an LDP container.  Within the container are:
 
 3. A number of "cell" items, referenced from the sofa:Col entities.
 
-        <composition-cell-URI> a sofa:Cell ;
+        <composition-cell-URI> a sofa:Cell_item ;
             sofa:col    <col-uri> ;     // Back reference to column item
             sofa:rowid  <rowid> ;       // Back-reference to row id
             sofa:fragment <fragment-description-URI> ;
@@ -98,9 +98,13 @@ When a column is deleted, the state can be updated by:
 
 ## NOTES
 
-The design as outlined includes back-references from colmns to the grid, and from cells to columns.  I am assuming these are cheap to add at the point of creation (the necessary information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow greater design flexibility in future (e.g. multiple grids in a container).
+The design as outlined includes back-references from columns to the grid, and from cells to columns.  I am assuming these are cheap to add at the point of creation (the necessary information will be available), and that these may help subsequently with navigation (e.g. given a cell reference, being able to find its column).  The column-to-grid reference is superfluous in the current design as one could (presumably) always find the grid entity from the container metadata, but if the cost is trivial it may allow greater design flexibility in future (e.g. multiple grids in a container).
 
 Proper interpretation of column items will require access to the corresponding grid item, so that relevant row header information can be accessed.  The rows in the grid item are definitive.
+
+The design relies on the use of row-id values (which may be arbitrary values; e.g. UUIDs or timestamp+sequence) to align entries between grid and column items.  It is probably important that any implementation takes steps to avoid potential reuse of row-ids so that any dangling references following deletion of a row can't get unintentially reassigned.  Implementations are free to leave old references lying around until they can be garbage-collected.
+
+An earlier design included row- and column- count fields.  We since decided that these were superfluous (and potentially prone to getting out of sync), and that the actual values could be determined quickly by a scan of the graph within a single resource.
 
 The column-first representation of the grid means that anticipated common operations are either O(1) or O(_Nrows_) in the number of web accesses required (where _Nrows_ is presumed to be small).  The current design has rows added or removed from the bottom of the grid.  Adding or removing a row in the middle of the grid will require updating each column (or adopting some convention for ignoring deleted rows).
 
