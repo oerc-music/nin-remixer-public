@@ -77,21 +77,21 @@ When col metadata is updated, the state can be updated by a single PUT operation
 
 When a fragment is assigned in the grid, the state can be updated by:
 
-    1.  a single POST or PUT to create or update a cell entity
-    2.  a single PUT operation to the corresponding column entity to reference the cell entity.
+  1.  a single POST or PUT to create or update a cell entity
+  2.  a single PUT operation to the corresponding column entity to reference the cell entity.
 
 When a row is added or deleted, the state can be updated by a single PUT to the grid entity for the row header.  The intent here is that cells will be added to (and maybe removed from) columns as-required (i.e., lazily).  A missing cell reference in the grid is presumed to be unallocated.
 
 When a column is added, the state can be updated by:
 
-    1. a POST operation to create the (initially empty) column entity, and 
-    2. a PUT to the grid entity to update the sequence of column references.
+  1. a POST operation to create the (initially empty) column entity, and 
+  2. a PUT to the grid entity to update the sequence of column references.
 
 When a column is deleted, the state can be updated by:
 
-    1. a small series of DELETE operations for the referenced cell items, 
-    2. a DELETE operation for the column item, and 
-    3. a PUT to update the grid item description.
+  1. a small series of DELETE operations for the referenced cell items, 
+  2. a DELETE operation for the column item, and 
+  3. a PUT to update the grid item description.
 
 @@There was some discussion about whether the selected filter criteria should be saved in the structure.  To some extent, that would be covered by saving active match annotations for each selected fragment.  These considerations might be covered by "other" metadata not explicitly mentioned above.
 
