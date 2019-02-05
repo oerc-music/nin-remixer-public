@@ -67,9 +67,25 @@ When opening an existing session, the previously accessed working set(s) are als
 While working in a session, each change to the music grid, and certain other changes, are written to the session state.
 
 
-## Session state representation (proposal)
+## Sequence data access patterns
+
+@@This is a prompt/placeholder from a meeting held 2018-12-04 (KP/DL/JP/GK), to hopefully seed continuing thoughts and discussions.@@
+
+Can we crystalize data access and update patterns to sequence-oriented data that are applicable across different MELD applications?  And can such patterns be implemented in common MELD core library components?
+
+SOFA pushes the MELD design by being update-intensive compared with other MELD applications (except maybe the Jam sesssion, where the nature of the updates was more linear - or additive?).
+
+(MELD interactions with sequence: more common to "blus" between grid "columns" than between "rows".)
+
+(GK: think about alternative grid designs in LDP - esp. grid-like thing - a _quilt_? - as single resource.  See [notes/20181214-MELD-music-quilts.md](./20181214-MELD-music-quilts.md).)
+
+----
+
+# Old design
 
 **NOTE: I now think this representation may be sub-optimal.  I am now thinking a single row of multi-scell columns may be more effective for SOFA.  Also, the "grid" item would enumerate possible entries andn provide metadata for labeling, ordering, etc.**
+
+**See instead [20190205 Session state representation (proposal)](./20190205-SOFA_session-state-representation-design.md)**
 
 A session state is represented as an LDP container.  Within the container are:
 
@@ -88,7 +104,6 @@ A session state is represented as an LDP container.  Within the container are:
                  :
               ] ;
             .
-
 
 2. A number of "row" items, one for each channel of the composition.
 
@@ -132,17 +147,3 @@ When a row is added or deleted, the state can be updated by a single POST or DEL
 When a colums is added or deleted, the state can be updated by a POST or DELETE operation for each cell description, plus a PUT to update each row description.
 
 @@There was some discussion about whether the selected filter criteria should be saved.  To some extent, that would be covered by saving active match annotations for each selected fragment.
-
-
-## Sequence data access patterns
-
-@@This is a prompt/placeholder from a meeting held 2018-12-04 (KP/DL/JP/GK), to hopefully seed continuing thoughts and discussions.@@
-
-Can we crystalize data access and update patterns to sequence-oriented data that are applicable across different MELD applications?  And can such patterns be implemented in common MELD core library components?
-
-SOFA pushes the MELD design by being update-intensive compared with other MELD applications (except maybe the Jam sesssion, where the nature of the updates was more linear - or additive?).
-
-(MELD interactions with sequence: more common to "blus" between grid "columns" than between "rows".)
-
-(GK: think about alternative grid designs in LDP - esp. grid-like thing - a _quilt_? - as single resource.  See [notes/20181214-MELD-music-quilts.md](./20181214-MELD-music-quilts.md).)
-
