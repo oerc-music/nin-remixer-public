@@ -128,22 +128,26 @@ td:hover .overlayBtn {
   width: 350px;
 }
 
-.fragList {
-	display: flex;
-	flex-wrap: wrap;
+.fragRow {
+  border-radius: 10px;
 }
-
+.fragList {
+  display: flex;
+  flex-wrap: wrap;
+}
 .fragItem {
   display: inline-block;
   border: 1px solid;
-	margin: 2px 9px 2px 1px;
-	padding: 7px;
+  margin: 2px 9px 2px 1px;
+  padding: 7px;
+  border-radius: 7px;
 }
 
 .fragItem:hover {
-	border: 2px solid;
-	background-color: #cceeff;
-	margin: 1px 8px 1px 0;
+  border: 2px solid;
+  background-color: #cceeff;
+  margin: 1px 8px 1px 0;
+  cursor:pointer
 }
 
 button.instAdd {
