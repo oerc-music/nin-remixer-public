@@ -128,6 +128,11 @@ td:hover .overlayBtn {
   width: 350px;
 }
 
+.fragList {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .fragItem {
   display: inline-block;
   border: 1px solid;
