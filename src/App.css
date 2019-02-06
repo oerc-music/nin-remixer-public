@@ -66,7 +66,7 @@
     background-color: #aaeeff;
 }
 .playbutton {
-    margin-left: 15px;
+    margin-right: 10px;
 }
 
 .gridDiv {
@@ -131,6 +131,14 @@ td:hover .overlayBtn {
 .fragItem {
   display: inline-block;
   border: 1px solid;
+	margin: 2px 9px 2px 1px;
+	padding: 7px;
+}
+
+.fragItem:hover {
+	border: 2px solid;
+	background-color: #cceeff;
+	margin: 1px 8px 1px 0;
 }
 
 button.instAdd {

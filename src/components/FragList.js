@@ -11,33 +11,32 @@ const showkey = (key, mode) => key + (mode === "minor" ? " minor" : "")
 export class BareFragList extends React.Component {
    render() {
       //const dispatch = this.props.dispatch
-      const selectDisabled = ! this.props.selecting
-      const onClick = this.props.onClick
-      const items = this.props.fragments
-      const svgs = this.props.svg
-      const meis = this.props.mei
-      const row = this.props.cursorRow
+      const selectDisabled = ! this.props.selecting;
+      const onClick = this.props.onClick;
+      const items = this.props.fragments;
+      const svgs = this.props.svg;
+      const meis = this.props.mei;
+      const row = this.props.cursorRow;
       //console.log("SVGS",svgs)
       //console.log("MEIS",meis)
       const listItems = Array.from(items.entries()).map(([index, itm]) =>
             <div className="fragItem" key={itm.id}>
-              <button onClick={e=>{onClick(index, itm.id)}}
-                      disabled={selectDisabled}>
-                Select
-              </button>
-              <button onClick={e=>{let m=meis.get(itm.mei)
-                                   playMei(m, row)
-                                   }}
-                      disabled={this.props.disablePlay}
-                      className="playbutton">▶</button>
-              <span title={itm.id}>
-              {itm.title} ({showkey(itm.keydisp, itm.mode)})
-              </span>
-              {(svgs.has(itm.mei)) && (
-                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
-                  <div><WrappedSVG src={svgs.get(itm.mei)}
-                          width={this.props.svgwidth.get(itm.mei)}/></div>
-                  )}
+	            <button onClick={e=>{let m=meis.get(itm.mei);
+		            playMei(m, row)
+	            }}
+	                    disabled={this.props.disablePlay}
+	                    className="playbutton">▶</button>
+	            <div style={{display:"inline"}} onClick={e=>{onClick(index, itm.id)}}>
+
+	              <span title={itm.id}>
+	              {itm.title} ({showkey(itm.keydisp, itm.mode)})
+	              </span>
+	              {(svgs.has(itm.mei)) && (
+	                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
+	                  <div><WrappedSVG src={svgs.get(itm.mei)}
+	                          width={this.props.svgwidth.get(itm.mei)}/></div>
+	                  )}
+	            </div>
             </div>
             );
 
