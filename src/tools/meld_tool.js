@@ -11,17 +11,21 @@
  *  Module dependencies.
  */
 
-var program = require('commander');
-var axios   = require('axios');
-var rdf     = require('rdflib');
+const program     = require('commander');
+const axios       = require('axios');
+const rdf         = require('rdflib');
+
+// See https://github.com/jeff-zucker/solid-file-client/blob/master/lib/solid-shell-client.js
+const SolidClient     = require('@solid/cli/src/SolidClient');
+const IdentityManager = require('@solid/cli/src/IdentityManager');
 
 /*
  *  @@how to access environmental values; esp current user?
  */
 
-var AUTHOR  = "author name";
-var DATA    = "current date";
-var BASEURL = "default LDP server";
+var DATE    = "@@@@current date";
+var AUTHOR  = "@@@@author name";
+var BASEURL = "https://localhost:8443/public/";
 
 /*
  *  Data
@@ -59,6 +63,11 @@ var ws_template = `
 
 program.version('0.1.0')
     .usage("[options] <sub-command> [args]")
+    .option("--author <author>",     "Author name of container or entry created")
+    .option("--baseurl <baseurl>",   "LDP server base URL")
+    .option("--username <username>", "Username for authentication")
+    .option("--password <password>", "Password for authentication")
+    .option("--provider <provider>", "Identity provider for authentication")
     // .option('-f, --foo', 'Foo')
     // .option('-b, --bar', 'Bar')
     // .option('-z, --baz [val]', 'baz [def]', 'def')
@@ -68,19 +77,23 @@ program.command("help [cmd]")
     .action(do_help)
     ;
 
+program.command("test-login")
+    .action(do_test_login)
+    ;
+
 program.command("show-container <container-uri>")
     .alias("sh")
     .description("Write container content to stdout.")
     .action(do_show_container)
     ;
 
-program.command("create-workset <ldpuri> <wsname>")
+program.command("create-workset <ldpurl> <wsname>")
     .alias("crws")
     .description("Create working set and write URI to stdout.")
     .action(do_create_workset)
     ;
 
-program.command("add-fragment <ldpuri> <wsname>")
+program.command("add-fragment <ldpurl> <wsname>")
     .alias("adfr")
     .description("Add fragment to working set and write fragment URI to stdout.")
     .action(do_add_fragment)
@@ -104,12 +117,53 @@ program.on('command:*', function () {
  *  Supporting (non-async) functions
  */
 
+function get_config() {
+    // This is a placeholder, obtaining values from command line options.
+    // Subsequent developments may access a configuration file
+    // and extract initial defauklt configuration from that.
+    //
+    // See also: https://nodejs.org/api/process.html#process_process_env
+    DATE = new Date().toISOString();
+    if (program.author != "") {
+        AUTHOR  = program.author;
+    } 
+    if (program.baseurl != "") {
+        BASEURL  = program.baseurl;
+    }
+}
+
+function get_auth_token() {
+    // See:
+    // https://github.com/solid/solid-cli/blob/master/bin/solid-bearer-token
+    // https://github.com/solid/solid-cli/blob/master/src/SolidClient.js
+    const client = new SolidClient({ identityManager : new IdentityManager() });
+    let usr = program.username;
+    let pwd = program.password;
+    let idp = program.provider;
+    let url = "http://localhost:8443/public";
+    let token = client.login(idp, {username: usr, password: pwd})
+        .then(session => client.createToken(url, session))
+        ;
+    return token
+}
+
 function show_container_data(response_data) {
     console.log(response_data);
 }
 
 function report_error(error) {
     console.error(error);
+}
+
+function check_status(status) {
+    if ( (status < 200) || (status >= 300) )
+    {
+        throw `Error status ${status}`;
+    }
+}
+
+function extract_header(response, name) {
+    return response.headers[name];
 }
 
 // program.command("*")
@@ -131,8 +185,8 @@ function report_error(error) {
 //     );
 
 function do_help(cmd) {
-    helptext = [
-        "meld-tool create-workset  <ldpuri> <wsname>",
+    let helptext = [
+        "meld-tool create-workset  <ldpurl> <wsname>",
         "meld-tool add-fragment <wsuri> <fruri>",
         // "",
         // "",
@@ -142,27 +196,46 @@ function do_help(cmd) {
         );
 }
 
+function do_test_login() {
+    console.log('Test login via %s as %s', program.provider, program.username);
+    get_auth_token()
+        .then(token => {console.log("Token %s", token)})
+        .catch(error => "@@@"+report_error(error.message))
+        ;
+}
+
 function do_show_container(container_uri) {
+    console.log('show workset %s', container_uri);
     ldp_request.get(container_uri)
         .then(response => show_container_data(response.data))
         .catch(error => report_error(error))
+        ;
 }
 
-function do_create_workset(ldpuri, wsname) {
+function do_create_workset(ldpurl, wsname) {
     // OUT=`curl -i -X POST -H "Content-Type: text/turtle" -H "Slug: ${SLUG}" -H 'Link: <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' $BASEURI --data "@container-filled.ttl"`
     // CONTAINERURI=`echo "$OUT" | tr -d '\r' | grep '^Location: \W*' | cut -d" " -f2`
+    console.log('  create workset %s in container %s', wsname, ldpurl);
 
-    /*  Assemble workset container data */
+    //  Assemble workset container data
+    get_config();
+    let container_body = ws_template
+        .replace("@AUTHOR",  AUTHOR)
+        .replace("@CREATED", DATE)
+        ;
 
-    /*  Post to supplied LDP service URI to create container */
+    let container_data = prefixes + container_body;
+    let header_data = {
+        "link":         '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"',
+        "content-type": 'text/turtle'
+    }
 
-    let p = ldp_request.post(ldpuri, container_data, header_data)
+    //  Post to supplied LDP service URI to create container
+    let p = ldp_request.post(ldpurl, container_data, header_data)
         .then(response => check_status(response.status)
         .then(response => extract_header(response, "location")))
-
-    /*  Check response */
-
-    /*  Extract workset URI from response */
+        .catch(error => report_error(error))
+        ;
 
     //   var containerTemplate = prefixes + `<> a ldp:BasicContainer, <${type}> . `
     //   var headers = {
@@ -178,18 +251,16 @@ function do_create_workset(ldpuri, wsname) {
 
     // return p
 
-    console.log('  create workset %s in container %s', wsname, ldpuri);
 }
 
-function do_add_fragment(ldpuri, wsname) {
+function do_add_fragment(ldpurl, wsname) {
+    get_config();
     console.log('  add fragment %s in workset %s', fruri, wsuri);
 }
 
 function runmain(argv) {
     program.parse(argv);
 }
-
-
 
 runmain(process.argv)
 
