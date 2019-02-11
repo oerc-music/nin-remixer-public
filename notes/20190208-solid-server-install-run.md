@@ -151,6 +151,24 @@ For debug output, use:
 
     $ DEBUG=solid:* npx solid start
 
+If using a self-signecd certificate (i.e., one not trusted by the host system certificate root), use one of the following commands instead:
+
+    $ ./node_modules/solid-server/bin/solid start
+
+or
+
+    $ DEBUG=solid:* ./node_modules/solid-server/bin/solid start
+
+(These commands suspend certificate checking by the solid server, and should not be used in production.  They are needed because it uses HTTP transactions internally for some operations.)
+
+
+## Deploy "production" solid server with LetsEncrypt certificate
+
+(Use Apache or Nginx to proxy incoming HTTP requests)
+
+@@TODO
+
+
 ## Create basic structure for user data (LDP container)
 
 How to get set up with an LDP container?
