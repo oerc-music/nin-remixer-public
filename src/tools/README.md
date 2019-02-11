@@ -9,6 +9,22 @@ Try:
     node meld_tool.js --help
 
 
+
+@@@
+In the MELD tools directory:
+
+    export NODE_EXTRA_CA_CERTS=$SOLID/certs/localhost.crt
+    export NODE_TLS_REJECT_UNAUTHORIZED=0
+    node meld_tool.js create-workset https://localhost:8443/ wstest
+
+(The second of these exports shouldn't be necessary?)
+
+
+
+
+
+
+
 ## Other notes
 
 ## Getting syntax errors?
@@ -39,3 +55,8 @@ To use `nvm` to install a recent version of node,muse some combination of the fo
     nvm ls-remote
     nvm install v10.15.0
     node -v
+
+
+## Localhost certs
+
+See: https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/
