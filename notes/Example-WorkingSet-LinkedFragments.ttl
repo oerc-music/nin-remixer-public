@@ -1,3 +1,6 @@
+# The use of linking elements allows the fragment references to retain URI identity.
+# So trhere is a double level of linkling between the workinf set container and 
+# the fragment description.
 
 @prefix ldp: <http://www.w3.org/ns/ldp#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
