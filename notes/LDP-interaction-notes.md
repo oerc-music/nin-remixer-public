@@ -45,7 +45,7 @@ Generally: get--- returns list, find--- returns single matching entity.
 
 `getMatchServices(wsi, workset)` - search SOFA structures and returns list of service [containers] for a given workset.
 
-`getAvailInstruments(wsi, workset)` - searches SOFA structures to returnlist of available instruments coivered by available match services.
+`getAvailInstruments(wsi, workset)` - searches SOFA structures to return list of available instruments coivered by available match services.
 
 
 ## src/actionsRdf.js
