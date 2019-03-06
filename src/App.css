@@ -35,9 +35,12 @@
 }
 
 .matchSel {
-        margin-left: 80px;
-        margin-top: 20px;
-        margin-bottom: 10px;
+	margin-bottom: 10px;
+	position: sticky;
+	background-color: white;
+	z-index: 10;
+	padding: 10px 42px;
+	top: 0;
 }
 
 .matchSel label {
@@ -153,18 +156,19 @@ td:hover .overlayBtn {
   cursor:pointer
 }
 .fragItem:hover:before {
-	content: "+";
+	content: "➕";
 	padding: 2px 10px;
 	float: right;
 	position: absolute;
 	top: 29%;
 	left: 50%;
 	margin-left: -5px;
-	font-size: 31px;
+	font-size: 30px;
 	font-weight: bold;
 	border-radius: 100px;
 	background-color: #5394a1d9;
 	color: white;
+	pointer-events: none;
 }
 
 button.instAdd {
