@@ -130,24 +130,26 @@ td:hover .overlayBtn {
 
 .fragRow {
   border-radius: 10px;
+	overflow-x: auto;
 }
-.fragList {
+.fraglist {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+	justify-content: flex-start;
 }
 .fragItem {
   display: inline-block;
   position: relative;
-  border: 1px solid;
-  margin: 2px 9px 2px 1px;
+  border: 2px solid;
+  margin: 2px 5px 5px 5px;
   padding: 7px;
   border-radius: 7px;
+  -flex-grow: 1;  /* Force items to fill space? */
 }
 
 .fragItem:hover {
   border: 2px solid #5394a1d9;
   background-color: #cceeff;
-  margin: 1px 8px 1px 0;
   cursor:pointer
 }
 .fragItem:hover:before {
