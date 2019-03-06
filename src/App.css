@@ -83,6 +83,7 @@
 
 .assembledGrid {
   overflow-x:scroll;
+	padding-bottom: 10px;
 }
 
 .assembledGrid .instName {
@@ -103,7 +104,7 @@
 }
 
 .assembledGrid tr {
-    height: 45px;
+    height: 75px;
 }
 
 .debugInfo div {
@@ -174,7 +175,9 @@ td:hover .overlayBtn {
 button.instAdd {
   margin-left: 50px;
 }
-
+#playfrags {
+	margin-left: 147px;
+}
 td.instName button {
   visibility: hidden;
 }
