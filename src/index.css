@@ -10,7 +10,7 @@ body {
 
 .fragRow {
   x-overflow-x:scroll;
-  max-height: calc(97.5vh - 315px);
+  max-height: calc(97.5vh - 385px);
   x-width: 600px;
   text-align: left;
   border: 1px solid #b8b8b8;
