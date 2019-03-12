@@ -25,7 +25,7 @@ class App extends Component {
                 }
         <div className="gridDiv">
           {! this.props.fragsLoaded ? null :
-                  <button onClick={e=>{
+                  <button id="playfrags" onClick={e=>{
                           console.log("PLAY GRID")
                           playMeiGrid(this.props.mei,
                                       this.props.selectedFrags,
