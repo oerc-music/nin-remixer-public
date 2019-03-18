@@ -1,6 +1,6 @@
 {
-  "wsi": "http://ldp.linkedmusic.org:8080/WSI/",
-  "workset": "http://ldp.linkedmusic.org:8080/workset-4afa63/",
+  "wsi": "https://localhost:8443/public/matchbase/WSI/",
+  "workset": "https://localhost:8443/public/Fragments/70180eb0-workset/",
   "rowURIs": [
           "",
           "",

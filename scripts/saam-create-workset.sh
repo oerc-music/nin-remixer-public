@@ -3,8 +3,14 @@
 BASEURI="http://localhost:8080/"
 SLUG="workset"
 
+HOSTHDR=''
+if [ "x$CONTHOST" != x ]; then
+  HOSTHDR="-H 'Host: $CONTHOST'"
+  echo $HOSTHDR
+fi
+
 # Create a container for the workset
-OUT=`curl -i -X POST -H "Content-Type: text/turtle" -H "Slug: ${SLUG}" -H 'Link: <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' $BASEURI --data "@container-template.ttl"`
+OUT=`curl -i -X POST -H "Content-Type: text/turtle" -H "Slug: ${SLUG}" -H 'Link: <http://www.w3.org/ns/ldp#BasicContainer>; rel="type"' $HOSTHDR $BASEURI --data "@container-template.ttl"`
 
 #echo "$OUT"
 

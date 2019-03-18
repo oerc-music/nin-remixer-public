@@ -28,6 +28,14 @@ echo ${CONTURI}
 echo $UUID
 echo $TMPFILE
 
+HOSTHDR=''
+HOSTHDR2=''
+if [ "x$CONTHOST" != x ]; then
+  HOSTHDR="--connect-to"
+  HOSTHDR2="$CONTHOST:$CONTLOCAL"
+  echo $HOSTHDR2
+fi
+
 cat >$TMPFILE <<END
 @prefix ldp: <http://www.w3.org/ns/ldp#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -41,9 +49,9 @@ cat >$TMPFILE <<END
 <> a ninre:FragmentRef , ldp:Resource ;
   ninre:fragment <$FRAGURI> ;
   dc:creator "$USER";
-  dct:created "$(date -Iseconds)" .
+  dct:created "$(date +%FT%T%z)" .
 
 END
 
-curl -v -i -X POST -H "Content-Type: text/turtle" -H "Slug: $SLUG" -H 'Link: <http://www.w3.org/ns/ldp#Resource>; rel="type"' --data "@$TMPFILE" $CONTURI
+curl -v -i -X POST -k -H "Content-Type: text/turtle" -H "Slug: $SLUG" -H 'Link: <http://www.w3.org/ns/ldp#Resource>; rel="type"' --data "@$TMPFILE" $HOSTHDR $HOSTHDR2 $CONTURI
 

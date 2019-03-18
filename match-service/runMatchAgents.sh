@@ -23,3 +23,4 @@ echo INSTRUMENTS
 for i in `cat $INSTRUMENTS`; do
   node instrumentmatch.js $WORKSET $i
 done
+
