@@ -185,3 +185,13 @@ td.instName button {
 td.instName:hover button {
   visibility: visible;
 }
+
+.ws-details {
+  margin-top: 10px;
+  font-size: small;
+}
+
+.reindex_stat {
+  margin-left: 50px;
+}
+

@@ -40,7 +40,11 @@ var emptyState = {
                                    ],
 
                     wsi: null,
-                    workset: null
+                    workset: null,
+
+	                reindexing: false,
+                    reindexDone: 0,
+	                reindexService: ""
                   }
 
 // Helper to set a state entry from a config object
@@ -69,7 +73,7 @@ export function ninReducer(state = emptyState, action) {
       }
       var nstate = update(state, {fragsLoaded: {$set: true},
                                cursorRow: {$apply: (v)=>(v==-1?0:v)}})
-      return update (nstate, {frags: {$set: action.frags}})
+      return update (nstate, {frags: {$set: action.frags}, filtFrags: {$set: action.frags}})
     case 'SET_MEI':
       let bbox = svgbbox(action.svg)
       //console.log("SVGBBOX:", bbox)
@@ -113,6 +117,7 @@ export function ninReducer(state = emptyState, action) {
       nstate = setState(nstate, action.config, "selectedFragments")
       nstate = setState(nstate, action.config, "cursorRow")
       nstate = setState(nstate, action.config, "cursorCol")
+      nstate = setState(nstate, action.config, "reindexService")
       return nstate
     case 'SET_INSTRUMENTS':
       return update(state, {availInstrServices: {$set: action.instruments}})
@@ -141,6 +146,12 @@ export function ninReducer(state = emptyState, action) {
     case 'FILT_SETFRAGS':
       return update(state, {filtSpec: {$set: action.spec},
                             filtFrags: {$set: action.frags}})
+    case 'REINDEXING':
+      return update(state, {reindexing: {$set: action.val}})
+    case 'REINDEX_DONE':
+      return update(state, {reindexDone: {$set: action.time}})
+    case 'REINDEX_FINISH_DONE':
+      return update(state, {reindexDone: {$set: 0}})
     default:
       return state
   }

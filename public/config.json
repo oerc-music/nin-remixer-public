@@ -1,6 +1,7 @@
 {
-  "wsi": "https://localhost:8443/public/matchbase/WSI/",
-  "workset": "https://localhost:8443/public/Fragments/70180eb0-workset/",
+  "wsi": "https://thalassa2.oerc.ox.ac.uk:4443/public/BASE/WSI/",
+  "workset": "https://thalassa2.oerc.ox.ac.uk:4443/public/WSET1/",
+  "reindexService": "http://thalassa2.oerc.ox.ac.uk:8080/cgi-bin/go2",
   "rowURIs": [
           "",
           "",
