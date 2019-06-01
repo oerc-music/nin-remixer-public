@@ -20,7 +20,7 @@ FRAGURI=$2
 TMPFILE=$(mktemp)
 
 UUID=$(basename "$FRAGURI")
-#UUID=${UUID%.ttl}
+UUID=${UUID%.ttl}
 
 SLUG="FragRef-$UUID"
 
