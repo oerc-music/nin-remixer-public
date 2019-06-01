@@ -31,7 +31,7 @@ export class BareFragList extends React.Component {
 	              <span title={itm.id}>
 	              {itm.title} ({showkey(itm.keydisp, itm.mode)})
 	              </span>
-                  <div className="fraguri"> {itm.id} </div>
+                  <div className="fraguri"> <a href={itm.id}>{itm.id}</a> </div>
 	              {(svgs.has(itm.mei)) && (
 	                  //<div style={{transform:"scale("+scalefac+")"}}><WrappedSVG src={svgs.get(itm.mei)}
 	                  <div><WrappedSVG src={svgs.get(itm.mei)}
