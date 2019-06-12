@@ -1,6 +1,7 @@
 {
-  "wsi": "http://ldp.linkedmusic.org:8080/WSI/",
-  "workset": "http://ldp.linkedmusic.org:8080/workset-4afa63/",
+  "wsi": "https://thalassa2.oerc.ox.ac.uk:4443/public/BASE/WSI/",
+  "workset": "https://thalassa2.oerc.ox.ac.uk:4443/public/WSET1/",
+  "reindexService": "http://thalassa2.oerc.ox.ac.uk:8080/cgi-bin/go2",
   "rowURIs": [
           "",
           "",

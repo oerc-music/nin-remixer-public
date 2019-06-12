@@ -53,7 +53,8 @@ export var FragmentSelector = function({dispatch, selectedFrags, cursorRow,
   const selectOnClick = (index, id)=> {dispatch(selectFragment(index, id))}
   //console.log(frags,filtFrags)
         //<FragList fragments={filtFrags.length?filtFrags:frags}
-  filtFrags.length || (filtFrags = frags)
+  //Don't show all frags if no filter
+  //filtFrags.length || (filtFrags = frags)
   return (
         <div className="nlistcol">
           { ! filtFrags && <div>"No Fragments"</div> }

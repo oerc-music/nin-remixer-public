@@ -139,7 +139,7 @@ td:hover .overlayBtn {
 .fraglist {
   display: flex;
   flex-flow: row wrap;
-	justify-content: flex-start;
+  justify-content: flex-start;
 }
 .fragItem {
   display: inline-block;
@@ -184,4 +184,28 @@ td.instName button {
 
 td.instName:hover button {
   visibility: visible;
+}
+
+.ws-details {
+  margin-top: 10px;
+  font-size: small;
+}
+
+.reindex_stat {
+  margin-left: 50px;
+}
+.fraguri {
+    display: none;
+    background-color: #eee;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: small;
+}
+.fragItem:hover .fraguri {
+  display: block;
+  position: absolute;
+  bottom: -40px;
+  left: 100px;
+  z-index: 5;
 }

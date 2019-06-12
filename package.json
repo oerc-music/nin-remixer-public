@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "commander": "^2.19.0",
+    "http-link-header": "^1.0.2",
     "immutability-helper": "^2.8.1",
     "lodash": "^4.17.11",
     "midi-writer-js": "^1.5.2",
@@ -26,5 +27,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -51,7 +51,7 @@ async function setupContainer(ws) {
   const cont = await getOrCreateMatchCont(ws)
   console.log("CONT:",cont)
   const exmatches = await cserv.getAnnotations(cont.body)
-  //console.log(exmatches)
+  console.log("EXISTING MATCHES:", exmatches)
   for (let mi in exmatches) {
      let m = exmatches[mi]
      console.log("Adding to cache:", m.target, m.body)
@@ -117,6 +117,7 @@ async function doAnnotations(cont, ws, tfragid) {
 
 async function doAll(cont, workset) {
   const frags = await getFrags(workset)
+  console.log(frags)
   for (let tfrag of frags) {
     console.log("ANNOTATIONS FOR:", tfrag.id)
     await doAnnotations(cont, workset, tfrag.id)

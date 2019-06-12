@@ -1,5 +1,6 @@
 var axios = require('axios');
 var rdf = require('rdflib');
+var url = require('url');
 
 // Prefixes and vocab constants
 
@@ -53,6 +54,11 @@ function createContainer(baseuri, type, slug) {
     headers: headers
   }).then(response => {
     console.log(response.status, response.headers.location)
+    if (response.headers.location && response.headers.location[0]==='/') {
+      // relative location add origin of baseuri
+      var baseOrigin = new url.URL(baseuri).origin
+      return Promise.resolve(baseOrigin+response.headers.location)
+    }
     return Promise.resolve(response.headers.location)
   })
 
@@ -120,11 +126,15 @@ module.exports.getLDPcontents = getLDPcontents
 function getFragLocs(uris) {
   if (uris)
     return Promise.all(uris.map(uri => 
-                  getTurtle(uri)
+	          {console.log("GETLOC:", uri)
+                  return ( getTurtle(uri)
                     .then(store => {
                        const fragnode = store.any(rdf.sym(uri), REMIX("fragment"), undefined)
+		       console.log(uri, fragnode)
                        return Promise.resolve(getNodeURI(fragnode))
                      })
+	            .catch(e=>{console.log(e);return Promise.resolve(undefined)})
+		  )}
                 ))
   else return Promise.resolve([])
 }

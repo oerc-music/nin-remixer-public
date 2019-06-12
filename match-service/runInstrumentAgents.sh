@@ -10,14 +10,6 @@ fi
 
 echo Workset: $WORKSET
 
-echo KEY MATCH
-
-node keymatch.js ALL $WORKSET
-
-echo LENGTH MATCH
-
-node lengthmatch.js ALL $WORKSET
-
 echo INSTRUMENTS
 
 for i in `cat $INSTRUMENTS`; do
