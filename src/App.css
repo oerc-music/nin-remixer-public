@@ -192,6 +192,7 @@ td.instName:hover button {
 }
 
 .reindex_stat {
+  display: none;
   margin-left: 50px;
 }
 .fraguri {
