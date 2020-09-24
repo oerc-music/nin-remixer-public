@@ -25,7 +25,7 @@ Not all of these criteria are necessarily resolved by the compatibility service 
 2. a compatibility model
 3. a match-before or match-after indicator
 
-I would imagine the remixer itself would be able to use this to assemble longer sequences and/ior satisfy multiple criteria.
+I would imagine the remixer itself would be able to use this to assemble longer sequences and/or satisfy multiple criteria.
 
 A (partial?) REST-style interface for this could look something like:
 
@@ -47,7 +47,7 @@ We also need to consider the context within which the compatibility service oper
 @@TODO: add reference to definition/example when available
 
 
-#Matching Fragments interface:
+# Matching Fragments interface:
 
 ## Set of matches specified by:
 
