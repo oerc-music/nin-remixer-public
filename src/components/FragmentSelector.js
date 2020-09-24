@@ -7,7 +7,7 @@ import { withFragFilter } from '../actionsFrags'
 const FragList = BareFragList
 
 export var MatchSelector = function({dispatch, matchtype, matchchecked,
-                                     filtSpec, frags, filtFrags }) {
+                                     filtSpec, frags, filtFrags, filtIsUpdating }) {
   //const id = matchtype
   const checked = matchchecked
   const handleChange = (id) => {dispatch(withFragFilter(
@@ -36,7 +36,13 @@ export var MatchSelector = function({dispatch, matchtype, matchchecked,
              <input type="checkbox" checked={false} disabled/>
              Instrument Match
            </label>
-           <span style={{marginLeft:"20px"}}>( {filtFrags.length} / {frags.length} )</span>
+           <span style={{marginLeft:"20px"}}>
+	     { filtIsUpdating ?
+	       <span style={{fontStyle:"italic"}}> Filters Updating </span>
+		     :
+	       <span> ( {filtFrags.length} / {frags.length} ) </span>
+             }
+	  </span>
            <br/>
            <div className="debugInfo">
              <div className="countPanel">{filtFrags.length} / {frags.length}</div>
@@ -58,6 +64,7 @@ export var FragmentSelector = function({dispatch, selectedFrags, cursorRow,
   return (
         <div className="nlistcol">
           { ! filtFrags && <div>"No Fragments"</div> }
+	  { ! filtIsUpdating &&
           <FragList fragments={filtFrags}
                     svg={svg}
                     svgwidth={svgwidth}
@@ -66,6 +73,7 @@ export var FragmentSelector = function({dispatch, selectedFrags, cursorRow,
                     disablePlay={! midiLoaded}
                     onClick={selectOnClick}
                     cursorRow={cursorRow} />
+	  }
         </div>
   )
 }
