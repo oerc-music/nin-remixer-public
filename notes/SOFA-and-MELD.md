@@ -40,8 +40,6 @@ SOFA separates the analysis of fragment compatibility from the guided user inter
 
 # MELD infrastructure and patterns
 
-<<@@diagram>>
-
 This is not a comprehensive description of MELD, just a highlight of some elements of MELD that are relevant to SOFA.
 
 * LDP containers
@@ -67,6 +65,8 @@ A MELD session represents a sequence of events that determine a (typically real-
 SOFA employs LDP containers and Web Annotations in ways that are intended to be compatible with the way other MELD applications use them.  This aims for use of common support libraries, and in some cases as a basis for exchange of musical information between applications (such as  a working set of musical fragments from Numbers into Notes being consumed by SOFA).
 
 Sequences of fragments is the basis of SOFA composition outputs, which may be used by separate rendering engines.
+
+![Quilts: 1- and 2-dimensonal structures for](./images/20200929-quilts-image-cropped.jpeg).  SOFA was not designed to generate generalized quilts, but focuses instead on generating sequences and grids of fragments.
 
 MELD sessions have not been used by SOFA to date, but they have a potential role to play in the scheduling/triggering of analysis agent activations.
 
