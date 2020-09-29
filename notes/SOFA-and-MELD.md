@@ -49,7 +49,11 @@ This is not a comprehensive description of MELD, just a highlight of some elemen
 * Sequences of elements
 * Sessions
 
-[LDP containers](@@@@) are used by MELD for storage of musical linking information.  Many MELD structures are represented using LDP containers of [Web Annotations](@@@@).
+[LDP containers](https://www.w3.org/TR/ldp-primer/) are used by MELD for storage of musical linking information.  Many MELD structures are represented using LDP containers of [Web Annotations](https://www.w3.org/TR/annotation-model/).
+
+![LDP container data model](./diagrams/ldp_container_data_model.png)
+
+![Web annotation basic model](./diagrams/web_annotation_basic_model.png)
 
 A recurring theme in MELD applications is representation of sequences of elements.  These may be musical elements in a work, events related to a musical performance, interaction events associated with a musicological analysis, among any other things.
 
@@ -58,7 +62,7 @@ A MELD session represents a sequence of events that determine a (typically real-
 
 # SOFA use of MELD
 
-<<@@diagram>>
+![SOFA use of MELD elements](./diagrams/20200929-SOFA-match-service-data-model.svg)
 
 SOFA employs LDP containers and Web Annotations in ways that are intended to be compatible with the way other MELD applications use them.  This aims for use of common support libraries, and in some cases as a basis for exchange of musical information between applications (such as  a working set of musical fragments from Numbers into Notes being consumed by SOFA).
 
