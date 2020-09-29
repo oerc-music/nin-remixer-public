@@ -16,7 +16,7 @@ A second application based on the SOFA ideas was considered, which would re-impl
 
 # How does SOFA work?
 
-<<@@diagram>>
+![SOFA overview architecture](./diagrams/20200929-SOFA-overview-architecture.svg)
 
 SOFA allows a user to assemble "fragments" into some composed output.  Composition structures considered to date include:
 
