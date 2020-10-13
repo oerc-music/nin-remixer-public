@@ -66,7 +66,9 @@ SOFA employs LDP containers and Web Annotations in ways that are intended to be 
 
 Sequences of fragments is the basis of SOFA composition outputs, which may be used by separate rendering engines.
 
-![Quilts: 1- and 2-dimensonal structures for](./images/20200929-quilts-image-cropped.jpeg).  SOFA was not designed to generate generalized quilts, but focuses instead on generating sequences and grids of fragments.
+![Quilts: 1- and 2-dimensonal structures for](./images/20200929-quilts-image-cropped.jpeg)  
+
+SOFA was not designed to generate generalized quilts, but focuses instead on generating sequences and grids of fragments.
 
 MELD sessions have not been used by SOFA to date, but they have a potential role to play in the scheduling/triggering of analysis agent activations.
 
